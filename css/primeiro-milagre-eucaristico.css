@@ -1,0 +1,432 @@
+/* ============================================================
+   PASTOR E OVELHA — Folha de Estilos Principal
+   ============================================================
+   ÍNDICE:
+   1. Variáveis de cor e fonte (edite aqui para mudar o tema)
+   2. Reset e base
+   3. Layout geral (tela inteira, sem fundo externo)
+   4. Painel esquerdo
+   5. Componentes: logo-ovelha, título, ornamento, descrição, versículo
+   6. Rodapé do painel: botões
+   7. Painel direito
+   8. Círculo responsivo de imagem e card flutuante
+   9. Responsivo (mobile / tablet)
+   ============================================================ */
+
+
+/* ============================================================
+   1. VARIÁVEIS — edite aqui para mudar cores e fontes
+   ============================================================ */
+:root {
+  /* ── Paleta oficial ──────────────────────────────────────── */
+  --dourado-divino:       #D4AF37;  /* Realeza de Jesus e o Ouro da Igreja  */
+  --branco-cordeiro:      #F8F9FA;  /* Pureza e a Ovelha                    */
+  --bege-la:              #E8DCC4;  /* A lã da ovelha e acolhimento         */
+  --terracota-humildade:  #A0522D;  /* Terra do caminho e o hábito religioso*/
+  --verde-pastagem:       #556B2F;  /* Esperança e o aprisco                */
+  --vermelho-liturgico:   #8B0000;  /* Sacrifício de Cristo                 */
+
+  /* ── Derivadas ───────────────────────────────────────────── */
+  --branco-puro:   #FFFFFF;
+  --bege-claro:    #F5EFE0;
+  --verde-hover:   #3f5022;
+  --sombra:        rgba(0, 0, 0, 0.10);
+
+  /* ── Tipografia ──────────────────────────────────────────── */
+  --fonte-titulo: 'Cormorant Garamond', 'Georgia', serif;
+  --fonte-corpo:  'EB Garamond', 'Georgia', serif;
+
+  /* ── Tamanhos responsivos ────────────────────────────────── */
+  --tamanho-titulo:    clamp(1.9rem, 3vw, 3rem);
+  --tamanho-corpo:     clamp(0.88rem, 1.1vw, 1rem);
+  --tamanho-versiculo: clamp(0.8rem,  1vw,  0.92rem);
+  --tamanho-botao:     clamp(0.9rem,  1vw,  1rem);
+
+  /* ── Bordas ──────────────────────────────────────────────── */
+  --raio-card:  14px;
+  --raio-botao: 100px;
+
+  /* ── Largura máxima do conteúdo esquerdo ─────────────────── */
+  /* Aumente ou diminua para controlar o espalhamento em telas grandes */
+  --largura-conteudo: 480px;
+}
+
+
+/* ============================================================
+   2. RESET E BASE
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--fonte-corpo);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+
+/* ============================================================
+   3. LAYOUT GERAL — preenche a tela inteira
+   ============================================================ */
+.card-principal {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+/* ============================================================
+   4. PAINEL ESQUERDO
+   ============================================================ */
+.painel-esquerdo {
+  background-color: var(--branco-cordeiro);
+  /* Centraliza o conteúdo horizontalmente dentro do painel */
+  display: flex;
+  flex-direction: column;
+  align-items: center;           /* centraliza no eixo horizontal */
+  justify-content: center;       /* centraliza no eixo vertical   */
+  padding: clamp(28px, 4vh, 48px) clamp(24px, 3vw, 48px);
+  overflow-y: auto;
+}
+
+/* Caixa interna que limita a largura do conteúdo */
+/* Evita que o texto se espalhe demais em telas largas */
+.conteudo-superior {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--largura-conteudo);
+}
+
+
+/* ============================================================
+   5A. LOGO OVELHA
+   ============================================================ */
+.logo-ovelha {
+  width: clamp(60px, 7vw, 90px);
+  height: clamp(60px, 7vw, 90px);
+  object-fit: contain;
+  margin-bottom: clamp(14px, 2vh, 24px);
+  mix-blend-mode: multiply;
+  border-radius: 50%;
+  /* Alinha à esquerda, independente do centro */
+  align-self: flex-start;
+}
+
+
+/* ============================================================
+   5B. TÍTULO PRINCIPAL
+   ============================================================ */
+.titulo {
+  font-family: var(--fonte-titulo);
+  font-size: var(--tamanho-titulo);
+  font-weight: 600;
+  color: var(--vermelho-liturgico);
+  line-height: 1.1;
+  margin-bottom: clamp(12px, 1.8vh, 18px);
+}
+
+
+/* ============================================================
+   5C. ORNAMENTO DOURADO
+   ============================================================ */
+.ornamento {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: clamp(12px, 1.8vh, 18px);
+}
+
+.ornamento-linha {
+  flex: 1;
+  height: 1px;
+  background-color: var(--dourado-divino);
+  opacity: 0.5;
+  max-width: 90px;
+}
+
+.ornamento-estrela {
+  color: var(--dourado-divino);
+  font-size: 13px;
+  line-height: 1;
+  user-select: none;
+}
+
+
+/* ============================================================
+   5D. DESCRIÇÃO
+   ============================================================ */
+.descricao {
+  font-size: var(--tamanho-corpo);
+  font-style: italic;
+  color: var(--terracota-humildade);
+  line-height: 1.75;
+  opacity: 0.9;
+  margin-bottom: clamp(14px, 2vh, 22px);
+}
+
+
+/* ============================================================
+   5E. CARD DE VERSÍCULO (esquerda)
+   ============================================================ */
+.card-versiculo {
+  background-color: var(--bege-claro);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: var(--raio-card);
+  padding: 14px 18px 12px 22px;
+  position: relative;
+}
+
+.card-versiculo::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background-color: var(--dourado-divino);
+  border-radius: var(--raio-card) 0 0 var(--raio-card);
+}
+
+.card-versiculo p {
+  font-size: var(--tamanho-versiculo);
+  font-style: italic;
+  color: var(--terracota-humildade);
+  line-height: 1.65;
+  margin-bottom: 5px;
+}
+
+.card-versiculo cite {
+  font-size: 0.73rem;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--verde-pastagem);
+}
+
+
+/* ============================================================
+   6. RODAPÉ DO PAINEL: BOTÕES
+   ============================================================ */
+.rodape-painel {
+  width: 100%;
+  max-width: var(--largura-conteudo);     /* alinha com o conteúdo acima */
+  border-top: 1px solid rgba(212, 175, 55, 0.22);
+  padding-top: clamp(16px, 2.5vh, 24px);
+  margin-top: clamp(16px, 2.5vh, 26px);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.botao-principal {
+  background-color: var(--verde-pastagem);
+  color: var(--branco-puro);
+  border: none;
+  padding: clamp(10px, 1.4vh, 13px) clamp(20px, 1.8vw, 26px);
+  border-radius: var(--raio-botao);
+  font-family: var(--fonte-corpo);
+  font-size: var(--tamanho-botao);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  text-decoration: none;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.botao-principal:hover  { background-color: var(--verde-hover); }
+.botao-principal:active { transform: scale(0.98); }
+
+.link-secundario {
+  font-family: var(--fonte-corpo);
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--terracota-humildade);
+  opacity: 0.75;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.link-secundario:hover { opacity: 1; }
+
+
+/* ============================================================
+   7. PAINEL DIREITO
+   ============================================================ */
+.painel-direito {
+  background-color: var(--vermelho-liturgico);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Linha dourada no topo */
+.painel-direito::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background-color: var(--dourado-divino);
+  opacity: 0.4;
+  z-index: 1;
+}
+
+/* Curva branca de transição */
+.arco-transicao {
+  position: absolute;
+  left: -72px;
+  top: -5%;
+  width: 144px;
+  height: 110%;
+  background-color: var(--branco-cordeiro);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Cruz ornamental */
+.cruz-ornamento {
+  position: absolute;
+  top: 22px;
+  right: 26px;
+  opacity: 0.14;
+  z-index: 2;
+}
+
+
+/* ============================================================
+   8. CONTEÚDO DIREITO: CÍRCULO + CARD FLUTUANTE
+   ============================================================ */
+.conteudo-direito {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* espaço extra no fundo para empurrar o card flutuante para baixo */
+  justify-content: center;
+  padding: clamp(24px, 5vh, 48px) clamp(20px, 4vw, 48px) clamp(60px, 10vh, 100px) clamp(32px, 6vw, 64px);
+  width: 100%;
+  height: 100%;
+  gap: clamp(12px, 2.5vh, 24px);
+}
+
+/* Círculo responsivo */
+.circulo-imagem {
+  width: clamp(160px, 28vw, 340px);
+  height: clamp(160px, 28vw, 340px);
+  border-radius: 50%;
+  border: 2.5px solid rgba(212, 175, 55, 0.45);
+  overflow: hidden;
+  background-color: var(--bege-claro);
+  flex-shrink: 0;
+}
+
+.circulo-imagem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+/* Card flutuante — canto inferior direito */
+.card-flutuante {
+  /* posicionamento absoluto para fixar no canto inferior direito */
+  position: absolute;
+  bottom: clamp(20px, 4vh, 48px);
+  right: clamp(20px, 3vw, 44px);
+  background-color: var(--bege-claro);
+  border-radius: 16px;
+  padding: 14px 16px;
+  width: clamp(170px, 18vw, 230px);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  z-index: 3;
+}
+
+.card-flutuante p {
+  font-size: clamp(0.72rem, 0.85vw, 0.82rem);
+  font-style: italic;
+  color: var(--terracota-humildade);
+  line-height: 1.6;
+  margin-bottom: 6px;
+}
+
+.card-flutuante cite {
+  font-size: 0.7rem;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--verde-pastagem);
+}
+
+
+/* ============================================================
+   9. RESPONSIVO
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 900px) {
+  html, body { overflow: auto; }
+
+  .card-principal {
+    grid-template-columns: 1fr;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .painel-esquerdo {
+    justify-content: flex-start;
+    padding: 36px 24px;
+  }
+
+  .painel-direito {
+    min-height: 55vw;
+  }
+
+  .arco-transicao { display: none; }
+
+  .conteudo-direito {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 40px 28px 80px;
+  }
+
+  .card-flutuante {
+    bottom: 16px;
+    right: 16px;
+    width: clamp(150px, 40vw, 220px);
+  }
+}
+
+/* Mobile pequeno */
+@media (max-width: 480px) {
+  .painel-esquerdo {
+    padding: 28px 18px;
+  }
+
+  .conteudo-superior,
+  .rodape-painel {
+    max-width: 100%;
+  }
+
+  .circulo-imagem {
+    width: clamp(120px, 45vw, 200px);
+    height: clamp(120px, 45vw, 200px);
+  }
+
+  .card-flutuante {
+    width: clamp(140px, 50vw, 190px);
+  }
+}
