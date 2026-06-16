@@ -8,7 +8,6 @@
 
     <link rel="icon" type="image/png" href="img/ovelha-cem-icon.png">
 
-
     <style>
         * {
             margin: 0;
@@ -19,32 +18,28 @@
 
         :root {
             --dourado-divino: #D4AF37;
-            /* Realeza de Jesus e o Ouro da Igreja */
             --branco-cordeiro: #F8F9FA;
-            /* Pureza e a Ovelha (um branco levemente suave) */
             --bege-la: #E8DCC4;
-            /* A lã da ovelha e acolhimento */
             --terracota-humildade: #A0522D;
-            /* Terra do caminho e o hábito religioso */
             --verde-pastagem: #556B2F;
-            /* Esperança e o aprisco (Verde Oliva Escuro) */
             --vermelho-liturgico: #8B0000;
-            /* Sacrifício de Cristo (Vermelho Sangue/Vinho) */
         }
 
         body {
             background-color: var(--branco-cordeiro);
             width: 100%;
-            height: 100%;
+            min-height: 100vh;
 
             display: grid;
             place-items: center;
-            min-height: 100vh;
+
+            /* Evita que o card encoste nas bordas em telas pequenas */
+            padding: 24px 16px;
         }
 
         main {
-            width: 550px;
-            height: 450px;
+            width: min(550px, 100%);   /* nunca ultrapassa 550px, mas encolhe em telas menores */
+            min-height: 450px;
             border-radius: 5px;
 
             display: grid;
@@ -54,10 +49,14 @@
             background-color: var(--branco-cordeiro);
             border: 1px solid #e1d7c1;
             box-shadow: 0px 0px 70px 150px rgba(232, 220, 196, 0.5);
+
+            /* Padding interno responsivo: generoso no desktop, compacto no mobile */
+            padding: clamp(24px, 6vw, 48px) clamp(16px, 5vw, 40px);
         }
 
         img {
-            width: 150px;
+            /* A imagem escala suavemente entre 100px (mobile pequeno) e 150px (desktop) */
+            width: clamp(100px, 28vw, 150px);
             border-radius: 50%;
             box-shadow: 0px 0px 50px 20px rgba(232, 220, 196, 0.5);
             border: 1px solid #e1d7c1;
@@ -66,34 +65,49 @@
         }
 
         main div {
-            gap: 30px;
+            gap: clamp(16px, 4vw, 30px); /* gap menor em mobile, igual ao original no desktop */
 
             display: grid;
             place-items: center;
+
+            width: 100%; /* garante que o div interno não estoure o card */
         }
 
         h1 {
-            font-size: 45px;
+            /* Escala de ~26px (mobile pequeno) até 45px (desktop) */
+            font-size: clamp(26px, 8vw, 45px);
             font-family: Georgia, 'Times New Roman', Times, serif;
+            line-height: 1.15;
         }
 
         .linha {
             background-color: var(--dourado-divino);
 
-            width: 30%;
+            /* A linha mantém a proporção visual, mas com mínimo e máximo definidos */
+            width: clamp(80px, 30%, 165px);
             height: 2px;
             padding: 0px;
 
             display: grid;
-
         }
 
         p {
             color: var(--verde-pastagem);
+            /* Texto legível em qualquer breakpoint */
+            font-size: clamp(13px, 3.5vw, 16px);
+            line-height: 1.6;
+        }
+
+        /* Em telas muito pequenas o <br> dentro do <p> pode gerar uma quebra desnecessária;
+           removemos para deixar o texto fluir naturalmente */
+        @media (max-width: 360px) {
+            p br {
+                display: none;
+            }
         }
 
         .footer {
-            font-size: smaller;
+            font-size: clamp(10px, 2.5vw, 13px);
             color: var(--vermelho-liturgico);
         }
 
@@ -130,7 +144,7 @@
             </h1>
             <div class="linha"></div>
             <p>Voltaremos em breve com algo ainda melhor. <br> Obrigado pela sua paciência.</p>
-            <p class="footer">@ 2026 - EM DESENVOLVIMENTO</p>
+            <p class="footer">@ Matheus Santos 2026 - EM DESENVOLVIMENTO</p>
         </div>
     </main>
 
