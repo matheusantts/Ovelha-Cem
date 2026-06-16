@@ -1,12 +1,247 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
+    <!-- Viewport garante responsividade em mobile/tablet -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ovelha Cem</title>
+
+    <!-- Google Fonts: Cinzel para títulos (serifa elegante/litúrgica), Lato para corpo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" href="img/ovelha-cem-icon.png">
 </head>
+
 <body>
-    <h1>Pagina testando</h1>
-    <a href="O Primeiro Milagre Eucarístico/primeiro-milagre-eucaristico.html">clica ai</a>
+
+    <!-- ========================================================
+         HEADER / NAVEGAÇÃO
+         - position: relative com z-index alto para ficar sobre o slider
+    ======================================================== -->
+    <header class="site-header">
+        <nav class="nav">
+            <a href="#" class="nav-logo">Ovelha Cem</a>
+
+            <!-- Botão hamburguer visível apenas em mobile -->
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <!-- Links do menu - em mobile ficam ocultos até o botão ser clicado -->
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Informações</a></li>
+                <li><a href="#">Fale Conosco</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <!-- ========================================================
+         SLIDER PRINCIPAL
+         Estrutura:
+         .slider (container geral, fullscreen)
+         └── .slider-list (lista de slides)
+             └── .slide (cada slide)
+                 ├── img (imagem de fundo do slide)
+                 └── .slide-content (textos e botões)
+         └── .slider-thumbs (miniaturas navegáveis)
+         └── .slider-arrows (botões < e >)
+    ======================================================== -->
+    <main class="slider" id="slider">
+
+        <!-- ---- LISTA DE SLIDES ---- -->
+        <!-- 
+            COMO ADICIONAR UM NOVO SLIDE:
+            1. Copie o bloco <div class="slide"> abaixo
+            2. Troque o src da <img> pela sua imagem
+            3. Edite o <h2>, <p> e os textos dos botões
+            4. Cole antes de </div> <!-- fim .slider-list 
+            5. Adicione também um .thumb-item correspondente em .slider-thumbs
+        -->
+        <div class="slider-list" id="sliderList">
+
+            <!-- SLIDE 1 -->
+            <div class="slide active">
+                <!--
+                    Substitua o src pela sua imagem:
+                    <img src="img/slide-01.jpg" alt="Milagre de Lanciano">
+                    
+                    A tag abaixo é um PLACEHOLDER de cor para demonstração.
+                    Remova-a quando tiver imagens reais.
+                -->
+                <!--<div class="slide-img-placeholder" style="background: linear-gradient(135deg, #1a0a2e, #4a1060);"></div>-->
+
+                <img src="img/Milagre-Eucaristico-de-Lanciano-um-milagre-aos-nossos-olhos-1.jpg" alt="Milagre-de-Lanciano">
+
+                <div class="slide-content">
+                    <span class="slide-label">Milagres Eucarísticos</span>
+                    <h2 class="slide-title">Milagre de Lanciano</h2>
+                    <p class="slide-desc">
+                        O mais antigo milagre eucarístico documentado da Igreja, ocorrido no
+                        século VIII na Itália, onde o pão e o vinho se transformaram
+                        visivelmente em carne e sangue.
+                    </p>
+                    <div class="slide-buttons">
+                        <button class="btn btn-primary">Saiba Mais</button>
+                        <button class="btn btn-secondary">Acessar</button>
+                    </div>
+                </div>
+            </div>
+            <!-- FIM SLIDE 1 -->
+
+            <!-- SLIDE 2 -->
+            <div class="slide">
+                <div class="slide-img-placeholder" style="background: linear-gradient(135deg, #0a2010, #1a5030);"></div>
+                <div class="slide-content">
+                    <span class="slide-label">Aparições Marianas</span>
+                    <h2 class="slide-title">Nossa Senhora de Fátima</h2>
+                    <p class="slide-desc">
+                        As aparições de 1917 em Fátima, Portugal, testemunhadas por milhares
+                        de pessoas, incluindo o famoso Milagre do Sol, são um dos eventos
+                        mais marcantes do século XX.
+                    </p>
+                    <div class="slide-buttons">
+                        <button class="btn btn-primary">Saiba Mais</button>
+                        <button class="btn btn-secondary">Acessar</button>
+                    </div>
+                </div>
+            </div>
+            <!-- FIM SLIDE 2 -->
+
+            <!-- SLIDE 3 -->
+            <div class="slide">
+                <div class="slide-img-placeholder" style="background: linear-gradient(135deg, #2a1000, #6a3010);"></div>
+                <div class="slide-content">
+                    <span class="slide-label">Santos da Igreja</span>
+                    <h2 class="slide-title">Santo Antônio de Pádua</h2>
+                    <p class="slide-desc">
+                        Patrono dos pobres e das causas perdidas, Santo Antônio foi um dos
+                        maiores pregadores da Idade Média, realizando inúmeros milagres
+                        documentados pela Igreja.
+                    </p>
+                    <div class="slide-buttons">
+                        <button class="btn btn-primary">Saiba Mais</button>
+                        <button class="btn btn-secondary">Acessar</button>
+                    </div>
+                </div>
+            </div>
+            <!-- FIM SLIDE 3 -->
+
+            <!-- SLIDE 4 -->
+            <div class="slide">
+                <div class="slide-img-placeholder" style="background: linear-gradient(135deg, #0a1020, #103050);"></div>
+                <div class="slide-content">
+                    <span class="slide-label">Estigmatizados</span>
+                    <h2 class="slide-title">Padre Pio de Pietrelcina</h2>
+                    <p class="slide-desc">
+                        Frade capuchinho que carregou as chagas de Cristo por 50 anos,
+                        com dons de bilocação, leitura de consciências e cura milagrosa,
+                        canonizado pelo Papa João Paulo II.
+                    </p>
+                    <div class="slide-buttons">
+                        <button class="btn btn-primary">Saiba Mais</button>
+                        <button class="btn btn-secondary">Acessar</button>
+                    </div>
+                </div>
+            </div>
+            <!-- FIM SLIDE 4 -->
+
+            <!-- SLIDE 5 -->
+            <div class="slide">
+                <div class="slide-img-placeholder" style="background: linear-gradient(135deg, #1a1500, #4a3a00);"></div>
+                <div class="slide-content">
+                    <span class="slide-label">Doutores da Igreja</span>
+                    <h2 class="slide-title">Santa Teresinha</h2>
+                    <p class="slide-desc">
+                        Doutora da Igreja e padroeira das missões, Santa Teresinha de Lisieux
+                        revelou o "Camininho da Infância Espiritual", uma das espiritualidades
+                        mais amadas do mundo.
+                    </p>
+                    <div class="slide-buttons">
+                        <button class="btn btn-primary">Saiba Mais</button>
+                        <button class="btn btn-secondary">Acessar</button>
+                    </div>
+                </div>
+            </div>
+            <!-- FIM SLIDE 5 -->
+
+        </div>
+        <!-- fim .slider-list -->
+
+
+        <!-- ---- MINIATURAS (THUMBNAILS) ----
+            COMO ADICIONAR UMA NOVA MINIATURA:
+            1. Copie um bloco <div class="thumb-item"> abaixo
+            2. Troque o src da <img> pela sua miniatura
+            3. Edite o <h3> com o nome correspondente ao slide
+            4. O atributo data-index deve seguir a sequência (0, 1, 2, 3...)
+        -->
+        <div class="slider-thumbs" id="sliderThumbs">
+
+            <div class="thumb-item active" data-index="0">
+                <!-- Placeholder: troque por <img src="img/thumb-01.jpg" alt="Lanciano"> -->
+                <div class="thumb-img-placeholder" style="background:#1a0a2e;"></div>
+                <div class="thumb-info">
+                    <h3>Lanciano</h3>
+                    <p>Ver matéria</p>
+                </div>
+            </div>
+
+            <div class="thumb-item" data-index="1">
+                <div class="thumb-img-placeholder" style="background:#0a2010;"></div>
+                <div class="thumb-info">
+                    <h3>Fátima</h3>
+                    <p>Ver matéria</p>
+                </div>
+            </div>
+
+            <div class="thumb-item" data-index="2">
+                <div class="thumb-img-placeholder" style="background:#2a1000;"></div>
+                <div class="thumb-info">
+                    <h3>Sto. Antônio</h3>
+                    <p>Ver matéria</p>
+                </div>
+            </div>
+
+            <div class="thumb-item" data-index="3">
+                <div class="thumb-img-placeholder" style="background:#0a1020;"></div>
+                <div class="thumb-info">
+                    <h3>Padre Pio</h3>
+                    <p>Ver matéria</p>
+                </div>
+            </div>
+
+            <div class="thumb-item" data-index="4">
+                <div class="thumb-img-placeholder" style="background:#1a1500;"></div>
+                <div class="thumb-info">
+                    <h3>Sta. Teresinha</h3>
+                    <p>Ver matéria</p>
+                </div>
+            </div>
+
+        </div>
+        <!-- fim .slider-thumbs -->
+
+
+        <!-- ---- BOTÕES DE NAVEGAÇÃO (setas) ---- -->
+        <div class="slider-arrows">
+            <button class="arrow-btn" id="btnBack" aria-label="Slide anterior">&#8249;</button>
+            <button class="arrow-btn" id="btnNext" aria-label="Próximo slide">&#8250;</button>
+        </div>
+
+    </main>
+    <!-- fim .slider -->
+
+
+    <!-- Script por último para não bloquear o carregamento da página -->
+    <script src="index.js"></script>
+
 </body>
 </html>
