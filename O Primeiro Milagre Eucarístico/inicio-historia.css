@@ -1,0 +1,586 @@
+/* ============================================================
+   PASTOR E OVELHA — Folha de Estilos Principal
+   ============================================================
+   ABORDAGEM: Desktop-first com breakpoints progressivos
+   BREAKPOINTS:
+     - Desktop  : > 1024px  (layout padrão de duas colunas)
+     - Tablet   : 601–1024px (duas colunas compactas → uma coluna)
+     - Mobile   : ≤ 600px   (uma coluna, tudo empilhado)
+
+   ÍNDICE:
+   1.  Variáveis globais (cores, fontes, espaçamentos, tamanhos)
+   2.  Reset e base
+   3.  Layout principal — grid de duas colunas
+   4.  Painel esquerdo — estrutura
+   5.  Logo da ovelha
+   6.  Título principal
+   7.  Ornamento decorativo
+   8.  Descrição
+   9.  Card de versículo (esquerda)
+   10. Rodapé — botões de ação
+   11. Painel direito — estrutura
+   12. Arco e ornamentos do painel direito
+   13. Círculo de imagem
+   14. Card flutuante de versículo (direita)
+   15. Responsivo — Tablet (601px–1024px)
+   16. Responsivo — Mobile (≤ 600px)
+   ============================================================ */
+
+
+/* ============================================================
+   1. VARIÁVEIS GLOBAIS
+   ============================================================ */
+:root {
+
+  /* ── Paleta de cores ─────────────────────────────────────── */
+  --dourado-divino:       #D4AF37;   /* Realeza de Jesus e o Ouro da Igreja  */
+  --branco-cordeiro:      #F8F9FA;   /* Pureza e a Ovelha                    */
+  --bege-la:              #E8DCC4;   /* A lã da ovelha e acolhimento         */
+  --terracota-humildade:  #A0522D;   /* Terra do caminho e o hábito religioso*/
+  --verde-pastagem:       #556B2F;   /* Esperança e o aprisco                */
+  --vermelho-liturgico:   #8B0000;   /* Sacrifício de Cristo                 */
+
+  /* ── Cores derivadas (não altere sem necessidade) ────────── */
+  --branco-puro:          #FFFFFF;
+  --bege-claro:           #F5EFE0;   /* versão mais clara do bege-la         */
+  --verde-hover:          #3f5022;   /* verde-pastagem mais escuro p/ hover  */
+  --dourado-borda:        rgba(212, 175, 55, 0.30);
+  --dourado-linha:        rgba(212, 175, 55, 0.22);
+
+  /* ── Tipografia ──────────────────────────────────────────── */
+  --fonte-titulo:  'Cormorant Garamond', Georgia, serif;
+  --fonte-corpo:   'EB Garamond', Georgia, serif;
+
+  /* ── Escala de tamanhos de fonte ─────────────────────────── */
+  /* clamp(mínimo, valor-fluido, máximo) */
+  --fs-titulo:     clamp(1.75rem, 2.8vw, 3rem);
+  --fs-corpo:      clamp(0.9rem,  1.1vw, 1.05rem);
+  --fs-versiculo:  clamp(0.82rem, 0.95vw, 0.95rem);
+  --fs-botao:      clamp(0.9rem,  1vw,   1rem);
+  --fs-cite:       0.75rem;
+
+  /* ── Espaçamento base (múltiplos de 8px) ─────────────────── */
+  --sp-xs:   8px;
+  --sp-sm:  16px;
+  --sp-md:  24px;
+  --sp-lg:  32px;
+  --sp-xl:  48px;
+  --sp-2xl: 64px;
+
+  /* ── Padding fluido dos painéis ──────────────────────────── */
+  --padding-painel-v: clamp(var(--sp-lg), 5vh, var(--sp-xl));
+  --padding-painel-h: clamp(var(--sp-md), 4vw, var(--sp-xl));
+
+  /* ── Largura máxima do bloco de conteúdo esquerdo ────────── */
+  /* Impede que o texto se espalhe em monitores muito largos    */
+  --max-conteudo: 460px;
+
+  /* ── Bordas ──────────────────────────────────────────────── */
+  --raio-card:    14px;
+  --raio-botao:  100px;
+  --raio-circulo: 50%;
+}
+
+
+/* ============================================================
+   2. RESET E BASE
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Evita salto de scroll ao abrir modais ou overlays */
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--fonte-corpo);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* No desktop a página ocupa exatamente a viewport */
+  height: 100dvh;     /* dvh = dynamic viewport height (melhor em mobile) */
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+
+/* ============================================================
+   3. LAYOUT PRINCIPAL — grid de duas colunas
+   ============================================================ */
+.card-principal {
+  display: grid;
+  /* Esquerda levemente menor que a direita */
+  grid-template-columns: 1fr 1.15fr;
+  grid-template-rows: 1fr;
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+
+/* ============================================================
+   4. PAINEL ESQUERDO — estrutura
+   ============================================================ */
+.painel-esquerdo {
+  background-color: var(--branco-cordeiro);
+  display: flex;
+  flex-direction: column;
+  /* Centraliza verticalmente o conjunto logo + conteúdo + rodapé */
+  justify-content: center;
+  align-items: center;           /* centraliza horizontalmente */
+  padding: var(--padding-painel-v) var(--padding-painel-h);
+  /* Permite scroll interno caso o conteúdo ultrapasse a tela */
+  overflow-y: auto;
+  /* Esconde a barra de scroll mas mantém o scroll funcional */
+  scrollbar-width: none;
+}
+.painel-esquerdo::-webkit-scrollbar {
+  display: none;
+}
+
+/* Wrapper interno que limita a largura máxima do conteúdo */
+.conteudo-superior {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--max-conteudo);
+}
+
+
+/* ============================================================
+   5. LOGO DA OVELHA
+   ============================================================ */
+.logo-ovelha {
+  width: clamp(56px, 6vw, 84px);
+  height: clamp(56px, 6vw, 84px);
+  object-fit: contain;
+  border-radius: var(--raio-circulo);
+  /* Retira o fundo branco de PNGs com fundo sólido */
+  mix-blend-mode: multiply;
+  /* Permanece à esquerda mesmo com o wrapper centralizado */
+  align-self: flex-start;
+  margin-bottom: clamp(var(--sp-sm), 2.5vh, var(--sp-md));
+}
+
+
+/* ============================================================
+   6. TÍTULO PRINCIPAL
+   ============================================================ */
+.titulo {
+  font-family: var(--fonte-titulo);
+  font-size: var(--fs-titulo);
+  font-weight: 600;
+  color: var(--vermelho-liturgico);
+  line-height: 1.1;
+  margin-bottom: clamp(var(--sp-sm), 2vh, var(--sp-md));
+}
+
+
+/* ============================================================
+   7. ORNAMENTO DECORATIVO (linhas + estrela dourada)
+   ============================================================ */
+.ornamento {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-xs);
+  margin-bottom: clamp(var(--sp-sm), 2vh, var(--sp-md));
+}
+
+.ornamento-linha {
+  flex: 1;
+  max-width: 80px;
+  height: 1px;
+  background-color: var(--dourado-divino);
+  opacity: 0.5;
+}
+
+.ornamento-estrela {
+  font-size: 12px;
+  color: var(--dourado-divino);
+  line-height: 1;
+  user-select: none;
+}
+
+
+/* ============================================================
+   8. DESCRIÇÃO
+   ============================================================ */
+.descricao {
+  font-size: var(--fs-corpo);
+  font-style: italic;
+  color: var(--terracota-humildade);
+  line-height: 1.75;
+  opacity: 0.9;
+  margin-bottom: clamp(var(--sp-sm), 2vh, var(--sp-md));
+}
+
+
+/* ============================================================
+   9. CARD DE VERSÍCULO (painel esquerdo)
+   ============================================================ */
+.card-versiculo {
+  position: relative;
+  background-color: var(--bege-claro);
+  border: 1px solid var(--dourado-borda);
+  border-radius: var(--raio-card);
+  /* Recuo à esquerda para a barra dourada não sobrepor o texto */
+  padding: var(--sp-sm) var(--sp-sm) var(--sp-sm) clamp(var(--sp-md), 2.5vw, var(--sp-lg));
+}
+
+/* Barra dourada vertical à esquerda do card */
+.card-versiculo::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: var(--dourado-divino);
+  border-radius: var(--raio-card) 0 0 var(--raio-card);
+}
+
+.card-versiculo p {
+  font-size: var(--fs-versiculo);
+  font-style: italic;
+  color: var(--terracota-humildade);
+  line-height: 1.65;
+  margin-bottom: var(--sp-xs);
+}
+
+.card-versiculo cite {
+  font-size: var(--fs-cite);
+  font-style: normal;
+  font-weight: 600;
+  color: var(--verde-pastagem);
+}
+
+
+/* ============================================================
+   10. RODAPÉ DO PAINEL — botões de ação
+   ============================================================ */
+.rodape-painel {
+  /* Alinha com o conteúdo acima respeitando o mesmo max-width */
+  width: 100%;
+  max-width: var(--max-conteudo);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+  flex-wrap: wrap;
+  border-top: 1px solid var(--dourado-linha);
+  padding-top: clamp(var(--sp-sm), 2.5vh, var(--sp-md));
+  margin-top: clamp(var(--sp-sm), 2.5vh, var(--sp-md));
+}
+
+/* Botão principal — verde com texto branco */
+.botao-principal {
+  display: inline-block;
+  background-color: var(--verde-pastagem);
+  color: var(--branco-puro);
+  font-family: var(--fonte-corpo);
+  font-size: var(--fs-botao);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  padding: clamp(10px, 1.4vh, 13px) clamp(var(--sp-md), 2vw, var(--sp-lg));
+  border-radius: var(--raio-botao);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+.botao-principal:hover  { background-color: var(--verde-hover); }
+.botao-principal:active { transform: scale(0.97); }
+
+/* Link secundário — discreto, com sublinhado */
+.link-secundario {
+  font-family: var(--fonte-corpo);
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--terracota-humildade);
+  opacity: 0.75;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.link-secundario:hover { opacity: 1; }
+
+
+/* ============================================================
+   11. PAINEL DIREITO — estrutura
+   ============================================================ */
+.painel-direito {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--vermelho-liturgico);
+  overflow: hidden;
+}
+
+/* Filete dourado no topo do painel */
+.painel-direito::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;   /* top: 0, left: 0, right: 0 */
+  height: 2px;
+  background-color: var(--dourado-divino);
+  opacity: 0.45;
+  z-index: 1;
+}
+
+
+/* ============================================================
+   12. ARCO E ORNAMENTOS DO PAINEL DIREITO
+   ============================================================ */
+
+/* Curva branca que faz a transição suave entre os dois painéis */
+.arco-transicao {
+  position: absolute;
+  left: -72px;
+  top: -5%;
+  width: 144px;
+  height: 110%;
+  background-color: var(--branco-cordeiro);
+  border-radius: var(--raio-circulo);
+  z-index: 1;
+  /* Suaviza a borda do arco em telas de alta resolução */
+  will-change: transform;
+}
+
+/* Cruz decorativa no canto superior direito */
+.cruz-ornamento {
+  position: absolute;
+  top: var(--sp-md);
+  right: var(--sp-md);
+  opacity: 0.14;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Wrapper do conteúdo (fica na frente do arco) */
+.conteudo-direito {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  /* Padding-bottom maior para dar espaço ao card flutuante */
+  padding: var(--sp-xl) var(--sp-lg) calc(var(--sp-xl) + 40px) clamp(var(--sp-xl), 6vw, var(--sp-2xl));
+  gap: var(--sp-md);
+}
+
+
+/* ============================================================
+   13. CÍRCULO DE IMAGEM
+   ============================================================ */
+.circulo-imagem {
+  flex-shrink: 0;
+  width: clamp(160px, 26vw, 320px);
+  height: clamp(160px, 26vw, 320px);
+  border-radius: var(--raio-circulo);
+  border: 2.5px solid rgba(212, 175, 55, 0.45);
+  overflow: hidden;
+  background-color: var(--bege-claro);
+}
+
+/* A imagem preenche o círculo sem distorcer, independente do tamanho */
+.circulo-imagem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+
+/* ============================================================
+   14. CARD FLUTUANTE DE VERSÍCULO (painel direito)
+   ============================================================ */
+.card-flutuante {
+  position: absolute;
+  /* Fixado no canto inferior direito do painel */
+  bottom: clamp(var(--sp-sm), 4vh, var(--sp-xl));
+  right: clamp(var(--sp-sm), 3vw, var(--sp-xl));
+  z-index: 3;
+  background-color: var(--bege-claro);
+  border: 1px solid var(--dourado-borda);
+  border-radius: 16px;
+  padding: var(--sp-sm) clamp(var(--sp-sm), 1.5vw, var(--sp-md));
+  /* Largura controlada: nem muito estreito nem muito largo */
+  width: clamp(180px, 19vw, 240px);
+}
+
+.card-flutuante p {
+  font-size: clamp(0.72rem, 0.85vw, 0.85rem);
+  font-style: italic;
+  color: var(--terracota-humildade);
+  line-height: 1.6;
+  margin-bottom: var(--sp-xs);
+}
+
+.card-flutuante cite {
+  font-size: var(--fs-cite);
+  font-style: normal;
+  font-weight: 600;
+  color: var(--verde-pastagem);
+}
+
+
+/* ============================================================
+   15. RESPONSIVO — TABLET (601px a 1024px)
+   ============================================================
+
+   Estratégia:
+   - Mantém as duas colunas até 900px (compactas)
+   - Abaixo de 900px empilha os painéis (uma coluna)
+   - O painel direito vira uma faixa horizontal com circulo + card lado a lado
+   - A hierarquia visual (logo → título → versículo → botões) é preservada
+   ============================================================ */
+@media (max-width: 1024px) {
+  :root {
+    /* Reduz levemente o tamanho máximo do conteúdo em telas médias */
+    --max-conteudo: 420px;
+  }
+}
+
+@media (max-width: 900px) {
+  /* Libera o scroll da página inteira */
+  body {
+    height: auto;
+    overflow: auto;
+  }
+
+  /* Empilha os painéis verticalmente */
+  .card-principal {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    width: 100%;
+    height: auto;
+    min-height: 100dvh;
+  }
+
+  /* ── Painel esquerdo no tablet ────────────────────────────── */
+  .painel-esquerdo {
+    /* Alinha ao início (sem tentar centralizar verticalmente) */
+    justify-content: flex-start;
+    padding: var(--sp-xl) var(--sp-lg);
+  }
+
+  .conteudo-superior,
+  .rodape-painel {
+    /* Permite crescer mais em tablets (mais espaço disponível) */
+    max-width: 560px;
+  }
+
+  /* ── Painel direito no tablet ─────────────────────────────── */
+  .painel-direito {
+    min-height: 52vw;   /* altura proporcional à largura da tela */
+  }
+
+  /* O arco lateral não faz sentido quando os painéis são empilhados */
+  .arco-transicao {
+    display: none;
+  }
+
+  /* Circulo e card flutuante lado a lado */
+  .conteudo-direito {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--sp-lg);
+    padding: var(--sp-xl) var(--sp-lg);
+    /* Remove o padding extra do fundo usado para o card absoluto */
+    padding-bottom: var(--sp-xl);
+  }
+
+  /* No tablet o card flutuante vira parte do fluxo normal */
+  .card-flutuante {
+    position: static;          /* sai do posicionamento absoluto */
+    width: clamp(200px, 38vw, 300px);
+    align-self: center;
+  }
+}
+
+
+/* ============================================================
+   16. RESPONSIVO — MOBILE (≤ 600px)
+   ============================================================
+
+   Estratégia:
+   - Tudo empilhado em coluna única
+   - Círculo centralizado, card flutuante abaixo do círculo
+   - Espaçamentos menores, fontes no limite mínimo do clamp
+   - Logo levemente menor para não dominar a tela
+   ============================================================ */
+@media (max-width: 600px) {
+  :root {
+    --max-conteudo: 100%;   /* conteúdo ocupa toda a largura */
+    --sp-xl: 32px;          /* reduz o espaçamento geral */
+    --sp-lg: 20px;
+  }
+
+  /* ── Painel esquerdo no mobile ────────────────────────────── */
+  .painel-esquerdo {
+    padding: var(--sp-lg);
+  }
+
+  .conteudo-superior,
+  .rodape-painel {
+    max-width: 100%;
+  }
+
+  .logo-ovelha {
+    /* Pequeno no mobile para não ocupar espaço desnecessário */
+    width: 52px;
+    height: 52px;
+    margin-bottom: var(--sp-sm);
+  }
+
+  /* Título ligeiramente menor para caber em 320px */
+  .titulo {
+    font-size: clamp(1.5rem, 7vw, 1.9rem);
+  }
+
+  /* ── Painel direito no mobile ─────────────────────────────── */
+  .painel-direito {
+    min-height: 80vw;   /* mais altura para dar destaque ao círculo */
+  }
+
+  /* No mobile, empilha círculo e card verticalmente */
+  .conteudo-direito {
+    flex-direction: column;
+    align-items: center;
+    padding: var(--sp-lg);
+    gap: var(--sp-md);
+  }
+
+  .circulo-imagem {
+    width: clamp(140px, 50vw, 210px);
+    height: clamp(140px, 50vw, 210px);
+  }
+
+  /* Card flutuante estático e centralizado no mobile */
+  .card-flutuante {
+    position: static;
+    width: 100%;
+    max-width: 320px;
+  }
+}
