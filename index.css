@@ -509,113 +509,186 @@ a {
     }
 }
 
-
 /* ================================================================
-   10. RESPONSIVIDADE
-   Breakpoints:
-   - Tablet: largura até 1024px
-   - Mobile: largura até 640px
+   10. RESPONSIVIDADE (TABLET E MOBILE)
 ================================================================ */
 
-/* ---- TABLET (até 1024px) ---- */
-@media (max-width: 1024px) {
-
-    /* Conteúdo do slide ocupa mais espaço horizontal */
-    .slide-content {
-        left: 6%;
-        width: 60%;
-        top: 45%;
-    }
-
-    /* Thumbnails menores */
+/* --- TABLETS (Até 992px) --- */
+@media (max-width: 992px) {
     :root {
-        --thumb-largura: 95px;
-        --thumb-altura:  140px;
+        --thumb-largura: 100px;
+        --thumb-altura: 140px;
     }
 
-    /* Menos thumbnails ficam visíveis — as que sobram ficam com scroll horizontal */
-    .slider-thumbs {
-        right: 2%;
-        gap: var(--espaco-sm);
-        overflow-x: auto;
-        /* Barra de scroll invisível mas funcional */
-        scrollbar-width: none;
-    }
-
-    .slider-thumbs::-webkit-scrollbar {
-        display: none;
+    .slide-content {
+        width: 65%;
+        left: 5%;
     }
 }
 
+/* --- MOBILE GENERATION (Até 768px) --- */
+@media (max-width: 768px) {
+    :root {
+        --header-altura: 60px;
+        --thumb-largura: 70px;
+        --thumb-altura: 100px;
+        --espaco-lg: 16px;
+    }
 
-/* ---- MOBILE (até 640px) ---- */
-@media (max-width: 640px) {
+    /* 1. Ajustes de Base */
+    body {
+        font-size: 14px;
+    }
 
-    /* === HEADER MOBILE === */
-
-    /* Mostra o botão hamburguer */
+    /* 2. Menu de Navegação (Mobile Toggle) */
     .nav-toggle {
-        display: flex;
-        margin-left: auto;  /* Vai para a extremidade direita */
+        display: flex; /* Exibe o botão hambúrguer */
+        z-index: 101;
     }
 
-    /* Menu de links: oculto por padrão, aparece como dropdown */
     .nav-links {
-        display: none;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 75%;
+        height: 100vh;
+        background-color: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(10px);
         flex-direction: column;
-        position: absolute;
-        top: var(--header-altura);
-        left: 0;
-        width: 100%;
-        background-color: rgba(10, 10, 10, 0.97);
-        padding: var(--espaco-md) 0;
-        gap: 0;
-        border-top: 1px solid rgba(212, 175, 55, 0.2);
+        justify-content: center;
+        align-items: center;
+        gap: var(--espaco-lg);
+        transition: right 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
     }
 
-    /* Quando o JS adiciona .open, o menu aparece */
+    /* Ativado via JavaScript */
     .nav-links.open {
-        display: flex;
-    }
-
-    .nav-links li a {
-        display: block;
-        padding: var(--espaco-md) var(--espaco-lg);
-        font-size: 0.9rem;
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .nav-links li:last-child a {
-        border-bottom: none;
-    }
-
-
-    /* === SLIDER MOBILE === */
-
-    /* Conteúdo do slide: ocupa quase toda a largura, posicionado mais ao centro-baixo */
-    .slide-content {
-        left: 0;
         right: 0;
+    }
+
+    .nav-links a {
+        font-size: 1.1rem;
+        padding: var(--espaco-sm) 0;
         width: 100%;
-        top: auto;
-        bottom: calc(var(--thumb-altura) + 90px); /* Espaço para thumbs e setas */
-        transform: none;
-        padding: 0 var(--espaco-lg);
         text-align: center;
     }
 
-    /* No mobile o label fica centralizado */
-    .slide-label {
-        border-left: none;
-        padding-left: 0;
-        padding-bottom: 4px;
-        border-bottom: 2px solid var(--dourado-divino);
+    /* 3. Conteúdo dos Slides */
+    .slide-content {
+        width: 90%;
+        left: 5%;
+        top: 40%; /* Sobe o texto para abrir espaço pras barras inferiores */
+        transform: translateY(-50%);
     }
 
-    /* Botões centralizados */
-    .slide-buttons {
-        justify-content: center;
+    .slide-label {
+        font-size: 0.65rem;
+        margin-bottom: var(--espaco-sm);
     }
+
+    .slide-title {
+        margin-bottom: var(--espaco-sm);
+    }
+
+    .slide-desc {
+        margin-bottom: var(--espaco-md);
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Limita texto longo em telas pequenas */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .slide-buttons {
+        gap: var(--espaco-xs);
+    }
+
+    .btn {
+        flex: 1; /* Faz os botões dividirem o espaço igualmente */
+        padding: 10px 16px;
+        font-size: 0.7rem;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    /* 4. Barra de Navegação 1: Thumbnails (Miniaturas) */
+    .thumbnails {
+        position: absolute;
+        bottom: 90px; /* Posicionada acima da barra de setas */
+        left: 0;
+        width: 100%;
+        height: auto;
+        transform: none;
+        display: flex;
+        justify-content: center;
+        gap: var(--espaco-sm);
+        padding: 0 var(--espaco-md);
+        z-index: 10;
+    }
+
+    .thumbnail-item {
+        width: var(--thumb-largura);
+        height: var(--thumb-altura);
+        flex-shrink: 0;
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* 5. Barra de Navegação 2: Setas (Arrows) */
+    .arrows {
+        position: absolute;
+        bottom: 20px; /* Alinhada na base extrema do dispositivo */
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 32px);
+        display: flex;
+        justify-content: space-between; /* Afasta as setas para as bordas */
+        gap: 0;
+        padding: 0;
+        z-index: 10;
+    }
+
+    .arrows button {
+        width: 48px; /* Área de toque expandida otimizada para o polegar */
+        height: 48px;
+        background-color: rgba(248, 249, 250, 0.1);
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(248, 249, 250, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--branco-cordeiro);
+        transition: background-color 0.2s;
+    }
+
+    .arrows button:active {
+        background-color: var(--dourado-divino);
+        color: var(--preto-noite);
+    }
+}
+
+/* --- TELAS MUITO PEQUENAS (Até 380px) --- */
+@media (max-width: 380px) {
+    :root {
+        --thumb-largura: 55px;
+        --thumb-altura: 80px;
+    }
+    
+    .slide-content {
+        top: 35%;
+    }
+    
+    .slide-desc {
+        display: none; /* Esconde descrição para priorizar os botões e títulos */
+    }
+    
+    .thumbnails {
+        bottom: 80px;
+    }
+}
+
 
     /* === THUMBNAILS MOBILE ===
        Ficam centralizadas na parte inferior, com scroll horizontal se necessário */
@@ -653,4 +726,4 @@ a {
         height: 38px;
         font-size: 1.4rem;
     }
-}
+

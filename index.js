@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
        para não "cortar" logo depois de uma ação do usuário.
     ============================================================== */
 
-    const INTERVALO_AUTOPLAY = 6000; // 6 segundos — altere conforme quiser
+    const INTERVALO_AUTOPLAY = 10000; // 10 segundos — altere conforme quiser
 
     function iniciarAutoplay() {
         /* Limpa qualquer timer anterior antes de criar um novo */
