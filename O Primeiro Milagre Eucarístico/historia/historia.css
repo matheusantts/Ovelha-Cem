@@ -1,0 +1,626 @@
+/* ============================================================
+   HISTÓRIA — Folha de Estilos
+   ============================================================
+   ÍNDICE:
+   1.  Variáveis globais (mesma paleta do projeto)
+   2.  Reset e base
+   3.  Layout geral da página
+   4.  Navbar de capítulos
+   5.  Cards de capítulo (ativos e inativos)
+   6.  Corpo — grid de duas colunas
+   7.  Coluna narrativa (esquerda)
+   8.  Controles de leitura
+   9.  Badge do capítulo
+   10. Título do capítulo
+   11. Ornamento
+   12. Texto narrativo
+   13. Rodapé — botões de navegação
+   14. Barra de progresso
+   15. Coluna de versículos (direita)
+   16. Cards de versículo
+   17. Responsivo — Tablet (≤ 900px)
+   18. Responsivo — Mobile (≤ 600px)
+   ============================================================ */
+
+
+/* ============================================================
+   1. VARIÁVEIS GLOBAIS
+   ============================================================ */
+:root {
+  /* ── Paleta oficial ──────────────────────────────────────── */
+  --dourado-divino:       #D4AF37;
+  --branco-cordeiro:      #F8F9FA;
+  --bege-la:              #E8DCC4;
+  --terracota-humildade:  #A0522D;
+  --verde-pastagem:       #556B2F;
+  --vermelho-liturgico:   #8B0000;
+
+  /* ── Derivadas ───────────────────────────────────────────── */
+  --branco-puro:          #FFFFFF;
+  --bege-claro:           #F5EFE0;
+  --verde-hover:          #3f5022;
+  --dourado-borda:        rgba(212, 175, 55, 0.30);
+  --dourado-linha:        rgba(212, 175, 55, 0.22);
+
+  /* ── Tipografia ──────────────────────────────────────────── */
+  --fonte-titulo:  'Cormorant Garamond', Georgia, serif;
+  --fonte-corpo:   'EB Garamond', Georgia, serif;
+
+  /* ── Tamanhos de fonte ───────────────────────────────────── */
+  --fs-titulo:     clamp(1.8rem, 3vw, 2.8rem);
+  --fs-corpo:      clamp(0.92rem, 1.1vw, 1.05rem);
+  --fs-versiculo:  clamp(0.82rem, 0.95vw, 0.95rem);
+  --fs-botao:      clamp(0.9rem, 1vw, 1rem);
+  --fs-badge:      0.68rem;
+  --fs-cite:       0.73rem;
+
+  /* ── Espaçamento base (múltiplos de 8px) ─────────────────── */
+  --sp-xs:   8px;
+  --sp-sm:  16px;
+  --sp-md:  24px;
+  --sp-lg:  32px;
+  --sp-xl:  48px;
+
+  /* ── Altura da navbar ────────────────────────────────────── */
+  --altura-navbar: 88px;
+
+  /* ── Bordas ──────────────────────────────────────────────── */
+  --raio-card:    14px;
+  --raio-botao:  100px;
+}
+
+
+/* ============================================================
+   2. RESET E BASE
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--fonte-corpo);
+  background-color: var(--branco-cordeiro);
+  color: var(--terracota-humildade);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+
+/* ============================================================
+   3. LAYOUT GERAL
+   ============================================================ */
+.pagina-historia {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+
+/* ============================================================
+   4. NAVBAR DE CAPÍTULOS
+   ============================================================ */
+.navbar-capitulos {
+  position: relative;
+  flex-shrink: 0;                        /* não encolhe com o flex */
+  height: var(--altura-navbar);
+  background-color: var(--vermelho-liturgico);
+  display: flex;
+  align-items: flex-end;                 /* cards "pousam" na base da navbar */
+  padding: 0 var(--sp-xl);
+}
+
+/* Filete dourado no topo da navbar */
+.navbar-linha-topo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--dourado-divino);
+  opacity: 0.45;
+}
+
+/* Lista horizontal de capítulos */
+.lista-capitulos {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--sp-md);
+  height: 100%;
+}
+
+.lista-capitulos li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+
+/* ============================================================
+   5. CARDS DE CAPÍTULO
+   ============================================================ */
+.card-capitulo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  padding: var(--sp-xs) var(--sp-sm);
+  border-radius: 14px 14px 0 0;         /* arredondado só em cima */
+  background-color: rgba(232, 220, 196, 0.35);
+  border: 1px solid transparent;
+  border-bottom: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  text-decoration: none;
+}
+
+.card-capitulo:hover:not(.ativo) {
+  background-color: rgba(232, 220, 196, 0.55);
+}
+
+/* Estado ativo — capítulo atual */
+.card-capitulo.ativo {
+  background-color: var(--bege-claro);
+  border-color: rgba(212, 175, 55, 0.55);
+}
+
+.cap-numero {
+  font-family: var(--fonte-titulo);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1;
+  color: rgba(250, 247, 242, 0.75);
+  transition: color 0.2s;
+}
+
+.card-capitulo.ativo .cap-numero {
+  color: var(--vermelho-liturgico);
+}
+
+.cap-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  color: rgba(250, 247, 242, 0.6);
+  margin-top: 3px;
+  transition: color 0.2s;
+}
+
+.card-capitulo.ativo .cap-label {
+  color: var(--terracota-humildade);
+}
+
+/* Ponto dourado indicador do capítulo ativo */
+.cap-indicador {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--dourado-divino);
+  position: absolute;
+  bottom: 5px;
+}
+
+
+/* ============================================================
+   6. CORPO — grid de duas colunas
+   ============================================================ */
+.corpo {
+  flex: 1;                               /* ocupa o restante da altura */
+  display: grid;
+  grid-template-columns: 1fr 280px;     /* narrativa | versículos */
+  gap: 0;
+  overflow: hidden;
+  background-color: var(--branco-puro);
+}
+
+
+/* ============================================================
+   7. COLUNA NARRATIVA (esquerda)
+   ============================================================ */
+.coluna-narrativa {
+  display: flex;
+  flex-direction: column;
+  padding: var(--sp-lg) var(--sp-xl);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--bege-la) transparent;
+}
+
+.coluna-narrativa::-webkit-scrollbar {
+  width: 4px;
+}
+.coluna-narrativa::-webkit-scrollbar-thumb {
+  background-color: var(--bege-la);
+  border-radius: 4px;
+}
+
+
+/* ============================================================
+   8. CONTROLES DE LEITURA
+   ============================================================ */
+.controles {
+  display: flex;
+  gap: var(--sp-xs);
+  margin-bottom: var(--sp-md);
+}
+
+.ctrl-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(160, 82, 45, 0.25);
+  background: none;
+  color: rgba(160, 82, 45, 0.55);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.ctrl-btn:hover {
+  border-color: rgba(160, 82, 45, 0.55);
+  color: var(--terracota-humildade);
+}
+
+
+/* ============================================================
+   9. DIVISOR E BADGE DO CAPÍTULO
+   ============================================================ */
+.divisor {
+  height: 1px;
+  background-color: var(--bege-la);
+  opacity: 0.8;
+  margin-bottom: var(--sp-md);
+}
+
+.badge-capitulo {
+  display: inline-flex;
+  align-items: center;
+  background-color: rgba(139, 0, 0, 0.07);
+  border: 1px solid rgba(139, 0, 0, 0.16);
+  border-radius: var(--raio-botao);
+  padding: 4px 16px;
+  margin-bottom: var(--sp-sm);
+  width: fit-content;
+}
+
+.badge-capitulo span {
+  font-family: var(--fonte-corpo);
+  font-size: var(--fs-badge);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--vermelho-liturgico);
+}
+
+
+/* ============================================================
+   10. TÍTULO DO CAPÍTULO
+   ============================================================ */
+.titulo-capitulo {
+  font-family: var(--fonte-titulo);
+  font-size: var(--fs-titulo);
+  font-weight: 600;
+  color: var(--terracota-humildade);
+  line-height: 1.1;
+  margin-bottom: var(--sp-sm);
+}
+
+
+/* ============================================================
+   11. ORNAMENTO
+   ============================================================ */
+.ornamento {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-xs);
+  margin-bottom: var(--sp-md);
+}
+
+.ornamento-linha {
+  width: 70px;
+  height: 1px;
+  background-color: var(--dourado-divino);
+  opacity: 0.45;
+}
+
+.ornamento-estrela {
+  font-size: 11px;
+  color: var(--dourado-divino);
+  line-height: 1;
+  user-select: none;
+}
+
+
+/* ============================================================
+   12. TEXTO NARRATIVO
+   ============================================================ */
+.texto-narrativo {
+  flex: 1;                               /* empurra o rodapé para baixo */
+  margin-bottom: var(--sp-lg);
+}
+
+.texto-narrativo p {
+  font-size: var(--fs-corpo);
+  font-style: italic;
+  color: var(--terracota-humildade);
+  line-height: 1.85;
+  opacity: 0.82;
+  margin-bottom: var(--sp-md);
+}
+
+.texto-narrativo p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ============================================================
+   13. RODAPÉ — BOTÕES DE NAVEGAÇÃO
+   ============================================================ */
+.rodape-capitulo {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+  flex-wrap: wrap;
+  margin-bottom: var(--sp-md);
+}
+
+.botao-proximo {
+  display: inline-block;
+  background-color: var(--verde-pastagem);
+  color: var(--branco-puro);
+  font-family: var(--fonte-corpo);
+  font-size: var(--fs-botao);
+  font-weight: 600;
+  padding: 11px 24px;
+  border-radius: var(--raio-botao);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.botao-proximo:hover  { background-color: var(--verde-hover); }
+.botao-proximo:active { transform: scale(0.97); }
+
+.link-voltar {
+  font-family: var(--fonte-corpo);
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--terracota-humildade);
+  opacity: 0.65;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.link-voltar:hover { opacity: 1; }
+
+
+/* ============================================================
+   14. BARRA DE PROGRESSO
+   ============================================================ */
+.progresso-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.progresso-barra {
+  height: 5px;
+  background-color: var(--bege-la);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* O preenchimento usa a variável CSS --progresso definida inline no HTML */
+/* Para mudar: altere style="--progresso: 25%" no HTML */
+.progresso-preenchimento {
+  height: 100%;
+  width: var(--progresso, 0%);
+  background-color: var(--dourado-divino);
+  border-radius: 10px;
+  transition: width 0.4s ease;
+}
+
+.progresso-label {
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--terracota-humildade);
+  opacity: 0.55;
+}
+
+
+/* ============================================================
+   15. COLUNA DE VERSÍCULOS (direita)
+   ============================================================ */
+.coluna-versiculo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+  padding: var(--sp-xl) var(--sp-lg) var(--sp-xl) var(--sp-md);
+  background-color: var(--branco-cordeiro);
+  border-left: 1px solid var(--bege-la);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.coluna-versiculo::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* ============================================================
+   16. CARDS DE VERSÍCULO (coluna direita)
+   ============================================================ */
+.card-versiculo {
+  position: relative;
+  background-color: var(--bege-claro);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: var(--raio-card);
+  padding: var(--sp-sm) var(--sp-sm) var(--sp-sm) clamp(var(--sp-md), 2vw, var(--sp-lg));
+}
+
+/* Barra dourada à esquerda de cada card */
+.card-versiculo::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: var(--dourado-divino);
+  border-radius: var(--raio-card) 0 0 var(--raio-card);
+}
+
+.card-versiculo p {
+  font-size: var(--fs-versiculo);
+  font-style: italic;
+  color: var(--terracota-humildade);
+  line-height: 1.65;
+  margin-bottom: var(--sp-xs);
+}
+
+.card-versiculo cite {
+  font-size: var(--fs-cite);
+  font-style: normal;
+  font-weight: 600;
+  color: var(--verde-pastagem);
+}
+
+
+/* ============================================================
+   17. RESPONSIVO — TABLET (≤ 900px)
+   ============================================================ */
+@media (max-width: 900px) {
+  body {
+    height: auto;
+    overflow: auto;
+  }
+
+  .pagina-historia {
+    height: auto;
+    min-height: 100dvh;
+  }
+
+  /* Navbar mais compacta */
+  :root { --altura-navbar: 76px; }
+
+  .navbar-capitulos {
+    padding: 0 var(--sp-md);
+  }
+
+  .lista-capitulos {
+    gap: var(--sp-sm);
+  }
+
+  .card-capitulo {
+    width: 80px;
+  }
+
+  /* Corpo passa para uma única coluna */
+  .corpo {
+    grid-template-columns: 1fr;
+    overflow: visible;
+  }
+
+  /* Coluna narrativa ocupa a largura toda */
+  .coluna-narrativa {
+    overflow: visible;
+    padding: var(--sp-lg) var(--sp-md);
+  }
+
+  /* Versículos viram faixa horizontal na base */
+  .coluna-versiculo {
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-left: none;
+    border-top: 1px solid var(--bege-la);
+    padding: var(--sp-md);
+    gap: var(--sp-sm);
+  }
+
+  .card-versiculo {
+    flex: 1 1 240px;               /* cards se expandem mas têm mínimo de 240px */
+  }
+}
+
+
+/* ============================================================
+   18. RESPONSIVO — MOBILE (≤ 600px)
+   ============================================================ */
+@media (max-width: 600px) {
+  :root {
+    --altura-navbar: 68px;
+    --sp-xl: 24px;
+    --sp-lg: 16px;
+  }
+
+  .navbar-capitulos {
+    padding: 0 var(--sp-sm);
+  }
+
+  .lista-capitulos {
+    gap: var(--sp-xs);
+  }
+
+  /* Cards de capítulo mais estreitos no mobile */
+  .card-capitulo {
+    width: clamp(60px, 20vw, 80px);
+  }
+
+  .cap-numero {
+    font-size: 1.1rem;
+  }
+
+  .coluna-narrativa {
+    padding: var(--sp-md) var(--sp-sm);
+  }
+
+  .rodape-capitulo {
+    gap: var(--sp-sm);
+  }
+
+  /* Cards de versículo empilhados no mobile */
+  .coluna-versiculo {
+    flex-direction: column;
+    padding: var(--sp-sm);
+  }
+
+  .card-versiculo {
+    flex: none;
+  }
+}

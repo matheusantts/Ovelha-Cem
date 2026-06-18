@@ -47,6 +47,8 @@
     --thumb-largura:  120px;
     --thumb-altura:   175px;
     --header-altura:  56px;
+    --subnav-altura:  44px;  /* Segunda barra de navegação — ajuste conforme seu HTML */
+    --header-total:   calc(var(--header-altura) + var(--subnav-altura));
 }
 
 
@@ -509,11 +511,13 @@ a {
     }
 }
 
+
 /* ================================================================
    10. RESPONSIVIDADE
    Breakpoints:
-   - Tablet: largura até 1024px
-   - Mobile: largura até 640px
+   - Tablet:       até 1024px
+   - Mobile:       até 640px
+   - Mobile pequeno: até 390px (iPhone SE, aparelhos compactos)
 ================================================================ */
 
 /* ---- TABLET (até 1024px) ---- */
@@ -555,7 +559,7 @@ a {
     /* Mostra o botão hamburguer */
     .nav-toggle {
         display: flex;
-        margin-left: auto;  /* Vai para a extremidade direita */
+        margin-left: auto;
     }
 
     /* Menu de links: oculto por padrão, aparece como dropdown */
@@ -570,6 +574,9 @@ a {
         padding: var(--espaco-md) 0;
         gap: 0;
         border-top: 1px solid rgba(212, 175, 55, 0.2);
+        /* Limita a altura do menu para não cobrir o conteúdo inteiro */
+        max-height: calc(100vh - var(--header-total));
+        overflow-y: auto;
     }
 
     /* Quando o JS adiciona .open, o menu aparece */
@@ -589,21 +596,41 @@ a {
     }
 
 
-    /* === SLIDER MOBILE === */
+    /* === SLIDER MOBILE ===
+       100svh desconta as barras do próprio browser (Chrome/Safari mobile).
+       100vh é mantido como fallback para browsers sem suporte a svh. */
+    .slider {
+        height: 100svh;
+        min-height: 100vh;
+    }
 
-    /* Conteúdo do slide: ocupa quase toda a largura, posicionado mais ao centro-baixo */
+
+    /* === CONTEÚDO DO SLIDE ===
+       Posicionado logo abaixo das duas barras de navegação,
+       com espaço reservado para thumbs e setas na parte inferior. */
     .slide-content {
         left: 0;
         right: 0;
         width: 100%;
-        top: auto;
-        bottom: calc(var(--thumb-altura) + 90px); /* Espaço para thumbs e setas */
+        top: var(--header-total);   /* Respira abaixo das duas barras */
+        bottom: auto;
         transform: none;
-        padding: 0 var(--espaco-lg);
+        padding: var(--espaco-lg) var(--espaco-lg) 0;
         text-align: center;
+        max-width: 100%;
+
+        /* Teto de altura: evita que o texto sobreponha thumbs e setas */
+        max-height: calc(
+            100svh
+            - var(--header-total)       /* duas barras no topo */
+            - var(--thumb-altura)        /* thumbnails no fundo */
+            - var(--espaco-xl)           /* setas + margem */
+            - var(--espaco-lg)           /* margem de segurança extra */
+        );
+        overflow: hidden;
     }
 
-    /* No mobile o label fica centralizado */
+    /* Label centralizado no mobile — troca borda lateral por sublinhado */
     .slide-label {
         border-left: none;
         padding-left: 0;
@@ -611,14 +638,42 @@ a {
         border-bottom: 2px solid var(--dourado-divino);
     }
 
-    /* Botões centralizados */
+    /* Título reduzido para não explodir em telas estreitas */
+    .slide-title {
+        font-size: clamp(1.5rem, 6vw, 2.5rem);
+        margin-bottom: var(--espaco-sm);
+    }
+
+    /* Descrição compacta — limitada a 3 linhas */
+    .slide-desc {
+        font-size: 0.82rem;
+        line-height: 1.5;
+        margin-bottom: var(--espaco-md);
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* Botões centralizados e levemente menores */
     .slide-buttons {
         justify-content: center;
     }
 
+    .btn {
+        padding: 9px 20px;
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+    }
+
 
     /* === THUMBNAILS MOBILE ===
-       Ficam centralizadas na parte inferior, com scroll horizontal se necessário */
+       Centralizadas na parte inferior com scroll horizontal suave */
+    :root {
+        --thumb-largura: 75px;
+        --thumb-altura:  110px;
+    }
+
     .slider-thumbs {
         left: 50%;
         right: auto;
@@ -628,24 +683,37 @@ a {
         max-width: 95vw;
         overflow-x: auto;
         scrollbar-width: none;
-        padding-bottom: 2px; /* Espaço para a borda inferior das thumbs ativas */
+        padding-bottom: 4px;
+        /* Scroll suave com snap no iOS */
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
     }
 
-    :root {
-        --thumb-largura: 75px;
-        --thumb-altura:  110px;
+    .slider-thumbs::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Cada thumb encaixa no scroll snap */
+    .thumb-item {
+        scroll-snap-align: start;
     }
 
     .thumb-info h3 {
         font-size: 0.58rem;
     }
 
+    /* Subtexto oculto nas thumbs minúsculas — pouco espaço e ilegível */
+    .thumb-info p {
+        display: none;
+    }
+
+
     /* === SETAS MOBILE ===
-       Ficam acima das thumbnails, centralizadas */
+       Acima das thumbnails, centralizadas horizontalmente */
     .slider-arrows {
         left: 50%;
         transform: translateX(-50%);
-        bottom: calc(var(--thumb-altura) + var(--espaco-lg) + 8px);
+        bottom: calc(var(--thumb-altura) + var(--espaco-lg) + 12px);
     }
 
     .arrow-btn {
@@ -653,5 +721,44 @@ a {
         height: 38px;
         font-size: 1.4rem;
     }
+}
 
+
+/* ---- MOBILE PEQUENO (até 390px — iPhone SE, Galaxy A, etc.) ---- */
+@media (max-width: 390px) {
+
+    :root {
+        --thumb-largura: 62px;
+        --thumb-altura:  95px;
+    }
+
+    .slide-content {
+        padding: var(--espaco-md) var(--espaco-md) 0;
+    }
+
+    .slide-title {
+        font-size: 1.4rem;
+    }
+
+    /* Descrição ainda mais curta em telas muito pequenas */
+    .slide-desc {
+        -webkit-line-clamp: 2;
+        font-size: 0.78rem;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        font-size: 0.65rem;
+        letter-spacing: 1.5px;
+    }
+
+    .slider-arrows {
+        bottom: calc(var(--thumb-altura) + var(--espaco-lg) + 8px);
+    }
+
+    .arrow-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 1.2rem;
+    }
 }
