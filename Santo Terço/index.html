@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia - Santo Terço</title>
+
+<!--
+  ============================================================
+  COMO EDITAR ESTE PROJETO
+  ============================================================
+  Este protótipo está dividido em 3 arquivos:
+
+    index.html   -> estrutura da página (este arquivo)
+    style.css    -> toda a aparência visual e responsividade
+    script.js    -> desenho do terço (SVG) e as orações
+
+  Para trocar TEXTOS DE ORAÇÕES, cores, tamanhos das contas ou
+  a ordem da sequência guiada, normalmente você só precisa
+  mexer em script.js (veja os comentários lá).
+
+  Para trocar CORES, FONTES ou o LAYOUT/RESPONSIVIDADE,
+  mexa em style.css (veja os comentários lá, especialmente
+  a seção de "media queries" no final do arquivo).
+
+  Os 3 arquivos devem ficar sempre na MESMA PASTA.
+  ============================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital@0;1&family=Inter:wght@400;500;600;700&display=swap">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ===================== CABEÇALHO ===================== -->
+  <header>
+    <div class="eyebrow">Devoção Mariana</div>
+    <h1>Como Rezar o Terço</h1>
+    <p class="sub">Toque em qualquer conta ou nome de oração no terço abaixo para ler o texto completo. Use as setas para seguir a sequência do início ao fim.</p>
+  </header>
+
+  <!-- ===================== ÁREA PRINCIPAL ===================== -->
+  <!-- Em telas grandes, o terço fica ao lado do texto da oração.
+       Em celular, o terço fica em cima e a oração embaixo
+       (isso é controlado em style.css, não aqui). -->
+  <div class="stage">
+
+    <!-- Painel do terço desenhado em SVG. O SVG em si é
+         criado inteiramente pelo script.js (função build()). -->
+    <div class="rosary-panel">
+      <svg id="rosarySvg" viewBox="0 0 460 900" xmlns="http://www.w3.org/2000/svg"
+           role="img" aria-label="Ilustração do terço com contas clicáveis"></svg>
+    </div>
+
+    <!-- Painel da oração: o texto muda via JavaScript
+         (função selectNode em script.js) -->
+    <div class="prayer-card">
+      <div class="prayer-eyebrow" id="prayerEyebrow">Toque em uma conta</div>
+      <div class="prayer-title" id="prayerTitle">Bem-vindo(a)</div>
+      <div class="prayer-rule"></div>
+      <div class="prayer-text" id="prayerText">Este é um guia interativo do terço. Toque em qualquer conta, no crucifixo ou em uma das etiquetas — "Pai Nosso", "Ave Maria", "Glória ao Pai", "Creio" ou "Salve Rainha" — para ver a oração completa aqui.</div>
+      <div class="prayer-count" id="prayerCount"></div>
+
+      <div class="nav-row">
+        <button class="nav-btn ghost" id="prevBtn" type="button">← Anterior</button>
+        <button class="nav-btn" id="nextBtn" type="button">Próxima oração →</button>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="hint">Sequência tradicional: Creio → Pai Nosso → 3 Ave Maria → Glória ao Pai → (Medalha) → 4 dezenas de Ave Maria, cada uma encerrada com Pai Nosso e Glória ao Pai.</p>
+
+  <footer>Protótipo — guia de oração do terço</footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

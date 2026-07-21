@@ -1,0 +1,4 @@
+
+ - Implementar imagens responsivas para Mobile e Tablets, e melhorar as imagens desktop
+
+ - 
