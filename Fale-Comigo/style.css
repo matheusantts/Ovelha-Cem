@@ -9,19 +9,36 @@
   --texto-principal: #3A2E22;
   --texto-secundario: #6b5d4a;
   --sombra: rgba(58, 46, 34, 0.18);
+
+  /* Espaçamentos e tipografia fluidos: escalam entre mobile e desktop
+     sem depender de breakpoints fixos para cada ajuste fino. */
+  --espaco-cartao: clamp(1.25rem, 3vw + 0.5rem, 2.5rem);
+  --gap-cartao: clamp(0.55rem, 1.4vh, 1.1rem);
+  --fonte-titulo: clamp(1.6rem, 4vw + 0.6rem, 2.6rem);
+  --fonte-base: clamp(0.85rem, 0.6vw + 0.65rem, 0.95rem);
+  --tamanho-avatar: clamp(2.75rem, 5vw + 1rem, 4.5rem);
 }
 
 * {
   box-sizing: border-box;
 }
 
+html,
 body {
+  height: 100%;
   margin: 0;
-  min-height: 100vh;
+}
+
+body {
+  /* 100dvh considera a barra de endereço móvel; 100vh como fallback. */
+  height: 100vh;
+  height: 100dvh;
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 3rem 1.5rem;
+  overflow: hidden;
+  padding: clamp(0.75rem, 2vh, 2rem);
   background:
     radial-gradient(circle at 15% 10%, rgba(212, 175, 55, 0.12), transparent 45%),
     radial-gradient(circle at 85% 90%, rgba(85, 107, 47, 0.10), transparent 50%),
@@ -29,26 +46,41 @@ body {
   font-family: 'Lora', serif;
   color: var(--texto-principal);
   position: relative;
-  overflow-x: hidden;
 }
 
 .ovelha-decorativa {
   position: absolute;
-  top: 2rem;
-  right: 2.5rem;
-  font-size: 2rem;
-  opacity: 0.35;
+  top: clamp(0.75rem, 2vh, 2rem);
+  right: clamp(1rem, 3vw, 2.5rem);
+  pointer-events: none;
+}
+
+.ovelha-decorativa img {
+  display: block;
+  width: var(--tamanho-avatar);
+  height: var(--tamanho-avatar);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--dourado-divino);
+  box-shadow: 0 4px 12px var(--sombra);
 }
 
 .cartao {
   width: 100%;
-  max-width: 460px;
+  max-width: min(460px, 92vw);
+  /* Garante que o cartão nunca ultrapasse a altura da viewport,
+     evitando qualquer necessidade de rolagem. */
+  max-height: 100%;
+  overflow-y: auto;
   background: var(--branco-cordeiro);
   border: 1px solid rgba(212, 175, 55, 0.35);
   border-radius: 18px;
-  padding: 2.5rem 2.25rem;
+  padding: var(--espaco-cartao);
   box-shadow: 0 20px 45px var(--sombra);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-cartao);
 }
 
 .cartao::before {
@@ -65,31 +97,31 @@ body {
 
 .cabecalho {
   text-align: center;
-  margin-bottom: 1.75rem;
 }
 
 .eyebrow {
   display: inline-block;
   font-family: 'Lora', serif;
-  font-size: 0.7rem;
+  font-size: clamp(0.62rem, 0.8vw + 0.4rem, 0.7rem);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--terracota-humildade);
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.5rem;
 }
 
 .cabecalho h1 {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 700;
-  font-size: 2.6rem;
-  margin: 0 0 0.6rem;
+  font-size: var(--fonte-titulo);
+  margin: 0 0 0.4rem;
   color: var(--vermelho-liturgico);
   letter-spacing: 0.01em;
+  line-height: 1.1;
 }
 
 .subtitulo {
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: var(--fonte-base);
+  line-height: 1.5;
   color: var(--texto-secundario);
   margin: 0 auto;
   max-width: 32ch;
@@ -101,13 +133,13 @@ body {
   justify-content: center;
   gap: 0.6rem;
   width: 100%;
-  padding: 0.85rem 1rem;
+  padding: clamp(0.6rem, 1.6vh, 0.85rem) 1rem;
   border-radius: 10px;
   border: 1.5px solid var(--terracota-humildade);
   color: var(--terracota-humildade);
   text-decoration: none;
   font-family: 'Lora', serif;
-  font-size: 0.95rem;
+  font-size: var(--fonte-base);
   font-weight: 500;
   transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
@@ -125,9 +157,8 @@ body {
   display: flex;
   align-items: center;
   text-align: center;
-  margin: 1.75rem 0 1.5rem;
   color: var(--texto-secundario);
-  font-size: 0.8rem;
+  font-size: clamp(0.72rem, 0.5vw + 0.6rem, 0.8rem);
 }
 
 .divisor::before,
@@ -141,32 +172,44 @@ body {
 .divisor span {
   padding: 0 0.75rem;
   font-style: italic;
+  white-space: nowrap;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-cartao);
 }
 
 .campo {
-  margin-bottom: 1.15rem;
   display: flex;
   flex-direction: column;
 }
 
 .campo label {
-  font-size: 0.82rem;
+  font-size: clamp(0.76rem, 0.4vw + 0.65rem, 0.82rem);
   color: var(--verde-pastagem);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
   font-weight: 500;
 }
 
 .campo input,
 .campo textarea {
   font-family: 'Lora', serif;
-  font-size: 0.95rem;
-  padding: 0.7rem 0.85rem;
+  font-size: var(--fonte-base);
+  padding: clamp(0.5rem, 1.2vh, 0.7rem) 0.85rem;
   border-radius: 8px;
   border: 1.5px solid var(--bege-la);
   background: var(--branco-cordeiro);
   color: var(--texto-principal);
   resize: vertical;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.campo textarea {
+  /* Altura fluida: cresce em telas altas, encolhe em telas baixas,
+     sempre dentro de um intervalo confortável para digitar. */
+  min-height: clamp(3.2rem, 12vh, 7rem);
 }
 
 .campo input::placeholder,
@@ -190,7 +233,7 @@ body {
   min-height: 1.1em;
   font-size: 0.78rem;
   color: var(--vermelho-liturgico);
-  margin-top: 0.35rem;
+  margin-top: 0.3rem;
 }
 
 .botao-enviar {
@@ -199,14 +242,13 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
-  padding: 0.9rem 1rem;
-  margin-top: 0.4rem;
+  padding: clamp(0.65rem, 1.8vh, 0.9rem) 1rem;
   border: none;
   border-radius: 10px;
   background: var(--vermelho-liturgico);
   color: var(--branco-cordeiro);
   font-family: 'Lora', serif;
-  font-size: 0.98rem;
+  font-size: clamp(0.88rem, 0.5vw + 0.75rem, 0.98rem);
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.15s ease;
@@ -228,9 +270,8 @@ body {
 .mensagem-status {
   text-align: center;
   font-size: 0.85rem;
-  margin-top: 1rem;
-  margin-bottom: 0;
   min-height: 1.2em;
+  margin: 0;
 }
 
 .mensagem-status.sucesso {
@@ -241,16 +282,62 @@ body {
   color: var(--vermelho-liturgico);
 }
 
-@media (max-width: 480px) {
-  .cartao {
-    padding: 2rem 1.5rem;
+/* ===== Mobile (padrão acima, até 599px) =====
+   O sistema de clamp() já cobre a maior parte do trabalho;
+   aqui só afinamos detalhes específicos de telas muito estreitas. */
+@media (max-width: 380px) {
+  .ovelha-decorativa {
+    display: none;
   }
 
-  .cabecalho h1 {
-    font-size: 2.1rem;
+  .divisor span {
+    font-size: 0.7rem;
   }
 }
 
+/* ===== Tablet (600px – 1023px) ===== */
+@media (min-width: 600px) {
+  .cartao {
+    max-width: 480px;
+    border-radius: 22px;
+  }
+}
+
+/* ===== Desktop (1024px+) ===== */
+@media (min-width: 1024px) {
+  .cartao {
+    max-width: 520px;
+    padding: clamp(2.25rem, 2.5vw, 3rem);
+  }
+}
+
+/* ===== Telas baixas / paisagem em celular =====
+   Evita rolagem quando a altura da viewport é reduzida,
+   comprimindo espaçamentos e ocultando o elemento decorativo. */
+@media (max-height: 560px) {
+  .ovelha-decorativa {
+    display: none;
+  }
+
+  .cartao {
+    gap: 0.4rem;
+    padding: 1rem 1.5rem;
+  }
+
+  .cabecalho h1 {
+    font-size: clamp(1.3rem, 3vw + 0.5rem, 1.8rem);
+  }
+
+  .subtitulo {
+    display: none;
+  }
+
+  .campo textarea {
+    min-height: 2.4rem;
+  }
+}
+
+/* ===== Preferência por movimento reduzido ===== */
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
