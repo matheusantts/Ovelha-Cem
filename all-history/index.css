@@ -1,0 +1,580 @@
+/* ================================================================
+   OVELHA CEM — index.css (página de lista/feed)
+   Seções:
+   1. Variáveis
+   2. Reset e base
+   3. Header + hero com ovelhinha de fundo
+   4. Navegação
+   5. Feed (lista de itens)
+   6. Item do feed — ícone
+   7. Item do feed — corpo (textos e botões)
+   8. Botões
+   9. Rodapé
+   10. Responsividade (tablet e mobile)
+================================================================ */
+
+
+/* ================================================================
+   1. VARIÁVEIS
+================================================================ */
+:root {
+    /* Paleta Ovelha Cem */
+    --dourado-divino:      #D4AF37;
+    --branco-cordeiro:     #F8F9FA;
+    --bege-la:             #E8DCC4;
+    --terracota-humildade: #A0522D;
+    --verde-pastagem:      #556B2F;
+    --vermelho-liturgico:  #8B0000;
+
+    /* Cores de suporte */
+    --preto-noite:         #0d0d0d;
+    --cinza-escuro:        #1a1a1a;
+    --cinza-medio:         #2a2a2a;
+    --cinza-linha:         rgba(212, 175, 55, 0.15); /* Divisor dourado sutil */
+
+    /* Tipografia */
+    --font-titulo: 'Cinzel', Georgia, serif;
+    --font-corpo:  'Lato', Arial, sans-serif;
+
+    /* Espaçamentos */
+    --espaco-xs:  4px;
+    --espaco-sm:  8px;
+    --espaco-md:  16px;
+    --espaco-lg:  32px;
+    --espaco-xl:  64px;
+
+    /* Header */
+    --header-nav-altura: 56px;
+    --header-hero-altura: 320px;
+
+    /*
+        LOGO DA OVELHINHA
+        Troque a URL abaixo pela sua imagem real.
+        Exemplo: url('img/ovelha-cem-logo.png')
+        Atualmente usa um SVG de ovelha inline codificado em base64.
+    */
+    --logo-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 80'%3E%3Cellipse cx='50' cy='45' rx='30' ry='22' fill='%23ffffff' opacity='0.15'/%3E%3Ccircle cx='50' cy='25' r='14' fill='%23ffffff' opacity='0.15'/%3E%3Ccircle cx='36' cy='38' r='10' fill='%23ffffff' opacity='0.15'/%3E%3Ccircle cx='64' cy='38' r='10' fill='%23ffffff' opacity='0.15'/%3E%3Ccircle cx='72' cy='22' r='11' fill='%23ffffff' opacity='0.12'/%3E%3Cellipse cx='68' cy='32' r='7' ry='5' fill='%23333' opacity='0.6'/%3E%3Cellipse cx='72' cy='28' r='4' ry='3' fill='%23555' opacity='0.5'/%3E%3Ccircle cx='74' cy='26' r='2' fill='%23fff' opacity='0.3'/%3E%3Crect x='36' y='64' width='6' height='14' rx='3' fill='%23555' opacity='0.4'/%3E%3Crect x='46' y='64' width='6' height='14' rx='3' fill='%23555' opacity='0.4'/%3E%3Crect x='56' y='64' width='6' height='14' rx='3' fill='%23555' opacity='0.4'/%3E%3C/svg%3E");
+}
+
+
+/* ================================================================
+   2. RESET E BASE
+================================================================ */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--preto-noite);
+    color: var(--branco-cordeiro);
+    font-family: var(--font-corpo);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+ul { list-style: none; }
+a  { text-decoration: none; color: inherit; }
+button { font-family: var(--font-corpo); cursor: pointer; }
+
+
+/* ================================================================
+   3. HEADER + HERO COM OVELHINHA DE FUNDO
+================================================================ */
+.site-header {
+    background-color: var(--cinza-escuro);
+    border-bottom: 1px solid var(--cinza-linha);
+    position: relative;
+    overflow: hidden; /* Garante que a ovelhinha não vaze para fora */
+}
+
+/*
+    OVELHINHA DE FUNDO
+    Pseudo-elemento que coloca a logo atrás de todo o conteúdo do header.
+    Troque --logo-url nas variáveis para usar sua imagem real.
+*/
+.header-hero::before {
+    content: '';
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 420px;
+    height: 340px;
+    background-image: var(--logo-url);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center right;
+    opacity: 0.18;   /* Sutileza da marca d'água — aumente para mais visível */
+    pointer-events: none; /* Não interfere nos cliques */
+    z-index: 0;
+}
+
+.header-hero {
+    position: relative;
+    z-index: 1;
+    padding: var(--espaco-xl) 8% var(--espaco-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-sm);
+}
+
+/* Categoria / eyebrow acima do título */
+.header-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--dourado-divino);
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-sm);
+}
+
+/* Linha decorativa antes do eyebrow */
+.header-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 2px;
+    background-color: var(--dourado-divino);
+    flex-shrink: 0;
+}
+
+.header-title {
+    font-family: var(--font-titulo);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    color: var(--branco-cordeiro);
+    line-height: 1.1;
+    letter-spacing: 2px;
+}
+
+.header-subtitle {
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    font-weight: 300;
+    color: var(--bege-la);
+    max-width: 480px;
+    line-height: 1.6;
+}
+
+
+/* ================================================================
+   4. NAVEGAÇÃO
+================================================================ */
+.nav {
+    display: flex;
+    align-items: center;
+    height: var(--header-nav-altura);
+    padding: 0 8%;
+    gap: var(--espaco-lg);
+    border-bottom: 1px solid var(--cinza-linha);
+    position: relative;
+    z-index: 10;
+}
+
+.nav-logo {
+    font-family: var(--font-titulo);
+    font-size: 1.1rem;
+    color: var(--dourado-divino);
+    letter-spacing: 2px;
+    margin-right: auto;
+    white-space: nowrap;
+}
+
+.nav-links {
+    display: flex;
+    gap: var(--espaco-lg);
+}
+
+.nav-links a {
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--bege-la);
+    opacity: 0.75;
+    transition: opacity 0.3s, color 0.3s;
+}
+
+.nav-links a:hover {
+    opacity: 1;
+    color: var(--dourado-divino);
+}
+
+/* Botão hamburguer — oculto no desktop */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    padding: var(--espaco-sm);
+    margin-left: auto;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: var(--branco-cordeiro);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+
+/* ================================================================
+   5. FEED — LISTA PRINCIPAL
+================================================================ */
+.main {
+    max-width: 860px;       /* Largura confortável para leitura */
+    margin: 0 auto;
+    padding: var(--espaco-xl) var(--espaco-lg);
+}
+
+.feed {
+    display: flex;
+    flex-direction: column;
+    gap: 0;                 /* O divisor é feito com border-bottom em cada item */
+}
+
+/* Cada item da lista */
+.feed-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--espaco-lg);
+    padding: var(--espaco-xl) 0;
+    border-bottom: 1px solid var(--cinza-linha);
+    /* Animação sutil ao passar o mouse */
+    transition: background-color 0.3s;
+    position: relative;
+}
+
+/* Linha dourada que aparece à esquerda ao hover */
+.feed-item::before {
+    content: '';
+    position: absolute;
+    left: -var(--espaco-lg);
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: var(--dourado-divino);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.3s ease;
+    border-radius: 0 2px 2px 0;
+}
+
+.feed-item:hover::before {
+    transform: scaleY(1);
+}
+
+/* Remove a borda do último item */
+.feed-item:last-child {
+    border-bottom: none;
+}
+
+
+/* ================================================================
+   6. ÍCONE DO ITEM
+   O ícone usa a variável CSS --icon-color definida inline no HTML.
+   Isso permite que cada item tenha sua própria cor sem classes extras.
+================================================================ */
+.feed-icon {
+    flex-shrink: 0;                 /* Não encolhe quando a tela diminui */
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    /* Fundo usa a cor do ícone com baixa opacidade */
+    background-color: color-mix(in srgb, var(--icon-color) 15%, transparent);
+    border: 2px solid color-mix(in srgb, var(--icon-color) 40%, transparent);
+    color: var(--icon-color);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.feed-item:hover .feed-icon {
+    background-color: color-mix(in srgb, var(--icon-color) 25%, transparent);
+    transform: scale(1.08);
+}
+
+/*
+    ÍCONE COM IMAGEM:
+    Se usar <img> dentro de .feed-icon, estas regras garantem que
+    a imagem fique centralizada e no tamanho certo.
+*/
+.feed-icon img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+
+/* ================================================================
+   7. CORPO DO ITEM (textos)
+================================================================ */
+.feed-body {
+    flex: 1;            /* Ocupa o espaço restante após o ícone */
+    min-width: 0;       /* Evita overflow de texto em flex */
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-sm);
+}
+
+/* Linha de metadados: categoria + data */
+.feed-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-md);
+    flex-wrap: wrap;
+}
+
+.feed-category {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--dourado-divino);
+}
+
+/* Ponto separador entre categoria e data */
+.feed-category::after {
+    content: '·';
+    margin-left: var(--espaco-md);
+    color: var(--bege-la);
+    opacity: 0.4;
+}
+
+.feed-date {
+    font-size: 0.72rem;
+    color: var(--bege-la);
+    opacity: 0.55;
+    font-weight: 300;
+}
+
+.feed-title {
+    font-family: var(--font-titulo);
+    font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+    font-weight: 700;
+    color: var(--branco-cordeiro);
+    line-height: 1.25;
+    transition: color 0.3s;
+}
+
+.feed-item:hover .feed-title {
+    color: var(--dourado-divino);
+}
+
+.feed-desc {
+    font-size: 0.92rem;
+    font-weight: 300;
+    color: var(--bege-la);
+    line-height: 1.75;
+    max-width: 620px;
+}
+
+/* Botões do item */
+.feed-buttons {
+    display: flex;
+    gap: var(--espaco-sm);
+    flex-wrap: wrap;
+    margin-top: var(--espaco-xs);
+}
+
+
+/* ================================================================
+   8. BOTÕES
+================================================================ */
+.btn {
+    padding: 9px 24px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 2px solid transparent;
+    transition: background-color 0.35s, color 0.35s, border-color 0.35s;
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background-color: var(--dourado-divino);
+    color: var(--preto-noite);
+    border-color: var(--dourado-divino);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--dourado-divino);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--dourado-divino);
+    border-color: var(--dourado-divino);
+}
+
+.btn-secondary:hover {
+    background-color: var(--dourado-divino);
+    color: var(--preto-noite);
+}
+
+
+/* ================================================================
+   9. RODAPÉ
+================================================================ */
+.site-footer {
+    text-align: center;
+    padding: var(--espaco-xl) var(--espaco-lg);
+    border-top: 1px solid var(--cinza-linha);
+    font-size: 0.78rem;
+    color: var(--bege-la);
+    opacity: 0.5;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+
+/* ================================================================
+   10. RESPONSIVIDADE
+   Breakpoints:
+   - Tablet: até 768px
+   - Mobile: até 480px
+================================================================ */
+
+/* ---- TABLET (até 768px) ---- */
+@media (max-width: 768px) {
+
+    .main {
+        padding: var(--espaco-lg) var(--espaco-md);
+    }
+
+    .header-hero {
+        padding: var(--espaco-lg) var(--espaco-lg) var(--espaco-lg);
+    }
+
+    /* Ovelhinha menor no tablet */
+    .header-hero::before {
+        width: 260px;
+        height: 210px;
+        opacity: 0.12;
+    }
+
+    .feed-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .feed-item {
+        gap: var(--espaco-md);
+        padding: var(--espaco-lg) 0;
+    }
+}
+
+
+/* ---- MOBILE (até 480px) ---- */
+@media (max-width: 480px) {
+
+    /* === HEADER MOBILE === */
+
+    /* Mostra o hamburguer */
+    .nav-toggle {
+        display: flex;
+    }
+
+    /* Esconde o logo de texto para dar espaço */
+    .nav-logo {
+        font-size: 0.95rem;
+    }
+
+    /* Menu dropdown no mobile */
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: var(--header-nav-altura);
+        left: 0;
+        width: 100%;
+        background-color: rgba(13, 13, 13, 0.98);
+        padding: var(--espaco-md) 0;
+        border-top: 1px solid var(--cinza-linha);
+        z-index: 50;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links li a {
+        display: block;
+        padding: var(--espaco-md) var(--espaco-lg);
+        border-bottom: 1px solid rgba(255,255,255,0.04);
+        font-size: 0.9rem;
+    }
+
+    /* Ovelhinha menor e mais centralizada no mobile */
+    .header-hero::before {
+        width: 200px;
+        height: 160px;
+        right: 0;
+        opacity: 0.10;
+    }
+
+    .header-hero {
+        padding: var(--espaco-lg) var(--espaco-md);
+    }
+
+    /* === FEED MOBILE ===
+       No mobile o ícone fica em cima do texto (coluna) */
+    .feed-item {
+        flex-direction: column;
+        gap: var(--espaco-md);
+        padding: var(--espaco-lg) 0;
+    }
+
+    /* Ícone menor e alinhado à esquerda */
+    .feed-icon {
+        width: 52px;
+        height: 52px;
+        font-size: 1.3rem;
+    }
+
+    .feed-title {
+        font-size: 1.1rem;
+    }
+
+    .feed-desc {
+        font-size: 0.88rem;
+    }
+
+    .btn {
+        padding: 8px 18px;
+        font-size: 0.68rem;
+    }
+}
+
+/* Acessibilidade: desativa animações para quem preferir */
+@media (prefers-reduced-motion: reduce) {
+    .feed-item::before,
+    .feed-icon,
+    .feed-title,
+    .btn {
+        transition: none;
+    }
+}

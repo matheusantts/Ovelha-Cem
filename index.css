@@ -47,8 +47,6 @@
     --thumb-largura:  120px;
     --thumb-altura:   175px;
     --header-altura:  56px;
-    --subnav-altura:  44px;  /* Segunda barra de navegação — ajuste conforme seu HTML */
-    --header-total:   calc(var(--header-altura) + var(--subnav-altura));
 }
 
 
@@ -214,14 +212,31 @@ a {
     z-index: 1;
 }
 
-/* Imagem real do slide */
-.slide img {
+/*
+    IMAGEM DO SLIDE — funciona tanto com <img> direto quanto com <picture>
+
+    O <picture> é um container inline por padrão, então precisamos
+    transformá-lo em bloco e dar as mesmas dimensões da imagem.
+    O <img> dentro do <picture> herda width/height do pai.
+*/
+
+/* Faz o <picture> ocupar o mesmo espaço que o <img> ocuparia */
+.slide-picture {
+    position: absolute;
+    inset: 0;           /* top:0; right:0; bottom:0; left:0 */
+    display: block;     /* <picture> é inline por padrão — precisa ser block */
+    width: 100%;
+    height: 100%;
+}
+
+/* O <img> dentro do <picture> preenche o container e escurece */
+.slide-picture img,
+.slide img {            /* mantém compatibilidade com <img> direto */
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Escurece a imagem para o texto ficar legível */
     filter: brightness(45%);
 }
 
@@ -376,8 +391,25 @@ a {
     border-color: var(--dourado-divino);
 }
 
-/* Imagem real da thumbnail */
-.thumb-item img {
+/*
+    IMAGEM DA THUMBNAIL — igual ao slide, suporta <picture> e <img>
+
+    O <picture> da thumbnail também precisa ser block e preencher
+    o container .thumb-item por completo.
+*/
+
+/* Container <picture> da thumbnail */
+.thumb-item picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+}
+
+/* <img> dentro do <picture> da thumbnail */
+.thumb-item picture img,
+.thumb-item > img {     /* mantém compatibilidade com <img> direto */
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -385,8 +417,10 @@ a {
     transition: filter 0.3s;
 }
 
-.thumb-item:hover img,
-.thumb-item.active img {
+.thumb-item:hover picture img,
+.thumb-item.active picture img,
+.thumb-item:hover > img,
+.thumb-item.active > img {
     filter: brightness(85%);
 }
 
@@ -515,9 +549,8 @@ a {
 /* ================================================================
    10. RESPONSIVIDADE
    Breakpoints:
-   - Tablet:       até 1024px
-   - Mobile:       até 640px
-   - Mobile pequeno: até 390px (iPhone SE, aparelhos compactos)
+   - Tablet: largura até 1024px
+   - Mobile: largura até 640px
 ================================================================ */
 
 /* ---- TABLET (até 1024px) ---- */
@@ -559,7 +592,7 @@ a {
     /* Mostra o botão hamburguer */
     .nav-toggle {
         display: flex;
-        margin-left: auto;
+        margin-left: auto;  /* Vai para a extremidade direita */
     }
 
     /* Menu de links: oculto por padrão, aparece como dropdown */
@@ -574,9 +607,6 @@ a {
         padding: var(--espaco-md) 0;
         gap: 0;
         border-top: 1px solid rgba(212, 175, 55, 0.2);
-        /* Limita a altura do menu para não cobrir o conteúdo inteiro */
-        max-height: calc(100vh - var(--header-total));
-        overflow-y: auto;
     }
 
     /* Quando o JS adiciona .open, o menu aparece */
@@ -596,41 +626,21 @@ a {
     }
 
 
-    /* === SLIDER MOBILE ===
-       100svh desconta as barras do próprio browser (Chrome/Safari mobile).
-       100vh é mantido como fallback para browsers sem suporte a svh. */
-    .slider {
-        height: 100svh;
-        min-height: 100vh;
-    }
+    /* === SLIDER MOBILE === */
 
-
-    /* === CONTEÚDO DO SLIDE ===
-       Posicionado logo abaixo das duas barras de navegação,
-       com espaço reservado para thumbs e setas na parte inferior. */
+    /* Conteúdo do slide: ocupa quase toda a largura, posicionado mais ao centro-baixo */
     .slide-content {
         left: 0;
         right: 0;
         width: 100%;
-        top: var(--header-total);   /* Respira abaixo das duas barras */
-        bottom: auto;
+        top: auto;
+        bottom: calc(var(--thumb-altura) + 90px); /* Espaço para thumbs e setas */
         transform: none;
-        padding: var(--espaco-lg) var(--espaco-lg) 0;
+        padding: 0 var(--espaco-lg);
         text-align: center;
-        max-width: 100%;
-
-        /* Teto de altura: evita que o texto sobreponha thumbs e setas */
-        max-height: calc(
-            100svh
-            - var(--header-total)       /* duas barras no topo */
-            - var(--thumb-altura)        /* thumbnails no fundo */
-            - var(--espaco-xl)           /* setas + margem */
-            - var(--espaco-lg)           /* margem de segurança extra */
-        );
-        overflow: hidden;
     }
 
-    /* Label centralizado no mobile — troca borda lateral por sublinhado */
+    /* No mobile o label fica centralizado */
     .slide-label {
         border-left: none;
         padding-left: 0;
@@ -638,42 +648,13 @@ a {
         border-bottom: 2px solid var(--dourado-divino);
     }
 
-    /* Título reduzido para não explodir em telas estreitas */
-    .slide-title {
-        font-size: clamp(1.5rem, 6vw, 2.5rem);
-        margin-bottom: var(--espaco-sm);
-    }
-
-    /* Descrição compacta — limitada a 3 linhas */
-    .slide-desc {
-        font-size: 0.82rem;
-        line-height: 1.5;
-        margin-bottom: var(--espaco-md);
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-
-    /* Botões centralizados e levemente menores */
+    /* Botões centralizados */
     .slide-buttons {
         justify-content: center;
     }
 
-    .btn {
-        padding: 9px 20px;
-        font-size: 0.7rem;
-        letter-spacing: 2px;
-    }
-
-
     /* === THUMBNAILS MOBILE ===
-       Centralizadas na parte inferior com scroll horizontal suave */
-    :root {
-        --thumb-largura: 75px;
-        --thumb-altura:  110px;
-    }
-
+       Ficam centralizadas na parte inferior, com scroll horizontal se necessário */
     .slider-thumbs {
         left: 50%;
         right: auto;
@@ -683,82 +664,29 @@ a {
         max-width: 95vw;
         overflow-x: auto;
         scrollbar-width: none;
-        padding-bottom: 4px;
-        /* Scroll suave com snap no iOS */
-        -webkit-overflow-scrolling: touch;
-        scroll-snap-type: x mandatory;
+        padding-bottom: 2px; /* Espaço para a borda inferior das thumbs ativas */
     }
 
-    .slider-thumbs::-webkit-scrollbar {
-        display: none;
-    }
-
-    /* Cada thumb encaixa no scroll snap */
-    .thumb-item {
-        scroll-snap-align: start;
+    :root {
+        --thumb-largura: 75px;
+        --thumb-altura:  110px;
     }
 
     .thumb-info h3 {
         font-size: 0.58rem;
     }
 
-    /* Subtexto oculto nas thumbs minúsculas — pouco espaço e ilegível */
-    .thumb-info p {
-        display: none;
-    }
-
-
     /* === SETAS MOBILE ===
-       Acima das thumbnails, centralizadas horizontalmente */
+       Ficam acima das thumbnails, centralizadas */
     .slider-arrows {
         left: 50%;
         transform: translateX(-50%);
-        bottom: calc(var(--thumb-altura) + var(--espaco-lg) + 12px);
+        bottom: calc(var(--thumb-altura) + var(--espaco-lg) + 8px);
     }
 
     .arrow-btn {
         width: 38px;
         height: 38px;
         font-size: 1.4rem;
-    }
-}
-
-
-/* ---- MOBILE PEQUENO (até 390px — iPhone SE, Galaxy A, etc.) ---- */
-@media (max-width: 390px) {
-
-    :root {
-        --thumb-largura: 62px;
-        --thumb-altura:  95px;
-    }
-
-    .slide-content {
-        padding: var(--espaco-md) var(--espaco-md) 0;
-    }
-
-    .slide-title {
-        font-size: 1.4rem;
-    }
-
-    /* Descrição ainda mais curta em telas muito pequenas */
-    .slide-desc {
-        -webkit-line-clamp: 2;
-        font-size: 0.78rem;
-    }
-
-    .btn {
-        padding: 8px 16px;
-        font-size: 0.65rem;
-        letter-spacing: 1.5px;
-    }
-
-    .slider-arrows {
-        bottom: calc(var(--thumb-altura) + var(--espaco-lg) + 8px);
-    }
-
-    .arrow-btn {
-        width: 34px;
-        height: 34px;
-        font-size: 1.2rem;
     }
 }

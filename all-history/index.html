@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ovelha Cem</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="index.css">
+    <!-- <link rel="icon" href="img/ovelha-cem-icon.png"> -->
+</head>
+
+<body>
+
+    <!-- ========================================================
+         HEADER
+         A ovelhinha de fundo é controlada no CSS via ::before.
+         Para trocar a imagem: edite --logo-url no :root do CSS.
+    ======================================================== -->
+    <header class="site-header">
+        <nav class="nav">
+            <a href="#" class="nav-logo">Ovelha Cem</a>
+
+            <!-- Botão hamburguer — só aparece no mobile -->
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Informações</a></li>
+                <li><a href="#">Fale Conosco</a></li>
+            </ul>
+        </nav>
+
+        <!--
+            HERO DO HEADER
+            A ovelhinha aparece aqui como marca d'água (pseudo-elemento ::before no CSS).
+            Troque a imagem editando --logo-url nas variáveis do CSS.
+        -->
+        <div class="header-hero">
+            <span class="header-eyebrow">Conteúdo Católico</span>
+            <h1 class="header-title">Ovelha Cem</h1>
+            <p class="header-subtitle">Milagres, santos e testemunhos que fortalecem a fé</p>
+        </div>
+    </header>
+
+
+    <!-- ========================================================
+         LISTA DE MATÉRIAS (feed vertical)
+
+         COMO ADICIONAR UM NOVO ITEM:
+         1. Copie um bloco <li class="feed-item"> abaixo
+         2. Troque o ícone dentro de .feed-icon (emoji, img ou SVG)
+         3. Edite a cor do ícone em style="--icon-color: var(--sua-cor);"
+         4. Edite .feed-category, .feed-date, h2, p e os botões
+         5. Cole antes de </ul>
+    ======================================================== -->
+    <main class="main">
+        <ul class="feed" id="feed">
+
+            <!-- ITEM 1 -->
+            <li class="feed-item">
+                <!--
+                    ÍCONE: coloque aqui qualquer símbolo.
+                    Opções:
+                    - Emoji:      <span>✝</span>
+                    - Imagem:     <img src="img/icon-lanciano.svg" alt="">
+                    - SVG inline: cole o <svg>...</svg> diretamente
+                -->
+                <div class="feed-icon" style="--icon-color: var(--vermelho-liturgico);">
+                    <span>✝</span>
+                </div>
+
+                <div class="feed-body">
+                    <div class="feed-meta">
+                        <span class="feed-category">Milagres Eucarísticos</span>
+                        <span class="feed-date">Século VIII</span>
+                    </div>
+                    <h2 class="feed-title">Milagre de Lanciano</h2>
+                    <p class="feed-desc">
+                        O mais antigo milagre eucarístico documentado da Igreja, ocorrido
+                        na Itália, onde o pão e o vinho se transformaram visivelmente em
+                        carne e sangue humanos — confirmados por análises científicas modernas.
+                    </p>
+                    <div class="feed-buttons">
+                        <button class="btn btn-primary">Saiba Mais</button>
+                        <button class="btn btn-secondary">Acessar</button>
+                    </div>
+                </div>
+            </li>
+
+            <!-- ITEM 2 -->
+            <li class="feed-item">
+                <div class="feed-icon" style="--icon-color: var(--dourado-divino);">
+                    <span>☩</span>
+                </div>
+                <div class="feed-body">
+                    <div class="feed-meta">
+                        <span class="feed-category">Aparições Marianas</span>
+                        <span class="feed-date">1917</span>
+                    </div>
+                    <h2 class="feed-title">Nossa Senhora de Fátima</h2>
+                    <p class="feed-desc">
+                        As aparições de 1917 em Fátima, Portugal, testemunhadas por milhares
+                        de pessoas, incluindo o famoso Milagre do Sol — um dos eventos
+                        mais verificáveis da história da Igreja.
+                    </p>
+                    <div class="feed-buttons">
+                        <button class="btn btn-primary">Saiba Mais</button>
+                        <button class="btn btn-secondary">Acessar</button>
+                    </div>
+                </div>
+            </li>
+
+            <!-- ITEM 3 -->
+            <li class="feed-item">
+                <div class="feed-icon" style="--icon-color: var(--terracota-humildade);">
+                    <span>✦</span>
+                </div>
+                <div class="feed-body">
+                    <div class="feed-meta">
+                        <span class="feed-category">Santos da Igreja</span>
+                        <span class="feed-date">1195 – 1231</span>
+                    </div>
+                    <h2 class="feed-title">Santo Antônio de Pádua</h2>
+                    <p class="feed-desc">
+                        Patrono dos pobres e das causas perdidas, foi um dos maiores
+                        pregadores da Idade Média — realizando inúmeros milagres
+                        documentados, entre eles, pregar aos peixes no mar.
+                    </p>
+                    <div class="feed-buttons">
+                        <button class="btn btn-primary">Saiba Mais</button>
+                        <button class="btn btn-secondary">Acessar</button>
+                    </div>
+                </div>
+            </li>
+
+            <!-- ITEM 4 -->
+            <li class="feed-item">
+                <div class="feed-icon" style="--icon-color: var(--verde-pastagem);">
+                    <span>✶</span>
+                </div>
+                <div class="feed-body">
+                    <div class="feed-meta">
+                        <span class="feed-category">Estigmatizados</span>
+                        <span class="feed-date">1887 – 1968</span>
+                    </div>
+                    <h2 class="feed-title">Padre Pio de Pietrelcina</h2>
+                    <p class="feed-desc">
+                        Frade capuchinho que carregou as chagas de Cristo por 50 anos,
+                        com dons de bilocação, leitura de consciências e cura milagrosa.
+                        Canonizado pelo Papa João Paulo II em 2002.
+                    </p>
+                    <div class="feed-buttons">
+                        <button class="btn btn-primary">Saiba Mais</button>
+                        <button class="btn btn-secondary">Acessar</button>
+                    </div>
+                </div>
+            </li>
+
+            <!-- ITEM 5 -->
+            <li class="feed-item">
+                <div class="feed-icon" style="--icon-color: var(--dourado-divino);">
+                    <span>☀</span>
+                </div>
+                <div class="feed-body">
+                    <div class="feed-meta">
+                        <span class="feed-category">Doutores da Igreja</span>
+                        <span class="feed-date">1873 – 1897</span>
+                    </div>
+                    <h2 class="feed-title">Santa Teresinha de Lisieux</h2>
+                    <p class="feed-desc">
+                        Doutora da Igreja e padroeira das missões, revelou o "Camininho
+                        da Infância Espiritual" — uma espiritualidade de abandono e
+                        confiança total em Deus, acessível a todos os fiéis.
+                    </p>
+                    <div class="feed-buttons">
+                        <button class="btn btn-primary">Saiba Mais</button>
+                        <button class="btn btn-secondary">Acessar</button>
+                    </div>
+                </div>
+            </li>
+
+            <!-- ADICIONE NOVOS ITENS AQUI -->
+
+        </ul>
+    </main>
+
+    <footer class="site-footer">
+        <p>© 2025 Ovelha Cem — Conteúdo Católico</p>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>

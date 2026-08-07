@@ -3,11 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <!-- Viewport garante responsividade em mobile/tablet -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ovelha Cem</title>
 
-    <!-- Google Fonts: Cinzel para títulos (serifa elegante/litúrgica), Lato para corpo -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
@@ -20,23 +18,20 @@
 
     <!-- ========================================================
          HEADER / NAVEGAÇÃO
-         - position: relative com z-index alto para ficar sobre o slider
     ======================================================== -->
     <header class="site-header">
         <nav class="nav">
             <a href="https://matheusantts.github.io/Portifolio-Matheus/" class="nav-logo" target="_blank">Ovelha Cem</a>
 
-            <!-- Botão hamburguer visível apenas em mobile -->
             <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
 
-            <!-- Links do menu - em mobile ficam ocultos até o botão ser clicado -->
             <ul class="nav-links" id="navLinks">
                 <li><a href="Santo Terço/index.html">Guia - Santo Terço</a></li>
-                <li><a href="pagina-em-desenvolvimento.html">Todas as histórias</a></li>
+                <li><a href="all-history/index.html">Todas as histórias</a></li>
                 <li><a href="Fale-Comigo/index.html">Fale Comigo</a></li>
             </ul>
         </nav>
@@ -45,43 +40,61 @@
 
     <!-- ========================================================
          SLIDER PRINCIPAL
-         Estrutura:
-         .slider (container geral, fullscreen)
-         └── .slider-list (lista de slides)
-             └── .slide (cada slide)
-                 ├── img (imagem de fundo do slide)
-                 └── .slide-content (textos e botões)
-         └── .slider-thumbs (miniaturas navegáveis)
-         └── .slider-arrows (botões < e >)
     ======================================================== -->
     <main class="slider" id="slider">
 
-        <!-- ---- LISTA DE SLIDES ---- -->
-        <!-- 
-            COMO ADICIONAR UM NOVO SLIDE:
-            1. Copie o bloco <div class="slide"> abaixo
-            2. Troque o src da <img> pela sua imagem
-            3. Edite o <h2>, <p> e os textos dos botões
-            4. Cole antes de </div> <!-- fim .slider-list 
-            5. Adicione também um .thumb-item correspondente em .slider-thumbs
-        -->
         <div class="slider-list" id="sliderList">
 
-            <!-- SLIDE 1 -->
+            <!-- ================================================
+                 SLIDE 1 — Milagre de Lanciano
+                 
+                 Como usar o <picture>:
+                 
+                 O elemento <picture> permite fornecer imagens DIFERENTES
+                 para tamanhos de tela diferentes. O navegador lê os
+                 <source> de cima para baixo e usa o PRIMEIRO que bater
+                 com o tamanho da tela. O <img> no final é o fallback
+                 (imagem padrão) para browsers antigos.
+                 
+                 Breakpoints usados:
+                 - max-width: 640px  → mobile  (vertical, mais alto)
+                 - max-width: 1024px → tablet  (quadrado/retrato)
+                 - sem media query   → desktop (widescreen, horizontal)
+                 
+                 COMO TROCAR AS IMAGENS:
+                 Substitua os src de cada <source> e do <img> pelas
+                 suas imagens reais. Mantenha a estrutura dos 3 arquivos
+                 (desktop / tablet / mobile) para cada slide.
+                 
+                 Exemplo real do seu projeto:
+                 <source media="(max-width: 640px)"  srcset="img/fundo-lanciano-mobile.png">
+                 <source media="(max-width: 1024px)" srcset="img/fundo-lanciano-tablet.png">
+                 <img src="img/fundo-lanciano.png" alt="Milagre de Lanciano">
+            ================================================ -->
             <div class="slide active">
-                <!--
-                    Substitua o src pela sua imagem:
-                    <img src="img/slide-01.jpg" alt="Milagre de Lanciano">
-                    
-                    A tag abaixo é um PLACEHOLDER de cor para demonstração.
-                    Remova-a quando tiver imagens reais.
-                -->
-                <!--<div class="slide-img-placeholder" style="background: linear-gradient(135deg, #1a0a2e, #4a1060);"></div>-->
 
-                <img src="img/fundo-lanciano.png" alt="Milagre-de-Lanciano">
+                <picture class="slide-picture">
+                    <!-- MOBILE: tela até 640px (celular em modo retrato) -->
+                    <source
+                        media="(max-width: 640px)"
+                        srcset="O Primeiro Milagre Eucarístico/pg-inicial/img-mobile.png">
+
+                    <!-- TABLET: tela até 1024px (iPad, tablet em modo retrato ou paisagem) -->
+                    <source
+                        media="(max-width: 1024px)"
+                        srcset="O Primeiro Milagre Eucarístico/pg-inicial/img-tablet.pn">
+
+                    <!-- DESKTOP: fallback — usado quando nenhum <source> bate
+                         ou em navegadores que não suportam <picture> -->
+                    <img
+                        src="O Primeiro Milagre Eucarístico/pg-inicial/img-desktop.png"
+                        alt="Milagre de Lanciano">
+                </picture>
 
                 <div class="slide-content">
-                    <a href="pagina-em-desenvolvimento.html"><span class="slide-label">Milagres Eucarísticos</span></a>
+                    <a href="pagina-em-desenvolvimento.html">
+                        <span class="slide-label">Milagres Eucarísticos</span>
+                    </a>
                     <h2 class="slide-title">Milagre de Lanciano</h2>
                     <p class="slide-desc">
                         O mais antigo milagre eucarístico documentado da Igreja, ocorrido no
@@ -95,20 +108,49 @@
                         <a href="pagina-em-desenvolvimento.html">
                             <button class="btn btn-secondary">Saiba Mais</button>
                         </a>
-                        
                     </div>
                 </div>
             </div>
             <!-- FIM SLIDE 1 -->
 
-            <!-- SLIDE 2 -->
+
+            <!-- ================================================
+                 SLIDE 2 — Nossa Senhora Aparecida
+                 
+                 Repita o mesmo padrão de <picture> para cada slide.
+                 Troque os srcset pelas imagens correspondentes:
+                 
+                 <source media="(max-width: 640px)"  srcset="Nossa Senhora Aparecida/fundo-aparecida-mobile.png">
+                 <source media="(max-width: 1024px)" srcset="Nossa Senhora Aparecida/fundo-aparecida-tablet.png">
+                 <img src="Nossa Senhora Aparecida/fundo-aparecida.png" alt="Aparecida">
+            ================================================ -->
             <div class="slide">
-                <img src="Nossa Senhora Aparecida/fundo-aparecida.png" alt="Aparecida">
+
+                <picture class="slide-picture">
+                    <!-- MOBILE -->
+                    <source
+                        media="(max-width: 640px)"
+                        srcset="img-mobile.png">
+
+                    <!-- TABLET -->
+                    <source
+                        media="(max-width: 1024px)"
+                        srcset="img-tablet.png">
+
+                    <!-- DESKTOP (fallback) -->
+                    <img
+                        src="img-desktop.png"
+                        alt="Nossa Senhora Aparecida">
+                </picture>
+
                 <div class="slide-content">
-                    <a href="pagina-em-desenvolvimento.html"><span class="slide-label">Aparições Marianas</span></a>
+                    <a href="pagina-em-desenvolvimento.html">
+                        <span class="slide-label">Aparições Marianas</span>
+                    </a>
                     <h2 class="slide-title">Nossa Senhora Aparecida</h2>
                     <p class="slide-desc">
-                        Descubra a emocionante história da nossa Padroeira, a Mãe que acolheu o povo brasileiro desde que sua imagem foi encontrada nas águas do Rio Paraíba.
+                        Descubra a emocionante história da nossa Padroeira, a Mãe que acolheu
+                        o povo brasileiro desde que sua imagem foi encontrada nas águas do Rio Paraíba.
                     </p>
                     <div class="slide-buttons">
                         <a href="Nossa Senhora Aparecida/inicio-historia.html">
@@ -122,14 +164,44 @@
             </div>
             <!-- FIM SLIDE 2 -->
 
-            <!-- SLIDE 3 -->
+
+            <!-- ================================================
+                 SLIDE 3 — São Bento
+                 
+                 Troque os srcset pelas imagens correspondentes:
+                 
+                 <source media="(max-width: 640px)"  srcset="São Bento/fundo-saobento-mobile.png">
+                 <source media="(max-width: 1024px)" srcset="São Bento/fundo-saobento-tablet.png">
+                 <img src="São Bento/fundo-saobento.png" alt="São Bento">
+            ================================================ -->
             <div class="slide">
-                <img src="São Bento/fundo-saobento.png" alt="São-Bento">
+
+                <picture class="slide-picture">
+                    <!-- MOBILE -->
+                    <source
+                        media="(max-width: 640px)"
+                        srcset="img-mobile.png">
+
+                    <!-- TABLET -->
+                    <source
+                        media="(max-width: 1024px)"
+                        srcset="img-tablet.png">
+
+                    <!-- DESKTOP (fallback) -->
+                    <img
+                        src="img-desktop.png"
+                        alt="São Bento">
+                </picture>
+
                 <div class="slide-content">
-                    <a href="pagina-em-desenvolvimento.html"><span class="slide-label">Santos da Igreja</span></a>
+                    <a href="pagina-em-desenvolvimento.html">
+                        <span class="slide-label">Santos da Igreja</span>
+                    </a>
                     <h2 class="slide-title">São Bento</h2>
                     <p class="slide-desc">
-                        Conheça a história de São Bento, o Padroeiro da Europa e fundador da vida monástica ocidental. Saiba o profundo significado espiritual de sua famosa Medalha de Proteção, detalhando as inscrições sagradas usadas por fiéis no mundo inteiro contra os males do corpo e da alma.
+                        Conheça a história de São Bento, o Padroeiro da Europa e fundador da
+                        vida monástica ocidental, e o profundo significado espiritual de sua
+                        famosa Medalha de Proteção.
                     </p>
                     <div class="slide-buttons">
                         <a href="São Bento/inicio-historia.html">
@@ -143,41 +215,91 @@
             </div>
             <!-- FIM SLIDE 3 -->
 
-            
+
+            <!-- ================================================
+                 COMO ADICIONAR UM NOVO SLIDE:
+                 
+                 1. Copie o bloco <div class="slide"> de qualquer slide acima
+                 2. Troque os 3 srcset do <picture> pelas suas imagens
+                 3. Edite o slide-label, slide-title, slide-desc e os links
+                 4. Adicione também um .thumb-item em .slider-thumbs abaixo
+                    (com data-index seguindo a sequência: 3, 4, 5...)
+                 5. O JavaScript não precisa de alteração
+            ================================================ -->
 
         </div>
         <!-- fim .slider-list -->
 
 
-        <!-- ---- MINIATURAS (THUMBNAILS) ----
-            COMO ADICIONAR UMA NOVA MINIATURA:
-            1. Copie um bloco <div class="thumb-item"> abaixo
-            2. Troque o src da <img> pela sua miniatura
-            3. Edite o <h3> com o nome correspondente ao slide
-            4. O atributo data-index deve seguir a sequência (0, 1, 2, 3...)
-        -->
+        <!-- ================================================
+             THUMBNAILS (MINIATURAS)
+             
+             As thumbnails também usam <picture> para servir
+             a imagem certa em cada tamanho de tela.
+             
+             Em telas pequenas as thumbs são menores (62–75px),
+             então uma imagem quadrada/menor economiza dados.
+             
+             COMO TROCAR:
+             <source media="(max-width: 640px)"  srcset="img/logo-thumb-mobile.png">
+             <source media="(max-width: 1024px)" srcset="img/logo-thumb-tablet.png">
+             <img src="img/logo-thumb.png" alt="nome">
+        ================================================ -->
         <div class="slider-thumbs" id="sliderThumbs">
 
+            <!-- THUMB 1 — Lanciano -->
             <div class="thumb-item active" data-index="0">
-                <!-- Placeholder: troque por <img src="img/thumb-01.jpg" alt="Lanciano"> -->
-                <!-- <div class="thumb-img-placeholder" style="background:#1a0a2e;"></div> -->
-                <img src="O Primeiro Milagre Eucarístico/imagens/ovelhacem-primeiromilagreeucaristico.png" alt="">
+                <picture>
+                    <!-- Em mobile e tablet, uma versão menor/quadrada da thumb -->
+                    <source
+                        media="(max-width: 640px)"
+                        srcset="img-mobile.png">
+                    <source
+                        media="(max-width: 1024px)"
+                        srcset="img-tablet.png">
+                    <!-- Versão desktop da thumbnail -->
+                    <img
+                        src="img-desktop.png"
+                        alt="Lanciano">
+                </picture>
                 <div class="thumb-info">
                     <h3>Lanciano</h3>
                     <p>Ver matéria</p>
                 </div>
             </div>
 
+            <!-- THUMB 2 — Aparecida -->
             <div class="thumb-item" data-index="1">
-                <img src="Nossa Senhora Aparecida/logo-aparecida.png" alt="logo-aparecida">
+                <picture>
+                    <source
+                        media="(max-width: 640px)"
+                        srcset="img-mobile.png">
+                    <source
+                        media="(max-width: 1024px)"
+                        srcset="img-tablet.png">
+                    <img
+                        src="img-desktop.png"
+                        alt="Nossa Senhora Aparecida">
+                </picture>
                 <div class="thumb-info">
                     <h3>Aparecida</h3>
                     <p>Ver matéria</p>
                 </div>
             </div>
 
+            <!-- THUMB 3 — São Bento -->
             <div class="thumb-item" data-index="2">
-                <img src="São Bento/logo-saobento.png" alt="logo-saobento">
+                <picture>
+                    <source
+                        media="(max-width: 640px)"
+                        srcset="img-mobile.png">
+                    <source
+                        media="(max-width: 1024px)"
+                        srcset="img-tablet.png">
+                    <img
+                        src="img-desktop.png"
+                        alt="São Bento">
+                </picture>
                 <div class="thumb-info">
                     <h3>São Bento</h3>
                     <p>Ver matéria</p>
@@ -188,7 +310,7 @@
         <!-- fim .slider-thumbs -->
 
 
-        <!-- ---- BOTÕES DE NAVEGAÇÃO (setas) ---- -->
+        <!-- BOTÕES DE NAVEGAÇÃO (setas) -->
         <div class="slider-arrows">
             <button class="arrow-btn" id="btnBack" aria-label="Slide anterior">&#8249;</button>
             <button class="arrow-btn" id="btnNext" aria-label="Próximo slide">&#8250;</button>
@@ -197,8 +319,6 @@
     </main>
     <!-- fim .slider -->
 
-
-    <!-- Script por último para não bloquear o carregamento da página -->
     <script src="index.js"></script>
 
 </body>

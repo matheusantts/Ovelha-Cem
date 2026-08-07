@@ -1,6 +1,6 @@
 // ===== Configuração =====
 // Email para onde as mensagens serão enviadas.
-const EMAIL_DESTINO = "contato@suaigreja.com.br";
+const EMAIL_DESTINO = "matheusbw07@gmail.com";
 
 const formulario = document.getElementById("formContato");
 const statusEnvio = document.getElementById("statusEnvio");

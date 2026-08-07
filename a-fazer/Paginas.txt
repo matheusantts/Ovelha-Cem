@@ -3,6 +3,8 @@
 
  - Corrigir bugs
 
- - Fale Conosco
+ - Mecher na responsividade contando com a barra do site no monile e tablet
 
  - Todas as Historias (Formato de lista)
+
+ - Arrumar os links de referencias dentro das historias

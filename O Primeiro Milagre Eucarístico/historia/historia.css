@@ -14,6 +14,7 @@
    10. Título do capítulo
    11. Ornamento
    12. Texto narrativo
+   12.1 Galeria de imagens do capítulo
    13. Rodapé — botões de navegação
    14. Barra de progresso
    15. Coluna de versículos (direita)
@@ -48,8 +49,8 @@
 
   /* ── Tamanhos de fonte ───────────────────────────────────── */
   --fs-titulo:     clamp(1.8rem, 3vw, 2.8rem);
-  --fs-corpo:      clamp(0.92rem, 1.1vw, 1.05rem);
-  --fs-versiculo:  clamp(0.82rem, 0.95vw, 0.95rem);
+  --fs-corpo:      clamp(1.125rem, 1.5vw, 1.375rem);
+  --fs-versiculo:  clamp(1.125rem, 1.5vw, 1.375rem);
   --fs-botao:      clamp(0.9rem, 1vw, 1rem);
   --fs-badge:      0.68rem;
   --fs-cite:       0.73rem;
@@ -100,7 +101,7 @@ ul {
 }
 
 a {
-  color: inherit;
+  color: #3f5022;
   text-decoration: none;
 }
 
@@ -386,6 +387,47 @@ img {
 
 
 /* ============================================================
+   12.1 GALERIA DE IMAGENS DO CAPÍTULO
+   ============================================================
+   Estrutura no HTML:
+   <div class="galeria-capitulo">
+     <figure class="imagem-capitulo"><img src="..." alt="..." loading="lazy" /></figure>
+     ... (repita para cada imagem)
+   </div>
+
+   Para ADICIONAR imagem: copie um bloco <figure class="imagem-capitulo">
+   Para REMOVER imagem: apague o bloco <figure> correspondente
+   O grid se reorganiza sozinho (auto-fit), não importa quantas imagens existam.
+   ============================================================ */
+.galeria-capitulo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--sp-sm);
+  margin-bottom: var(--sp-lg);
+}
+
+.imagem-capitulo {
+  margin: 0;
+  border-radius: var(--raio-card);
+  overflow: hidden;
+  border: 1px solid var(--dourado-borda);
+  background-color: var(--bege-claro);
+}
+
+.imagem-capitulo img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.imagem-capitulo:hover img {
+  transform: scale(1.03);
+}
+
+
+/* ============================================================
    13. RODAPÉ — BOTÕES DE NAVEGAÇÃO
    ============================================================ */
 .rodape-capitulo {
@@ -612,6 +654,12 @@ img {
 
   .rodape-capitulo {
     gap: var(--sp-sm);
+  }
+
+  /* Galeria com colunas menores no mobile */
+  .galeria-capitulo {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--sp-xs);
   }
 
   /* Cards de versículo empilhados no mobile */
