@@ -20,33 +20,44 @@
 ================================================================ */
 :root {
     /* --- Paleta Ovelha Cem --- */
-    --dourado-divino:     #D4AF37;  /* Realeza de Jesus e o Ouro da Igreja */
-    --branco-cordeiro:    #F8F9FA;  /* Pureza — branco levemente suave */
-    --bege-la:            #E8DCC4;  /* Lã da ovelha e acolhimento */
-    --terracota-humildade:#A0522D;  /* Terra do caminho e o hábito religioso */
-    --verde-pastagem:     #556B2F;  /* Esperança e o aprisco */
-    --vermelho-liturgico: #8B0000;  /* Sacrifício de Cristo */
+    --dourado-divino: #D4AF37;
+    /* Realeza de Jesus e o Ouro da Igreja */
+    --branco-cordeiro: #F8F9FA;
+    /* Pureza — branco levemente suave */
+    --bege-la: #E8DCC4;
+    /* Lã da ovelha e acolhimento */
+    --terracota-humildade: #A0522D;
+    /* Terra do caminho e o hábito religioso */
+    --verde-pastagem: #556B2F;
+    /* Esperança e o aprisco */
+    --vermelho-liturgico: #8B0000;
+    /* Sacrifício de Cristo */
 
     /* --- Cores de suporte --- */
-    --preto-noite:        #0a0a0a;  /* Fundo escuro do slider */
-    --overlay-escuro:     rgba(0, 0, 0, 0.55); /* Escurecimento das imagens */
-    --branco-transparente:rgba(248, 249, 250, 0.12); /* Fundo sutil em botões */
+    --preto-noite: #0a0a0a;
+    /* Fundo escuro do slider */
+    --overlay-escuro: rgba(0, 0, 0, 0.55);
+    /* Escurecimento das imagens */
+    --branco-transparente: rgba(248, 249, 250, 0.12);
+    /* Fundo sutil em botões */
 
     /* --- Tipografia --- */
-    --font-titulo: 'Cinzel', Georgia, serif;        /* Serifa litúrgica para títulos */
-    --font-corpo:  'Lato', Arial, sans-serif;       /* Sem serifa para textos e UI */
+    --font-titulo: 'Cinzel', Georgia, serif;
+    /* Serifa litúrgica para títulos */
+    --font-corpo: 'Lato', Arial, sans-serif;
+    /* Sem serifa para textos e UI */
 
     /* --- Espaçamentos base --- */
-    --espaco-xs:  4px;
-    --espaco-sm:  8px;
-    --espaco-md:  16px;
-    --espaco-lg:  32px;
-    --espaco-xl:  64px;
+    --espaco-xs: 4px;
+    --espaco-sm: 8px;
+    --espaco-md: 16px;
+    --espaco-lg: 32px;
+    --espaco-xl: 64px;
 
     /* --- Tamanhos do slider --- */
-    --thumb-largura:  120px;
-    --thumb-altura:   175px;
-    --header-altura:  56px;
+    --thumb-largura: 120px;
+    --thumb-altura: 175px;
+    --header-altura: 56px;
 }
 
 
@@ -102,11 +113,13 @@ a {
    3. HEADER E NAVEGAÇÃO
 ================================================================ */
 .site-header {
-    position: absolute;   /* Flutua sobre o slider */
+    position: absolute;
+    /* Flutua sobre o slider */
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 100;         /* Acima de tudo */
+    z-index: 100;
+    /* Acima de tudo */
     padding: 0 5%;
 }
 
@@ -123,7 +136,8 @@ a {
     font-size: 1.2rem;
     color: var(--dourado-divino);
     letter-spacing: 2px;
-    margin-right: auto; /* Empurra os links para a direita */
+    margin-right: auto;
+    /* Empurra os links para a direita */
     white-space: nowrap;
 }
 
@@ -150,7 +164,8 @@ a {
 
 /* Botão hamburguer — oculto no desktop, visível no mobile */
 .nav-toggle {
-    display: none;          /* Escondido por padrão */
+    display: none;
+    /* Escondido por padrão */
     flex-direction: column;
     justify-content: center;
     gap: 5px;
@@ -170,9 +185,17 @@ a {
 }
 
 /* Estado aberto do hamburguer (classe adicionada pelo JS) */
-.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.nav-toggle.open span:nth-child(2) { opacity: 0; }
-.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav-toggle.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-toggle.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
 
 
 /* ================================================================
@@ -181,7 +204,8 @@ a {
 .slider {
     position: relative;
     width: 100%;
-    height: 100vh;      /* Ocupa toda a altura da tela */
+    height: 100vh;
+    /* Ocupa toda a altura da tela */
     overflow: hidden;
     background-color: var(--preto-noite);
 }
@@ -199,7 +223,8 @@ a {
 ================================================================ */
 .slide {
     position: absolute;
-    inset: 0;           /* Equivale a: top:0; right:0; bottom:0; left:0 */
+    inset: 0;
+    /* Equivale a: top:0; right:0; bottom:0; left:0 */
     opacity: 0;
     transition: opacity 0.7s ease;
     /* Garante que slides inativos não capturem cliques */
@@ -210,34 +235,6 @@ a {
     opacity: 1;
     pointer-events: auto;
     z-index: 1;
-}
-
-/*
-    IMAGEM DO SLIDE — funciona tanto com <img> direto quanto com <picture>
-
-    O <picture> é um container inline por padrão, então precisamos
-    transformá-lo em bloco e dar as mesmas dimensões da imagem.
-    O <img> dentro do <picture> herda width/height do pai.
-*/
-
-/* Faz o <picture> ocupar o mesmo espaço que o <img> ocuparia */
-.slide-picture {
-    position: absolute;
-    inset: 0;           /* top:0; right:0; bottom:0; left:0 */
-    display: block;     /* <picture> é inline por padrão — precisa ser block */
-    width: 100%;
-    height: 100%;
-}
-
-/* O <img> dentro do <picture> preenche o container e escurece */
-.slide-picture img,
-.slide img {            /* mantém compatibilidade com <img> direto */
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(45%);
 }
 
 /* Placeholder de cor (usado enquanto não há imagens reais) */
@@ -262,7 +259,8 @@ a {
     top: 50%;
     left: 8%;
     transform: translateY(-50%);
-    width: 50%;             /* Ocupa metade da tela para não colidir com as thumbs */
+    width: 50%;
+    /* Ocupa metade da tela para não colidir com as thumbs */
     max-width: 600px;
     color: var(--branco-cordeiro);
     z-index: 2;
@@ -287,12 +285,13 @@ a {
 
 .slide-title {
     font-family: var(--font-titulo);
-    font-size: clamp(2rem, 5vw, 4rem); /* Responsivo: mínimo 2rem, ideal 5vw, máximo 4rem */
+    font-size: clamp(2rem, 5vw, 4rem);
+    /* Responsivo: mínimo 2rem, ideal 5vw, máximo 4rem */
     font-weight: 700;
     line-height: 1.15;
     margin-bottom: var(--espaco-md);
     color: var(--branco-cordeiro);
-    text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0s, transform 0s;
@@ -313,7 +312,8 @@ a {
 .slide-buttons {
     display: flex;
     gap: var(--espaco-sm);
-    flex-wrap: wrap;        /* Em telas muito estreitas, botões vão para linha abaixo */
+    flex-wrap: wrap;
+    /* Em telas muito estreitas, botões vão para linha abaixo */
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0s, transform 0s;
@@ -339,19 +339,19 @@ a {
 }
 
 .btn-primary:hover {
-    background-color: transparent;
-    color: var(--dourado-divino);
+    background-color: var(--verde-pastagem);
+    color: var(--preto-noite);
 }
 
 /* Botão secundário: contorno dourado */
 .btn-secondary {
-    background-color: transparent;
-    color: var(--dourado-divino);
+    background-color: var(--dourado-divino);
+    color: var(--preto-noite);
     border-color: var(--dourado-divino);
 }
 
 .btn-secondary:hover {
-    background-color: var(--dourado-divino);
+    background-color: var(--verde-pastagem);
     color: var(--preto-noite);
 }
 
@@ -378,7 +378,8 @@ a {
     /* Borda dourada transparente — fica opaca na thumbnail ativa */
     border: 2px solid transparent;
     transition: border-color 0.3s, transform 0.3s;
-    flex-shrink: 0; /* Impede que as thumbs encolham em telas menores */
+    flex-shrink: 0;
+    /* Impede que as thumbs encolham em telas menores */
 }
 
 .thumb-item:hover {
@@ -409,7 +410,8 @@ a {
 
 /* <img> dentro do <picture> da thumbnail */
 .thumb-item picture img,
-.thumb-item > img {     /* mantém compatibilidade com <img> direto */
+.thumb-item>img {
+    /* mantém compatibilidade com <img> direto */
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -419,8 +421,8 @@ a {
 
 .thumb-item:hover picture img,
 .thumb-item.active picture img,
-.thumb-item:hover > img,
-.thumb-item.active > img {
+.thumb-item:hover>img,
+.thumb-item.active>img {
     filter: brightness(85%);
 }
 
@@ -438,7 +440,7 @@ a {
     right: 0;
     padding: var(--espaco-sm) var(--espaco-sm) 10px;
     /* Gradiente sutil para o texto ficar legível */
-    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 100%);
 }
 
 .thumb-info h3 {
@@ -534,6 +536,7 @@ a {
     Desativa as animações se o sistema operacional tiver esta preferência ativa.
 */
 @media (prefers-reduced-motion: reduce) {
+
     .slide-label,
     .slide-title,
     .slide-desc,
@@ -566,7 +569,7 @@ a {
     /* Thumbnails menores */
     :root {
         --thumb-largura: 95px;
-        --thumb-altura:  140px;
+        --thumb-altura: 140px;
     }
 
     /* Menos thumbnails ficam visíveis — as que sobram ficam com scroll horizontal */
@@ -592,7 +595,8 @@ a {
     /* Mostra o botão hamburguer */
     .nav-toggle {
         display: flex;
-        margin-left: auto;  /* Vai para a extremidade direita */
+        margin-left: auto;
+        /* Vai para a extremidade direita */
     }
 
     /* Menu de links: oculto por padrão, aparece como dropdown */
@@ -618,7 +622,7 @@ a {
         display: block;
         padding: var(--espaco-md) var(--espaco-lg);
         font-size: 0.9rem;
-        border-bottom: 1px solid rgba(255,255,255,0.05);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .nav-links li:last-child a {
@@ -634,7 +638,8 @@ a {
         right: 0;
         width: 100%;
         top: auto;
-        bottom: calc(var(--thumb-altura) + 90px); /* Espaço para thumbs e setas */
+        bottom: calc(var(--thumb-altura) + 90px);
+        /* Espaço para thumbs e setas */
         transform: none;
         padding: 0 var(--espaco-lg);
         text-align: center;
@@ -664,12 +669,13 @@ a {
         max-width: 95vw;
         overflow-x: auto;
         scrollbar-width: none;
-        padding-bottom: 2px; /* Espaço para a borda inferior das thumbs ativas */
+        padding-bottom: 2px;
+        /* Espaço para a borda inferior das thumbs ativas */
     }
 
     :root {
         --thumb-largura: 75px;
-        --thumb-altura:  110px;
+        --thumb-altura: 110px;
     }
 
     .thumb-info h3 {

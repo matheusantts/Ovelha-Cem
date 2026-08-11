@@ -8,3 +8,5 @@
  - Todas as Historias (Formato de lista)
 
  - Arrumar os links de referencias dentro das historias
+
+ - Melhorar leitura para Tablet e Desktop
