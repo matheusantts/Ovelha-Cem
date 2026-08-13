@@ -1,11 +1,11 @@
 
- - Pagina do Santo Terço
+ - Pagina do Santo Terço (ultimos detalhes)
 
  - Corrigir bugs
 
- - Mecher na responsividade contando com a barra do site no monile e tablet
+ - Melhorar responsividade contando com a barra do site no monile e tablet
 
- - Todas as Historias (Formato de lista)
+ - Todas as Historias (Terminar)
 
  - Arrumar os links de referencias dentro das historias
 
