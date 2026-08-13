@@ -3,13 +3,14 @@
    ================================================================
    Índice deste arquivo:
 
-   1. TEXTOS DAS ORAÇÕES        -> edite aqui para mudar as palavras
-   2. FUNÇÕES GEOMÉTRICAS        -> raramente precisa mexer
-   3. PONTOS DO TERÇO (posições) -> edite aqui para mudar o formato/tamanho
-   4. FUNÇÕES DE DESENHO (SVG)   -> como cada peça é desenhada
-   5. MONTAGEM DO TERÇO (build)  -> a ordem em que tudo é desenhado
-   6. SEQUÊNCIA GUIADA           -> ordem dos botões "Anterior/Próxima"
-   7. INTERAÇÃO (cliques, painel)-> como o clique atualiza o texto
+   1. TEXTOS DAS ORAÇÕES         -> edite aqui para mudar as palavras
+   1b. MISTÉRIOS (por dia da semana) -> edite aqui os 4 conjuntos
+   2. FUNÇÕES GEOMÉTRICAS         -> raramente precisa mexer
+   3. PONTOS DO TERÇO (posições)  -> edite aqui para mudar o formato/tamanho
+   4. FUNÇÕES DE DESENHO (SVG)    -> como cada peça é desenhada
+   5. MONTAGEM DO TERÇO (build)   -> a ordem em que tudo é desenhado
+   6. SEQUÊNCIA GUIADA            -> ordem dos botões "Anterior/Próxima"
+   7. INTERAÇÃO (cliques, painel) -> como o clique atualiza o texto
    ================================================================ */
 
 
@@ -25,7 +26,7 @@
 const PRAYERS = {
   creio: {
     eyebrow: "No crucifixo",
-    title: "Creio (Símbolo dos Apóstolos)",
+    title: "Sinal da Cruz - Creio",
     text: `Creio em Deus Pai todo-poderoso, Criador do céu e da terra; e em Jesus Cristo, seu único Filho, nosso Senhor, que foi concebido pelo poder do Espírito Santo, nasceu da Virgem Maria, padeceu sob Pôncio Pilatos, foi crucificado, morto e sepultado, desceu à mansão dos mortos, ressuscitou ao terceiro dia, subiu aos céus, está sentado à direita de Deus Pai todo-poderoso, donde há de vir a julgar os vivos e os mortos.
 
 Creio no Espírito Santo, na Santa Igreja Católica, na comunhão dos santos, na remissão dos pecados, na ressurreição da carne, na vida eterna. Amém.`
@@ -50,7 +51,7 @@ Santa Maria, Mãe de Deus, rogai por nós, pecadores, agora e na hora de nossa m
     text: `Glória ao Pai, ao Filho e ao Espírito Santo, como era no princípio, agora e sempre, e por todos os séculos dos séculos. Amém.`
   },
   salveRainha: {
-    eyebrow: "Na medalha",
+    eyebrow: "Oração final",
     title: "Salve Rainha",
     text: `Salve, Rainha, Mãe de misericórdia, vida, doçura, esperança nossa, salve! A vós bradamos, os degredados filhos de Eva. A vós suspiramos, gemendo e chorando neste vale de lágrimas.
 
@@ -59,6 +60,83 @@ Eia, pois, advogada nossa, esses vossos olhos misericordiosos a nós volvei. E d
 Ó clemente, ó piedosa, ó doce sempre Virgem Maria. Rogai por nós, Santa Mãe de Deus, para que sejamos dignos das promessas de Cristo.`
   }
 };
+
+
+/* ----------------------------------------------------------------
+   1b. MISTÉRIOS (por dia da semana)
+   Quatro conjuntos tradicionais. O conjunto do dia é escolhido
+   automaticamente por getMysterySetForToday() logo abaixo, seguindo
+   o costume: Gozosos (2ª e 6ª... na verdade 2ª e sábado), Dolorosos
+   (3ª e 6ª), Gloriosos (4ª e domingo), Luminosos (5ª).
+
+   Para EDITAR os textos, mude os títulos/textos abaixo.
+   Para FORÇAR sempre um único conjunto (em vez do automático por
+   dia), troque a função getMysterySetForToday() no final desta
+   seção para simplesmente "return MYSTERY_SETS.gozosos;" (por
+   exemplo).
+---------------------------------------------------------------- */
+const MYSTERY_SETS = {
+  gozosos: {
+    name: "Mistérios Gozosos",
+    items: [
+      { title: "1º Mistério Gozoso — A Anunciação", text: "O anjo Gabriel anuncia a Maria que ela será a Mãe do Salvador, e ela responde com um \"sim\" humilde e confiante." },
+      { title: "2º Mistério Gozoso — A Visitação", text: "Maria visita sua prima Isabel, grávida de João Batista, e a saúda com alegria e louvor a Deus." },
+      { title: "3º Mistério Gozoso — O Nascimento de Jesus", text: "Jesus nasce numa gruta pobre em Belém, e os pastores são os primeiros a adorá-lo." },
+      { title: "4º Mistério Gozoso — A Apresentação no Templo", text: "Maria e José apresentam o Menino Jesus no templo, e o ancião Simeão o reconhece como o Salvador prometido." },
+      { title: "5º Mistério Gozoso — O Encontro no Templo", text: "Aos doze anos, Jesus é encontrado por seus pais ensinando os doutores da lei no templo de Jerusalém." },
+    ]
+  },
+  dolorosos: {
+    name: "Mistérios Dolorosos",
+    items: [
+      { title: "1º Mistério Doloroso — A Agonia no Horto", text: "Jesus ora angustiado no Getsêmani, suando sangue diante da paixão que se aproxima." },
+      { title: "2º Mistério Doloroso — A Flagelação", text: "Jesus é açoitado cruelmente por ordem de Pilatos, entregando seu corpo pela nossa salvação." },
+      { title: "3º Mistério Doloroso — A Coroação de Espinhos", text: "Os soldados colocam uma coroa de espinhos na cabeça de Jesus e zombam dele como se fosse rei." },
+      { title: "4º Mistério Doloroso — Jesus Carrega a Cruz", text: "Jesus carrega a cruz pesada pelas ruas de Jerusalém a caminho do Calvário." },
+      { title: "5º Mistério Doloroso — A Crucificação e Morte", text: "Jesus morre na cruz, entregando a vida por amor à humanidade." },
+    ]
+  },
+  gloriosos: {
+    name: "Mistérios Gloriosos",
+    items: [
+      { title: "1º Mistério Glorioso — A Ressurreição", text: "Jesus ressuscita ao terceiro dia, vencendo definitivamente a morte." },
+      { title: "2º Mistério Glorioso — A Ascensão", text: "Jesus sobe aos céus diante dos apóstolos, prometendo enviar o Espírito Santo." },
+      { title: "3º Mistério Glorioso — A Vinda do Espírito Santo", text: "O Espírito Santo desce sobre Maria e os apóstolos reunidos no Cenáculo, em Pentecostes." },
+      { title: "4º Mistério Glorioso — A Assunção de Maria", text: "Maria é levada de corpo e alma ao céu, ao final de sua vida terrena." },
+      { title: "5º Mistério Glorioso — A Coroação de Maria", text: "Maria é coroada Rainha do céu e da terra, junto a seu Filho Jesus." },
+    ]
+  },
+  luminosos: {
+    name: "Mistérios Luminosos",
+    items: [
+      { title: "1º Mistério Luminoso — O Batismo de Jesus", text: "Jesus é batizado por João no rio Jordão, e o Pai o proclama seu Filho amado." },
+      { title: "2º Mistério Luminoso — As Bodas de Caná", text: "Por intercessão de Maria, Jesus realiza seu primeiro milagre, transformando água em vinho." },
+      { title: "3º Mistério Luminoso — O Anúncio do Reino", text: "Jesus anuncia o Reino de Deus e convida todos à conversão e à fé." },
+      { title: "4º Mistério Luminoso — A Transfiguração", text: "Diante de Pedro, Tiago e João, Jesus se transfigura e revela sua glória." },
+      { title: "5º Mistério Luminoso — A Instituição da Eucaristia", text: "Na Última Ceia, Jesus institui a Eucaristia, dando seu Corpo e Sangue sob a forma de pão e vinho." },
+    ]
+  }
+};
+
+// Tradição: 2ª e sáb = Gozosos | 3ª e 6ª = Dolorosos | 4ª e dom = Gloriosos | 5ª = Luminosos
+function getMysterySetForToday(){
+  const day = new Date().getDay(); // 0=domingo ... 6=sábado
+  if (day === 1 || day === 6) return MYSTERY_SETS.gozosos;
+  if (day === 2 || day === 5) return MYSTERY_SETS.dolorosos;
+  if (day === 3 || day === 0) return MYSTERY_SETS.gloriosos;
+  return MYSTERY_SETS.luminosos; // quinta-feira
+}
+
+const todaySet = getMysterySetForToday();
+// Registra mystery1..mystery5 em PRAYERS, para serem usados como
+// qualquer outra oração (prayerKey) nas contas do terço.
+todaySet.items.forEach((m, i) => {
+  PRAYERS[`mystery${i + 1}`] = {
+    eyebrow: todaySet.name,
+    title: m.title,
+    text: m.text
+  };
+});
 
 
 /* ----------------------------------------------------------------
@@ -111,11 +189,11 @@ const LR  = { x: 340, y: 470 };
 // "bulge" controla o quanto a curva se afasta da linha reta
 // entre os dois pontos (valores maiores = curva mais aberta).
 const arcs = [
-  { p0: MED, p2: LL, ctrl: controlFor(MED, LL, -46, 10), side: "left"  }, // baixo-esquerda
-  { p0: LL,  p2: UL, ctrl: controlFor(LL, UL, -60, 0),   side: "left"  }, // esquerda
-  { p0: UL,  p2: UR, ctrl: controlFor(UL, UR, 0, -58),   side: "top"   }, // topo
-  { p0: UR,  p2: LR, ctrl: controlFor(UR, LR, 60, 0),    side: "right" }, // direita
-  { p0: LR,  p2: MED,ctrl: controlFor(LR, MED, 46, 10),  side: "right" }, // baixo-direita
+  { p0: MED, p2: LL, ctrl: controlFor(MED, LL, -46, 10), side: "left"  }, // decade 1 (após o 1º Mistério)
+  { p0: LL,  p2: UL, ctrl: controlFor(LL, UL, -60, 0),   side: "left"  }, // decade 2
+  { p0: UL,  p2: UR, ctrl: controlFor(UL, UR, 0, -58),   side: "top"   }, // decade 3
+  { p0: UR,  p2: LR, ctrl: controlFor(UR, LR, 60, 0),    side: "right" }, // decade 4
+  { p0: LR,  p2: MED,ctrl: controlFor(LR, MED, 46, 10),  side: "right" }, // decade 5
 ];
 
 
@@ -138,6 +216,16 @@ const nodes = {};
 function registerNode(id, prayerKey, svgEl){
   if (!nodes[id]) nodes[id] = { els: [], prayerKey };
   nodes[id].els.push(svgEl);
+}
+
+// Cria um "alias": um novo id clicável que reaproveita o(s) MESMO
+// elemento(s) visual(is) de um id já existente (ex: a mesma conta
+// grande), mas associado a uma oração diferente (ex: um Mistério).
+// Usado para que a mesma conta acenda tanto para o Mistério quanto
+// para o Pai Nosso, em passos separados da sequência guiada.
+function registerAlias(newId, prayerKey, sourceId){
+  const source = nodes[sourceId];
+  nodes[newId] = { els: source ? [...source.els] : [], prayerKey };
 }
 
 function drawThread(){
@@ -170,8 +258,8 @@ function drawBead(pt, r, id, prayerKey){
 }
 
 // Desenha um rótulo de texto clicável (ex: "Pai Nosso").
-function drawLabel(x, y, text, id, prayerKey, anchor){
-  const t = el('text', { x, y, class: 'label', 'text-anchor': anchor || 'start', 'data-id': id,
+function drawLabel(x, y, text, id, prayerKey, anchor, extraClass){
+  const t = el('text', { x, y, class: extraClass ? `label ${extraClass}` : 'label', 'text-anchor': anchor || 'start', 'data-id': id,
     tabindex: '0', role: 'button', 'aria-label': PRAYERS[prayerKey] ? PRAYERS[prayerKey].title : text });
   t.textContent = text;
   t.addEventListener('click', () => selectNode(id));
@@ -219,6 +307,11 @@ function drawDefs(){
    -> rótulos -> medalha -> haste (Pai Nosso, Glória, Aves, Pai Nosso)
    -> crucifixo.
 
+   Cada uma das 5 contas grandes que abrem uma dezena (a do fim da
+   haste + as 4 do laço) recebe também um pequeno rótulo "Nº Mistério"
+   — é nele que o alias do Mistério daquela conta é registrado
+   (ver seção 6, registerAlias).
+
    Para ADICIONAR/REMOVER uma conta, copie um bloco de drawBead(...)
    existente e ajuste posição, raio e prayerKey.
 ---------------------------------------------------------------- */
@@ -233,7 +326,8 @@ function build(){
     { pt: UR, id: "pater-ur" },
     { pt: LR, id: "pater-lr" },
   ];
-  paterAnchors.forEach(p => drawBead(p.pt, 11, p.id, 'paiNosso'));
+  const paterBeadEls = {};
+  paterAnchors.forEach(p => { paterBeadEls[p.id] = drawBead(p.pt, 11, p.id, 'paiNosso'); });
 
   // ---- 5 dezenas de contas pequenas ("Ave Maria") ao longo dos arcos ----
   arcs.forEach((a, idx) => {
@@ -252,23 +346,38 @@ function build(){
     drawLabel(lx, ly, "Ave Maria", `label-ave-${idx}`, 'aveMaria', anchor);
   });
 
-  // ---- rótulos "Pai Nosso" / "Glória ao Pai" ao lado de cada conta grande ----
+  // ---- rótulos "Pai Nosso" / "Glória ao Pai" / "Nº Mistério" ao lado de cada conta grande ----
+  // Cada conta grande do laço FECHA a dezena anterior (Glória ao Pai),
+  // anuncia o próximo Mistério e abre a próxima dezena (Pai Nosso).
   const paterLabelInfo = [
-    { pt: LL, dx: -72, dy: 6,  dx2: -72, dy2: 26, anchor: 'end' },
-    { pt: UL, dx: -70, dy: -4, dx2: -70, dy2: 16, anchor: 'end' },
-    { pt: UR, dx: 70,  dy: -4, dx2: 70,  dy2: 16, anchor: 'start' },
-    { pt: LR, dx: 72,  dy: 6,  dx2: 72,  dy2: 26, anchor: 'start' },
+    { pt: LL, dx: -72, dy: 6,  dx2: -72, dy2: 26, dx3: -72, dy3: 46, anchor: 'end' },
+    { pt: UL, dx: -70, dy: -4, dx2: -70, dy2: 16, dx3: -70, dy3: 36, anchor: 'end' },
+    { pt: UR, dx: 70,  dy: -4, dx2: 70,  dy2: 16, dx3: 70,  dy3: 36, anchor: 'start' },
+    { pt: LR, dx: 72,  dy: 6,  dx2: 72,  dy2: 26, dx3: 72,  dy3: 46, anchor: 'start' },
   ];
+  // pater-ll fecha a 1ª dezena e anuncia o 2º Mistério; pater-ul -> 3º;
+  // pater-ur -> 4º; pater-lr -> 5º. (o 1º Mistério fica na conta da
+  // haste, tratado logo abaixo, fora deste loop.)
+  const mysteryNumberForPater = [2, 3, 4, 5];
+
   paterAnchors.forEach((p, idx) => {
     const info = paterLabelInfo[idx];
     const lx1 = p.pt.x + info.dx,  ly1 = p.pt.y + info.dy;
     const lx2 = p.pt.x + info.dx2, ly2 = p.pt.y + info.dy2;
+    const lx3 = p.pt.x + info.dx3, ly3 = p.pt.y + info.dy3;
+
     drawLeader(p.pt.x, p.pt.y, lx1, ly1);
-    drawLabel(lx1, ly1, "Pai Nosso", `plabel-pn-${idx}`, 'paiNosso', info.anchor);
-    drawLabel(lx2, ly2, "Glória ao Pai", `plabel-gl-${idx}`, 'gloria', info.anchor);
+    drawLabel(lx1, ly1, "Glória ao Pai", `plabel-gl-${idx}`, 'gloria', info.anchor);
+
+    const mNum = mysteryNumberForPater[idx];
+    drawLabel(lx2, ly2, `${mNum}º Mistério`, `plabel-myst-${idx}`, `mystery${mNum}`, info.anchor, 'label-mystery');
+    // faz a própria conta grande acender também quando o Mistério é exibido
+    registerNode(`plabel-myst-${idx}`, `mystery${mNum}`, paterBeadEls[p.id]);
+
+    drawLabel(lx3, ly3, "Pai Nosso", `plabel-pn-${idx}`, 'paiNosso', info.anchor);
   });
 
-  // ---- medalha central ("Salve Rainha") ----
+  // ---- medalha central ("Salve Rainha", ao final) ----
   const medG = el('g', { class: 'medallion-ring', 'data-id': 'medallion', tabindex: '0', role: 'button',
     'aria-label': 'Salve Rainha' });
   medG.appendChild(el('circle', { cx: MED.x, cy: MED.y, r: 30, fill: 'url(#medGrad)', stroke: '#5a4410', 'stroke-width': 2 }));
@@ -284,14 +393,23 @@ function build(){
 
   drawLeader(MED.x + 30, MED.y, MED.x + 95, MED.y);
   drawLabel(MED.x + 100, MED.y + 4, "Salve Rainha", 'medal-label', 'salveRainha', 'start');
+  // rótulo extra: Glória ao Pai final, ao fechar a 5ª dezena, antes da Salve Rainha
+  drawLeader(MED.x + 30, MED.y + 18, MED.x + 95, MED.y + 22);
+  drawLabel(MED.x + 100, MED.y + 26, "Glória ao Pai", 'medal-gloria-label', 'gloria', 'start');
+  registerNode('medal-gloria-label', 'gloria', medG);
 
   // ---- haste (do medalhão até o crucifixo) ----
   const tailX = MED.x;
   let y = MED.y + 70;
 
-  drawBead({ x: tailX, y }, 11, 'tail-pater-top', 'paiNosso');
+  const firstPaterBead = drawBead({ x: tailX, y }, 11, 'tail-pater-top', 'paiNosso');
   drawLeader(tailX, y, tailX - 78, y - 4);
   drawLabel(tailX - 82, y - 2, "Pai Nosso", 'tail-pn-top-label', 'paiNosso', 'end');
+  // 1º Mistério: mesma conta (tail-pater-top), rótulo do lado oposto
+  drawLeader(tailX, y, tailX + 78, y - 4);
+  drawLabel(tailX + 82, y - 2, "1º Mistério", 'mystery-tail-label', 'mystery1', 'start', 'label-mystery');
+  registerNode('mystery-tail-label', 'mystery1', firstPaterBead);
+
   y += 34;
 
   drawBead({ x: tailX, y }, 6, 'tail-gloria', 'gloria');
@@ -325,24 +443,73 @@ function build(){
 
   drawLeader(tailX - 34, y + 30, tailX - 100, y + 30);
   drawLabel(tailX - 104, y + 34, "Creio", 'cross-label', 'creio', 'end');
+
+  // ---- indicador do conjunto de Mistérios do dia (fora do SVG) ----
+  const badge = document.getElementById('todayMysteries');
+  if (badge) badge.textContent = `Hoje: ${todaySet.name}`;
 }
 
 
 /* ----------------------------------------------------------------
    6. SEQUÊNCIA GUIADA
-   Define a ordem usada pelos botões "Anterior" / "Próxima oração".
+   Define a ordem usada pelos botões "Anterior" / "Próxima oração",
+   já seguindo a estrutura tradicional das 5 dezenas com mistérios:
+
+   Creio → Pai Nosso → 3 Ave Maria → Glória ao Pai →
+   [1º Mistério → Pai Nosso → 10 Ave Maria] →
+   [Glória ao Pai → 2º Mistério → Pai Nosso → 10 Ave Maria] →
+   [Glória ao Pai → 3º Mistério → Pai Nosso → 10 Ave Maria] →
+   [Glória ao Pai → 4º Mistério → Pai Nosso → 10 Ave Maria] →
+   [Glória ao Pai → 5º Mistério → Pai Nosso → 10 Ave Maria] →
+   Glória ao Pai → Salve Rainha (última oração da sequência)
+
+   Cada Mistério é registrado como um "alias" (ver registerAlias na
+   seção 4) da mesma conta grande onde o Pai Nosso daquela dezena
+   é rezado — por isso a MESMA conta acende para os dois passos.
+
    Para mudar a ordem, edite os ids abaixo (eles devem bater com os
-   ids passados em drawBead()/drawLabel() na seção 5).
+   ids passados em drawBead()/drawLabel()/registerAlias() na seção 5).
 ---------------------------------------------------------------- */
-const sequence = [
-  'cross', 'tail-pater-bottom', 'tail-ave-0', 'tail-ave-1', 'tail-ave-2',
-  'tail-gloria', 'tail-pater-top', 'medallion',
-];
-(function appendDecades(){
-  const paterIds = ['pater-ll', 'pater-ul', 'pater-ur', 'pater-lr'];
+
+// Desenha o terço agora (precisa acontecer ANTES dos aliases abaixo,
+// já que eles reaproveitam contas que só existem depois do build()).
+build();
+
+// aliases: mistérios 2 a 5 reaproveitam a conta grande do laço
+registerAlias('mystery-ll-alias', 'mystery2', 'pater-ll');
+registerAlias('mystery-ul-alias', 'mystery3', 'pater-ul');
+registerAlias('mystery-ur-alias', 'mystery4', 'pater-ur');
+registerAlias('mystery-lr-alias', 'mystery5', 'pater-lr');
+// mistério 1 reaproveita a conta grande do topo da haste
+registerAlias('mystery-tail-alias', 'mystery1', 'tail-pater-top');
+
+const sequence = [];
+
+// monta a sequência completa, intercalando Glória -> Mistério -> Pai Nosso
+// entre cada dezena e a próxima
+(function buildFullSequence(){
+  sequence.push('cross', 'tail-pater-bottom', 'tail-ave-0', 'tail-ave-1', 'tail-ave-2', 'tail-gloria');
+  sequence.push('mystery-tail-alias', 'tail-pater-top');
+
+  const paterCloseIds = [
+    { gloria: 'plabel-gl-0', mystery: 'mystery-ll-alias', pater: 'pater-ll' },
+    { gloria: 'plabel-gl-1', mystery: 'mystery-ul-alias', pater: 'pater-ul' },
+    { gloria: 'plabel-gl-2', mystery: 'mystery-ur-alias', pater: 'pater-ur' },
+    { gloria: 'plabel-gl-3', mystery: 'mystery-lr-alias', pater: 'pater-lr' },
+  ];
+
   arcs.forEach((a, idx) => {
+    // as 10 Ave Marias da dezena que está sendo fechada/aberta
     for (let i = 0; i < 10; i++) sequence.push(`ave-arc${idx}-${i}`);
-    sequence.push(paterIds[idx]);
+
+    if (idx < 4){
+      // fecha esta dezena e abre a próxima: Glória -> próximo Mistério -> Pai Nosso
+      const c = paterCloseIds[idx];
+      sequence.push(c.gloria, c.mystery, c.pater);
+    } else {
+      // 5ª e última dezena: só fecha com Glória ao Pai, depois Salve Rainha
+      sequence.push('medal-gloria-label', 'medallion');
+    }
   });
 })();
 
@@ -363,9 +530,10 @@ function selectNode(id){
   if (!node) return;
 
   clearActive();
-  node.els.forEach(e => e.classList.add('active'));
+  node.els.forEach(e => { if (e) e.classList.add('active'); });
 
   const p = PRAYERS[node.prayerKey];
+  if (!p) return;
   document.getElementById('prayerEyebrow').textContent = p.eyebrow;
   document.getElementById('prayerTitle').textContent = p.title;
   document.getElementById('prayerText').textContent = p.text;
@@ -389,6 +557,3 @@ document.getElementById('prevBtn').addEventListener('click', () => {
   const prev = (currentIndex <= 0 ? sequence.length : currentIndex) - 1;
   selectNode(sequence[prev]);
 });
-
-// Inicia o desenho do terço assim que este script é carregado.
-build();

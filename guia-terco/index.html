@@ -13,11 +13,11 @@
 
     index.html   -> estrutura da página (este arquivo)
     style.css    -> toda a aparência visual e responsividade
-    script.js    -> desenho do terço (SVG) e as orações
+    script.js    -> desenho do terço (SVG), as orações e os mistérios
 
-  Para trocar TEXTOS DE ORAÇÕES, cores, tamanhos das contas ou
-  a ordem da sequência guiada, normalmente você só precisa
-  mexer em script.js (veja os comentários lá).
+  Para trocar TEXTOS DE ORAÇÕES/MISTÉRIOS, cores, tamanhos das
+  contas ou a ordem da sequência guiada, normalmente você só
+  precisa mexer em script.js (veja os comentários lá).
 
   Para trocar CORES, FONTES ou o LAYOUT/RESPONSIVIDADE,
   mexa em style.css (veja os comentários lá, especialmente
@@ -40,6 +40,8 @@
     <div class="eyebrow">Devoção Mariana</div>
     <h1>Como Rezar o Terço</h1>
     <p class="sub">Toque em qualquer conta ou nome de oração no terço abaixo para ler o texto completo. Use as setas para seguir a sequência do início ao fim.</p>
+    <!-- Preenchido via JS (script.js) com o conjunto de mistérios do dia -->
+    <p class="today-badge" id="todayMysteries"></p>
   </header>
 
   <!-- ===================== ÁREA PRINCIPAL ===================== -->
@@ -61,7 +63,7 @@
       <div class="prayer-eyebrow" id="prayerEyebrow">Toque em uma conta</div>
       <div class="prayer-title" id="prayerTitle">Bem-vindo(a)</div>
       <div class="prayer-rule"></div>
-      <div class="prayer-text" id="prayerText">Este é um guia interativo do terço. Toque em qualquer conta, no crucifixo ou em uma das etiquetas — "Pai Nosso", "Ave Maria", "Glória ao Pai", "Creio" ou "Salve Rainha" — para ver a oração completa aqui.</div>
+      <div class="prayer-text" id="prayerText">Este é um guia interativo do terço. Toque em qualquer conta, no crucifixo ou em uma das etiquetas — "Pai Nosso", "Ave Maria", "Glória ao Pai", "Creio", um "Mistério" ou "Salve Rainha" — para ver a oração completa aqui.</div>
       <div class="prayer-count" id="prayerCount"></div>
 
       <div class="nav-row">
@@ -72,7 +74,7 @@
 
   </div>
 
-  <p class="hint">Sequência tradicional: Creio → Pai Nosso → 3 Ave Maria → Glória ao Pai → (Medalha) → 4 dezenas de Ave Maria, cada uma encerrada com Pai Nosso e Glória ao Pai.</p>
+  <p class="hint">Sequência: Creio → Pai Nosso → 3 Ave Maria → Glória ao Pai → <strong>1º Mistério</strong> → Pai Nosso → 10 Ave Maria → Glória ao Pai → <strong>2º Mistério</strong> → Pai Nosso → 10 Ave Maria → Glória ao Pai → <strong>3º Mistério</strong> → Pai Nosso → 10 Ave Maria → Glória ao Pai → <strong>4º Mistério</strong> → Pai Nosso → 10 Ave Maria → Glória ao Pai → <strong>5º Mistério</strong> → Pai Nosso → 10 Ave Maria → Glória ao Pai → <strong>Salve Rainha</strong> (oração final).</p>
 
   <footer>Protótipo — guia de oração do terço</footer>
 </div>
