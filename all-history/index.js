@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     - Buscar dados: fetchMateria(id);
                 */
                 console.log('Saiba Mais clicado:', titulo);
-                alert('Abrindo matéria: ' + titulo); // remova esta linha em produção
+                // alert('Abrindo matéria: ' + titulo); // remova esta linha em produção
             }
 
             if (botao.classList.contains('btn-secondary')) {

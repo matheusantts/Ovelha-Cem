@@ -271,7 +271,6 @@ button { font-family: var(--font-corpo); cursor: pointer; }
     top: 0;
     bottom: 0;
     width: 3px;
-    background-color: var(--dourado-divino);
     transform: scaleY(0);
     transform-origin: top;
     transition: transform 0.3s ease;

@@ -1,4 +1,4 @@
 
- - 
+ - Verificar se o tamanho das imagens não esta influeniando na lendidão do mobile
 
  - 

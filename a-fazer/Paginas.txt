@@ -5,8 +5,8 @@
 
  - Melhorar responsividade contando com a barra do site no monile e tablet
 
- - Todas as Historias (Terminar)
-
  - Arrumar os links de referencias dentro das historias
 
  - Melhorar leitura para Tablet e Desktop
+
+ - Adicionar botão de voltar na página "Fale Comigo"
