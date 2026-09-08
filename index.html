@@ -24,7 +24,8 @@
     <div class="container">
       <a class="navbar-brand" href="#">Ovelha Cem</a>
 
-      <button class="btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+      <button class="btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop"
+        aria-controls="offcanvasTop">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -35,21 +36,21 @@
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-          
+
           <ul class="navbar-nav ms-auto text-center">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="guia-terco/index.html">Guia - Santo Terço</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="all-history/index.html">Todas as Histórias</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="fale-comigo/index.html">Fale Comigo</a>
-          </li>
-        </ul>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="guia-terco/index.html">Guia - Santo Terço</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="all-history/index.html">Todas as Histórias</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="fale-comigo/index.html">Fale Comigo</a>
+            </li>
+          </ul>
 
         </div>
       </div>
@@ -57,11 +58,9 @@
 
   </nav>
 
-  <!-- Tentar colocar o conteudo principal dentro de um slide do bootstrap, se não conseguir fazer slide com javascript puro -->
-
   <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-      <div class="carousel-item active resp" data-bs-interval="10000">
+      <div class="carousel-item active resp" data-bs-interval="3000">
 
         <div class="container-fluid position-relative d-block">
 
@@ -72,7 +71,7 @@
 
               <div
                 class="row d-flex flex-column justify-content-center align-items-center ms-lg-3 p-lg-5 gap-1 gap-lg-3 p-3">
-                <a class="text-decoration-none" href="#">Milagres Eucarísticos</a>
+                <a class="text-decoration-none" href="#">MILAGRES EUCARÍSTICOS</a>
                 <h2 class="text-start">Milagre de Lanciano</h2>
                 <p class="text-start">O mais antigo milagre eucarístico documentado da Igreja, ocorrido no século VIII
                   na
@@ -80,7 +79,7 @@
                   vinho se transformaram visivelmente em carne e sangue</p>
                 <div class="row">
                   <button type="button" class="btn btn-warning col-4 ms-3">
-                    <a href="#" class="text-decoration-none">Acessar</a>
+                    <a href="all-history/lanciano-milagre/inicio-historia.html" class="text-decoration-none">Acessar</a>
                   </button>
                 </div>
               </div>
@@ -88,22 +87,9 @@
             </div>
 
             <div
-              class="col-12 col-lg-6 bg-danger h100c h60-2 text-center text-light d-flex flex-column justify-content-center align-items-center gap-1 gap-lg-5">
+              class="col-12 col-lg-6 bg-danger h100c h60-2 text-center text-light d-flex flex-column gap-1 gap-lg-5 align-items-center">
               <img src="https://picsum.photos/id/3/400/250" alt="" class="img-fluid img-resp"
-                style="border-radius: 10%;">
-              <div class="row">
-                <div class="col-4 cardsc m-2 rounded-1 cards-resp"></div>
-                <div class="col-4 cardsc m-2 rounded-1 cards-resp"></div>
-                <div class="col-4 cardsc m-2 rounded-1 cards-resp"></div>
-              </div>
-              <div>
-                <button type="button" class="btn btn-outline-warning"
-                  style="height: 50px; width: 50px; border-radius: 50%;" data-bs-target="#carouselExampleInterval"
-                  data-bs-slide="prev">&lt;</button>
-                <button type="button" class="btn btn-outline-warning"
-                  style="height: 50px; width: 50px; border-radius: 50%;" data-bs-target="#carouselExampleInterval"
-                  data-bs-slide="next">&gt;</button>
-              </div>
+                style="border-radius: 10%; margin-top: 30px;">
             </div>
 
           </div>
@@ -112,8 +98,37 @@
 
       </div>
 
+      <div class="row position-relative">
+        <div class="col-lg-6"></div>
 
-      <div class="carousel-item resp" data-bs-interval="2000">
+        <div class="col-lg-6">
+
+          <div class="row gap-2 gap-lg-5">
+
+            <div class="col-4 cardsc m-2 rounded-1 cards-resp"></div>
+            <div class="col-4 cardsc m-2 rounded-1 cards-resp"></div>
+            <div class="col-4 cardsc m-2 rounded-1 cards-resp"></div>
+
+            <div class="col-12">
+
+              <button type="button" class="btn btn-outline-warning btnprox" data-bs-target="#carouselExampleInterval"
+                data-bs-slide="prev">
+                &lt;
+              </button>
+              <button type="button" class="btnnext btn btn-outline-warning" data-bs-target="#carouselExampleInterval"
+                data-bs-slide="next">
+                &gt;
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!--
+      <div class="carousel-item resp" data-bs-interval="3000">
 
         <div class="container-fluid position-relative d-block">
 
@@ -124,15 +139,14 @@
 
               <div
                 class="row d-flex flex-column justify-content-center align-items-center ms-lg-3 p-lg-5 gap-1 gap-lg-3 p-3">
-                <a class="text-decoration-none" href="#">Milagres Eucarísticos</a>
-                <h2 class="text-start">Milagre de Lanciano</h2>
-                <p class="text-start">O mais antigo milagre eucarístico documentado da Igreja, ocorrido no século VIII
-                  na
-                  Itália, onde o pão e o
-                  vinho se transformaram visivelmente em carne e sangue</p>
+                <a class="text-decoration-none" href="#">APARIÇÕES MARIANAS</a>
+                <h2 class="text-start">Nossa Senhora Aparecida</h2>
+                <p class="text-start">Descubra a emocionante história da nossa Padroeira, a Mãe que acolheu o povo
+                  brasileiro desde que sua imagem foi encontrada nas águas do Rio Paraíba.</p>
                 <div class="row">
                   <button type="button" class="btn btn-warning col-4 ms-3">
-                    <a href="#" class="text-decoration-none">Acessar</a>
+                    <a href="all-history/nossa-senhora-aparecida/inicio-historia.html"
+                      class="text-decoration-none">Acessar</a>
                   </button>
                 </div>
               </div>
@@ -149,11 +163,9 @@
                 <div class="col-4 cardsc m-2 rounded-1 cards-resp"></div>
               </div>
               <div>
-                <button type="button" class="btn btn-outline-warning"
-                  style="height: 50px; width: 50px; border-radius: 50%;" data-bs-target="#carouselExampleInterval"
+                <button type="button" class="btn btn-outline-warning btnc" data-bs-target="#carouselExampleInterval"
                   data-bs-slide="prev">&lt;</button>
-                <button type="button" class="btn btn-outline-warning"
-                  style="height: 50px; width: 50px; border-radius: 50%;" data-bs-target="#carouselExampleInterval"
+                <button type="button" class="btn btn-outline-warning btnc" data-bs-target="#carouselExampleInterval"
                   data-bs-slide="next">&gt;</button>
               </div>
             </div>
@@ -163,7 +175,8 @@
         </div>
 
       </div>
-      <div class="carousel-item resp">
+
+      <div class="carousel-item resp" data-bs-interval="3000">
 
         <div class="container-fluid position-relative d-block">
 
@@ -174,15 +187,13 @@
 
               <div
                 class="row d-flex flex-column justify-content-center align-items-center ms-lg-3 p-lg-5 gap-1 gap-lg-3 p-3">
-                <a class="text-decoration-none" href="#">Milagres Eucarísticos</a>
-                <h2 class="text-start">Milagre de Lanciano</h2>
-                <p class="text-start">O mais antigo milagre eucarístico documentado da Igreja, ocorrido no século VIII
-                  na
-                  Itália, onde o pão e o
-                  vinho se transformaram visivelmente em carne e sangue</p>
+                <a class="text-decoration-none" href="#">SANTOS DA IGREJA</a>
+                <h2 class="text-start">São Bento</h2>
+                <p class="text-start">Conheça a história de São Bento, o Padroeiro da Europa e fundador da vida
+                  monástica ocidental, e o profundo significado espiritual de sua famosa Medalha de Proteção.</p>
                 <div class="row">
                   <button type="button" class="btn btn-warning col-4 ms-3">
-                    <a href="#" class="text-decoration-none">Acessar</a>
+                    <a href="all-history/sao-bento/inicio-historia.html" class="text-decoration-none">Acessar</a>
                   </button>
                 </div>
               </div>
@@ -199,20 +210,21 @@
                 <div class="col-4 cardsc m-2 rounded-1 cards-resp"></div>
               </div>
               <div>
-                <button type="button" class="btn btn-outline-warning"
-                  style="height: 50px; width: 50px; border-radius: 50%;" data-bs-target="#carouselExampleInterval"
+                <button type="button" class="btn btn-outline-warning btnc" data-bs-target="#carouselExampleInterval"
                   data-bs-slide="prev">&lt;</button>
-                <button type="button" class="btn btn-outline-warning"
-                  style="height: 50px; width: 50px; border-radius: 50%;" data-bs-target="#carouselExampleInterval"
+                <button type="button" class="btn btn-outline-warning btnc" data-bs-target="#carouselExampleInterval"
                   data-bs-slide="next">&gt;</button>
               </div>
             </div>
 
           </div>
 
+
         </div>
 
       </div>
+
+    -->
 
     </div>
 
