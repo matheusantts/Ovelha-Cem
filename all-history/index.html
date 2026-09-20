@@ -16,16 +16,10 @@
 
 <body>
 
-    <!-- ========================================================
-         HEADER
-         A ovelhinha de fundo é controlada no CSS via ::before.
-         Para trocar a imagem: edite --logo-url no :root do CSS.
-    ======================================================== -->
     <header class="site-header">
         <nav class="nav">
             <a href="#" class="nav-logo">Ovelha Cem</a>
 
-            <!-- Botão hamburguer — só aparece no mobile -->
             <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
                 <span></span>
                 <span></span>
@@ -39,11 +33,6 @@
             </ul>
         </nav>
 
-        <!--
-            HERO DO HEADER
-            A ovelhinha aparece aqui como marca d'água (pseudo-elemento ::before no CSS).
-            Troque a imagem editando --logo-url nas variáveis do CSS.
-        -->
         <div class="header-hero">
             <span class="header-eyebrow">Conteúdo Católico</span>
             <h1 class="header-title">Ovelha Cem</h1>
@@ -51,29 +40,11 @@
         </div>
     </header>
 
-
-    <!-- ========================================================
-         LISTA DE MATÉRIAS (feed vertical)
-
-         COMO ADICIONAR UM NOVO ITEM:
-         1. Copie um bloco <li class="feed-item"> abaixo
-         2. Troque o ícone dentro de .feed-icon (emoji, img ou SVG)
-         3. Edite a cor do ícone em style="--icon-color: var(--sua-cor);"
-         4. Edite .feed-category, .feed-date, h2, p e os botões
-         5. Cole antes de </ul>
-    ======================================================== -->
     <main class="main">
         <ul class="feed" id="feed">
 
-            <!-- ITEM 1 -->
             <li class="feed-item">
-                <!--
-                    ÍCONE: coloque aqui qualquer símbolo.
-                    Opções:
-                    - Emoji:      <span>✝</span>
-                    - Imagem:     <img src="img/icon-lanciano.svg" alt="">
-                    - SVG inline: cole o <svg>...</svg> diretamente
-                -->
+             
                 <div class="feed-icon" style="--icon-color: var(--vermelho-liturgico);">
                     <img src="lanciano-milagre/img/ovelhacem-primeiromilagreeucaristico.png" style="height: auto; width: 75px; border-radius: 50%;" alt="Lanciano">
                 </div>
@@ -95,7 +66,6 @@
                 </div>
             </li>
 
-            <!-- ITEM 2 -->
             <li class="feed-item">
                 <div class="feed-icon" style="--icon-color: var(--dourado-divino);">
                     <img src="nossa-senhora-aparecida/img/logo-aparecida.png" style="height: auto; width: 75px; border-radius: 50%;" alt="Aparecida">
@@ -115,7 +85,6 @@
                 </div>
             </li>
 
-            <!-- ITEM 3 -->
             <li class="feed-item">
                 <div class="feed-icon" style="--icon-color: var(--terracota-humildade);">
                     <img src="sao-bento/img/logo-saobento.png" style="height: auto; width: 75px; border-radius: 50%;" alt="Bento">
@@ -134,8 +103,6 @@
                     </div>
                 </div>
             </li>
-
-            <!-- ADICIONE NOVOS ITENS AQUI -->
 
         </ul>
     </main>

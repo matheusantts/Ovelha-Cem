@@ -21,21 +21,13 @@
 
   <main class="pagina-historia">
 
-    <!-- ======================================================
-         NAVBAR — barra de capítulos (topo, fundo vermelho)
-         ====================================================== -->
     <nav class="navbar-capitulos" aria-label="Capítulos da história">
 
-      <!-- Linha dourada decorativa no topo da navbar -->
       <div class="navbar-linha-topo" aria-hidden="true"></div>
 
-      <!-- Lista de capítulos -->
-      <!-- Para adicionar um capítulo: copie um <li> e ajuste o número e o href -->
-      <!-- Para marcar o capítulo ativo: adicione a classe "ativo" no <a> -->
       <ul class="lista-capitulos" role="list">
 
         <li>
-          <!-- Capítulo 4 — ATIVO (classe "ativo" indica o capítulo atual) -->
           <a href="#" class="card-capitulo" aria-current="page">
             <span class="cap-numero">1</span>
             <span class="cap-label">Cap. 1</span>
@@ -61,68 +53,62 @@
             <span class="cap-numero">4</span>
             <span class="cap-label">Cap. 4</span>
           </a>
-          <!-- Ponto dourado abaixo do capítulo ativo -->
           <div class="cap-indicador" aria-hidden="true"></div>
         </li>
 
       </ul>
-    </nav><!-- fim .navbar-capitulos -->
+    </nav>
 
-
-    <!-- ======================================================
-         CORPO — conteúdo principal dividido em duas colunas
-         ====================================================== -->
     <div class="corpo">
 
-      <!-- ── Coluna esquerda: narrativa ─────────────────────── -->
       <section class="coluna-narrativa" aria-label="Conteúdo do capítulo">
 
-        <!-- Controles de navegação -->
         <div class="controles" aria-label="Controles de leitura">
-          <a href="/O Primeiro Milagre Eucarístico/inicio-historia.html"><button class="ctrl-btn" title="Reiniciar leitura" aria-label="Reiniciar leitura">↺</button></a>
+          <a href="../inicio-historia.html"><button class="ctrl-btn" title="Reiniciar leitura" aria-label="Reiniciar leitura">↺</button></a>
           <!--<button class="ctrl-btn" title="Mover" aria-label="Mover">⊕</button>-->
         </div>
 
-        <!-- Divisor dourado -->
         <div class="divisor" aria-hidden="true"></div>
 
-        <!-- Badge do capítulo ativo -->
-        <!-- Para mudar: edite o texto dentro do <span> -->
         <div class="badge-capitulo">
           <span>✦ &nbsp; Capítulo IIII &nbsp; ✦</span>
         </div>
 
-        <!-- Título do capítulo -->
-        <!-- Para mudar: edite o texto abaixo -->
-        <h1 class="titulo-capitulo">Começo da História</h1>
+        <h1 class="titulo-capitulo">Imagens</h1>
 
-        <!-- Ornamento dourado -->
         <div class="ornamento" aria-hidden="true">
           <div class="ornamento-linha"></div>
           <span class="ornamento-estrela">✦</span>
           <div class="ornamento-linha"></div>
         </div>
 
-        <!-- Texto narrativo -->
-        <!-- Para mudar: edite os parágrafos abaixo -->
         <div class="texto-narrativo">
           <p>
-            No princípio, havia apenas silêncio e espera. O pastor caminhou
-            pela verdejante pastagem, guiando suas ovelhas com voz suave e
-            firme. Cada passo era uma oração, cada olhar — uma bênção.
+            
           </p>
+          
+          <div class="galeria-capitulo" aria-label="Imagens do capítulo">
+
+            <figure class="imagem-capitulo">
+              <img src="img/imagem-01.jpg" alt="Descrição da imagem 1" loading="lazy" />
+            </figure>
+
+            <figure class="imagem-capitulo">
+              <img src="img/imagem-02.jpg" alt="Descrição da imagem 2" loading="lazy" />
+            </figure>
+
+            <figure class="imagem-capitulo">
+              <img src="img/imagem-03.jpg" alt="Descrição da imagem 3" loading="lazy" />
+            </figure>
+
+          </div>
         </div>
 
-        <!-- Rodapé: botões de navegação entre capítulos -->
         <footer class="rodape-capitulo">
-          <!-- Para mudar o link: substitua href="#" pela URL do próximo capítulo -->
           <a href="#" class="botao-proximo">- História Concluída -</a>
-          <!-- Para mudar o link: substitua href pelo caminho da página inicial -->
           <a href="/index.html" class="link-voltar">← Voltar ao início</a>
         </footer>
 
-        <!-- Barra de progresso -->
-        <!-- Para mudar: ajuste --progresso e o texto abaixo -->
         <div class="progresso-wrap" aria-label="Progresso da leitura">
           <div class="progresso-barra" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
             <div class="progresso-preenchimento" style="--progresso: 100%"></div>
@@ -130,33 +116,27 @@
           <span class="progresso-label">Progresso: 100% — Capítulo 4 de 4</span>
         </div>
 
-      </section><!-- fim .coluna-narrativa -->
+      </section>
 
-
-      <!-- ── Coluna direita: versículos de apoio ────────────── -->
       <aside class="coluna-versiculo" aria-label="Versículos relacionados">
 
-        <!-- Card de versículo 1 -->
-        <!-- Para mudar: edite <p> e <cite> -->
         <div class="card-versiculo">
           <p>"Mesmo que eu ande pelo vale da sombra da morte,
              não temerei mal algum, pois tu estás comigo."</p>
           <cite>— Salmos 23:4</cite>
         </div>
 
-        <!-- Card de versículo 2 -->
-        <!-- Para mudar: edite <p> e <cite> -->
         <div class="card-versiculo">
           <p>"Ele me guia nas veredas da justiça
              por amor do seu nome."</p>
           <cite>— Salmos 23:3</cite>
         </div>
 
-      </aside><!-- fim .coluna-versiculo -->
+      </aside>
 
-    </div><!-- fim .corpo -->
+    </div>
 
-  </main><!-- fim .pagina-historia -->
+  </main>
 
 </body>
 </html>
