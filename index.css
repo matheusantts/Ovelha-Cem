@@ -273,7 +273,7 @@ a {
     font-weight: 700;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--dourado-divino);
+    color: var(--bege-la);
     border-left: 3px solid var(--dourado-divino);
     padding-left: var(--espaco-sm);
     margin-bottom: var(--espaco-md);
@@ -306,6 +306,11 @@ a {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0s, transform 0s;
+
+    background-color: #556b2fa6;
+    border-radius: 20px;
+    text-align: center;
+    border: solid var(--dourado-divino);
 }
 
 /* Container dos botões lado a lado */
