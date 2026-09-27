@@ -11,15 +11,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="index.css">
-    <link rel="icon" href="img/ovelha-cem-icon.png">
+    <link rel="stylesheet" href="src/pages/styles/style.css">
+    <link rel="icon" href="src/img/geral/ovelha-cem-icon.png">
 </head>
 
 <body>
 
     <header class="site-header">
         <nav class="nav">
-            <a href="https://matheusantts.github.io/Portifolio-Matheus/" class="nav-logo" target="_blank">Ovelha Cem</a>
+            <a href="<https://matheusantts.github.io/Portifolio-Matheus/>" class="nav-logo" target="_blank">Ovelha Cem</a>
 
             <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
                 <span></span>
@@ -28,9 +28,9 @@
             </button>
 
             <ul class="nav-links" id="navLinks">
-                <li><a href="guia-terco/index.html">Guia - Santo Terço</a></li>
-                <li><a href="all-history/index.html">Todas as histórias</a></li>
-                <li><a href="fale-comigo/index.html">Fale Comigo</a></li>
+                <li><a href="src/pages/guiaTerco.html">Guia - Santo Terço</a></li>
+                <li><a href="src/pages/todasHistorias.html">Todas as histórias</a></li>
+                <li><a href="src/pages/faleComigo.html">Fale Comigo</a></li>
             </ul>
         </nav>
     </header>
@@ -40,10 +40,10 @@
         <div class="slider-list" id="sliderList">
             <div class="slide active">
 
-                <img src="all-history/lanciano-milagre/img/pg-inicial.png" alt="lanciano">
+                <img src="src/img/paginaInicial/fundos/milagre-lanciano.png" alt="lanciano">
 
                     <div class="slide-content">
-                        <a href="pagina-em-desenvolvimento.html">
+                        <a href="src/pages/pagina-em-desenvolvimento.html">
                             <span class="slide-label">Milagres Eucarísticos</span>
                         </a>
                         <h2 class="slide-title">Milagre de Lanciano</h2>
@@ -53,7 +53,7 @@
                             visivelmente em carne e sangue.
                         </p>
                         <div class="slide-buttons">
-                            <a href="all-history/lanciano-milagre/inicio-historia.html">
+                            <a href="src/pages/milagreLanciano.html">
                                 <button class="btn btn-primary">Acessar</button>
                             </a>
                         </div>
@@ -62,10 +62,10 @@
             
             <div class="slide">
 
-                <img src="all-history/nossa-senhora-aparecida/img/pg-inicial.png" alt="Aparecida">
+                <img src="src/img/paginaInicial/fundos/senhora-aparecida.png" alt="Aparecida">
                 
                 <div class="slide-content">
-                    <a href="pagina-em-desenvolvimento.html">
+                    <a href="src/pages/pagina-em-desenvolvimento.html">
                         <span class="slide-label">Aparições Marianas</span>
                     </a>
                     <h2 class="slide-title">Nossa Senhora Aparecida</h2>
@@ -74,7 +74,7 @@
                         o povo brasileiro desde que sua imagem foi encontrada nas águas do Rio Paraíba.
                     </p>
                     <div class="slide-buttons">
-                        <a href="all-history/nossa-senhora-aparecida/inicio-historia.html">
+                        <a href="src/pages/pagina-em-desenvolvimento.html">
                             <button class="btn btn-primary">Acessar</button>
                         </a>
                         </a>
@@ -84,10 +84,10 @@
             
             <div class="slide">
 
-                <img src="all-history/sao-bento/img/pg-inicial.png" alt="Bento">
+                <img src="src/img/paginaInicial/fundos/sao-bento.png" alt="Bento">
 
                 <div class="slide-content">
-                    <a href="pagina-em-desenvolvimento.html">
+                    <a href="src/pages/pagina-em-desenvolvimento.html">
                         <span class="slide-label">Santos da Igreja</span>
                     </a>
                     <h2 class="slide-title">São Bento</h2>
@@ -97,7 +97,7 @@
                         famosa Medalha de Proteção.
                     </p>
                     <div class="slide-buttons">
-                        <a href="all-history/sao-bento/inicio-historia.html">
+                        <a href="src/pages/pagina-em-desenvolvimento.html">
                             <button class="btn btn-primary">Acessar</button>
                         </a>
                     </div>
@@ -109,7 +109,7 @@
         <div class="slider-thumbs" id="sliderThumbs">
 
             <div class="thumb-item active" data-index="0">
-                <img src="all-history/lanciano-milagre/img/ovelhacem-primeiromilagreeucaristico.png" alt="lanciano">
+                <img src="src/img/paginaInicial/cards/milagre-lanciano.png" alt="lanciano">
                 <div class="thumb-info">
                     <h3>Lanciano</h3>
                     <p>Ver matéria</p>
@@ -117,7 +117,7 @@
             </div>
 
             <div class="thumb-item" data-index="1">
-                <img src="all-history/nossa-senhora-aparecida/img/logo-aparecida.png" alt="Aparecida">
+                <img src="src/img/paginaInicial/cards/senhora-aparecida.png" alt="Aparecida">
                 <div class="thumb-info">
                     <h3>Aparecida</h3>
                     <p>Ver matéria</p>
@@ -125,7 +125,7 @@
             </div>
 
             <div class="thumb-item" data-index="2">
-                <img src="all-history/sao-bento/img/logo-saobento.png" alt="Bento">
+                <img src="src/img/paginaInicial/cards/sao-bento.png" alt="Bento">
                 <div class="thumb-info">
                     <h3>São Bento</h3>
                     <p>Ver matéria</p>
@@ -141,7 +141,7 @@
 
     </main>
 
-    <script src="index.js"></script>
+    <script src="src/pages/scripts/script.js"></script>
 
 </body>
 

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia - Santo Terço</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital@0;1&family=Inter:wght@400;500;600;700&display=swap">
+
+<link rel="stylesheet" href="styles/guiaTerco.css">
+<link rel="icon" href="../img/geral/ovelha-cem-icon.png">
+
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Devoção Mariana</div>
+    <h1>Como Rezar o Terço</h1>
+    <p class="sub">Toque em qualquer conta ou nome de oração no terço abaixo para ler o texto completo. Use as setas para seguir a sequência do início ao fim.</p>
+    <p class="today-badge" id="todayMysteries"></p>
+  </header>
+
+  <div class="stage">
+
+    <div class="rosary-panel">
+      <svg id="rosarySvg" viewBox="0 0 460 900" xmlns="http://www.w3.org/2000/svg"
+           role="img" aria-label="Ilustração do terço com contas clicáveis"></svg>
+    </div>
+
+    <div class="prayer-card">
+      <div class="prayer-eyebrow" id="prayerEyebrow">Toque em uma conta</div>
+      <div class="prayer-title" id="prayerTitle">Bem-vindo(a)</div>
+      <div class="prayer-rule"></div>
+      <div class="prayer-text" id="prayerText">Este é um guia interativo do terço. Toque em qualquer conta, no crucifixo ou em uma das etiquetas — "Pai Nosso", "Ave Maria", "Glória ao Pai", "Creio", um "Mistério" ou "Salve Rainha" — para ver a oração completa aqui.</div>
+      <div class="prayer-count" id="prayerCount"></div>
+
+      <div class="nav-row">
+        <button class="nav-btn ghost" id="prevBtn" type="button">← Anterior</button>
+        <button class="nav-btn" id="nextBtn" type="button">Próxima oração →</button>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="hint">Sequência: Creio → Pai Nosso → 3 Ave Maria → Glória ao Pai → <strong>1º Mistério</strong> → Pai Nosso → 10 Ave Maria → Glória ao Pai → <strong>2º Mistério</strong> → Pai Nosso → 10 Ave Maria → Glória ao Pai → <strong>3º Mistério</strong> → Pai Nosso → 10 Ave Maria → Glória ao Pai → <strong>4º Mistério</strong> → Pai Nosso → 10 Ave Maria → Glória ao Pai → <strong>5º Mistério</strong> → Pai Nosso → 10 Ave Maria → Glória ao Pai → <strong>Salve Rainha</strong> (oração final).</p>
+
+  <footer>Protótipo — guia de oração do terço</footer>
+</div>
+
+<script src="scripts/guiaTerco.js"></script>
+</body>
+</html>
