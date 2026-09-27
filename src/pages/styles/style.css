@@ -121,6 +121,9 @@ a {
     z-index: 100;
     /* Acima de tudo */
     padding: 0 5%;
+    padding-bottom: var(--espaco-lg);
+    /* Gradiente sutil para manter o menu legível sobre qualquer imagem */
+    background: linear-gradient(to bottom, rgba(10, 10, 10, 0.6) 0%, rgba(10, 10, 10, 0) 100%);
 }
 
 .nav {
@@ -237,6 +240,19 @@ a {
     z-index: 1;
 }
 
+/* Escurece a imagem de fundo para garantir contraste do texto,
+   independente do brilho/cores da foto de cada slide */
+.slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        linear-gradient(100deg, rgba(10, 10, 10, 0.82) 0%, rgba(10, 10, 10, 0.5) 32%, rgba(10, 10, 10, 0.12) 58%, rgba(10, 10, 10, 0) 78%),
+        linear-gradient(to top, rgba(10, 10, 10, 0.8) 0%, rgba(10, 10, 10, 0) 35%);
+}
+
 /* Placeholder de cor (usado enquanto não há imagens reais) */
 .slide-img-placeholder {
     position: absolute;
@@ -303,14 +319,10 @@ a {
     line-height: 1.7;
     color: var(--bege-la);
     margin-bottom: var(--espaco-lg);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.65);
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0s, transform 0s;
-
-    background-color: #556b2fa6;
-    border-radius: 20px;
-    text-align: center;
-    border: solid var(--dourado-divino);
 }
 
 /* Container dos botões lado a lado */
@@ -348,15 +360,15 @@ a {
     color: var(--preto-noite);
 }
 
-/* Botão secundário: contorno dourado */
+/* Botão secundário: contorno dourado, fundo transparente */
 .btn-secondary {
-    background-color: var(--dourado-divino);
-    color: var(--preto-noite);
+    background-color: transparent;
+    color: var(--dourado-divino);
     border-color: var(--dourado-divino);
 }
 
 .btn-secondary:hover {
-    background-color: var(--verde-pastagem);
+    background-color: var(--dourado-divino);
     color: var(--preto-noite);
 }
 
@@ -392,9 +404,10 @@ a {
     border-color: rgba(212, 175, 55, 0.5);
 }
 
-/* Thumbnail ativa recebe borda dourada sólida */
+/* Thumbnail ativa recebe borda dourada sólida e um leve brilho */
 .thumb-item.active {
     border-color: var(--dourado-divino);
+    box-shadow: 0 4px 18px rgba(212, 175, 55, 0.35);
 }
 
 /*
@@ -648,6 +661,11 @@ a {
         transform: none;
         padding: 0 var(--espaco-lg);
         text-align: center;
+    }
+
+    /* Overlay mais concentrado na base, onde o conteúdo fica no mobile */
+    .slide::after {
+        background: linear-gradient(to top, rgba(10, 10, 10, 0.92) 0%, rgba(10, 10, 10, 0.55) 45%, rgba(10, 10, 10, 0.15) 70%, rgba(10, 10, 10, 0) 100%);
     }
 
     /* No mobile o label fica centralizado */
