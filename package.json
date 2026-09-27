@@ -1,0 +1,11 @@
+{
+  "name": "ovelha-cem",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "otimizar-imagem": "node scripts/otimizar-imagem.mjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5"
+  }
+}
