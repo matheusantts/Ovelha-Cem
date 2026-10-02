@@ -159,7 +159,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     - Abrir modal:  abrirModal(titulo);
                     - Buscar dados: fetchMateria(id);
                 */
-                console.log('Saiba Mais clicado:', titulo);
                 // alert('Abrindo matéria: ' + titulo); // remova esta linha em produção
             }
 
@@ -168,8 +167,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     BOTÃO "ACESSAR"
                     Mesma lógica — substitua pela ação correta.
                 */
-                console.log('Acessar clicado:', titulo);
-                alert('Acessando: ' + titulo); // remova esta linha em produção
             }
         });
     }

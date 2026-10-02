@@ -69,7 +69,7 @@ function definirStatus(texto, tipo) {
 // Envia a mensagem abrindo o cliente de email do usuário (mailto),
 // já preenchido com o assunto e o corpo da mensagem.
 function enviarPorMailto(nome, email, mensagem) {
-  const assunto = encodeURIComponent(`Fale Conosco - mensagem de ${nome}`);
+  const assunto = encodeURIComponent(`Fale Comigo - mensagem de ${nome}`);
   const corpo = encodeURIComponent(
     `Nome: ${nome}\nEmail: ${email}\n\nMensagem:\n${mensagem}`
   );
