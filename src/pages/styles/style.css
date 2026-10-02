@@ -253,6 +253,14 @@ a {
         linear-gradient(to top, rgba(10, 10, 10, 0.8) 0%, rgba(10, 10, 10, 0) 35%);
 }
 
+/* Fundo responsivo: <picture> preenche o slide e a <img> dentro dele
+   continua com object-fit: cover (versões mobile/tablet escolhidas no HTML) */
+.slide > picture {
+    position: absolute;
+    inset: 0;
+    display: block;
+}
+
 /* Placeholder de cor (usado enquanto não há imagens reais) */
 .slide-img-placeholder {
     position: absolute;
@@ -605,6 +613,47 @@ a {
 }
 
 
+/* ---- TABLET EM RETRATO (até 1024px) ----
+   A imagem retrato tem o motivo na metade de cima, então o texto desce
+   para a base (mesma lógica do mobile). */
+@media (max-width: 1024px) and (orientation: portrait) {
+    .slide-content {
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-width: none;
+        top: auto;
+        bottom: calc(var(--thumb-altura) + 110px);
+        transform: none;
+        padding: 0 var(--espaco-lg);
+        text-align: center;
+    }
+
+    .slide::after {
+        background: linear-gradient(to top, rgba(10, 10, 10, 0.92) 0%, rgba(10, 10, 10, 0.55) 45%, rgba(10, 10, 10, 0.15) 70%, rgba(10, 10, 10, 0) 100%);
+    }
+
+    .slide-label {
+        border-left: none;
+        padding-left: 0;
+        padding-bottom: 4px;
+        border-bottom: 2px solid var(--dourado-divino);
+    }
+
+    .slide-buttons {
+        justify-content: center;
+    }
+}
+
+/* ---- TABLET EM PAISAGEM ----
+   Desloca o recorte da imagem para o motivo não ficar atrás do texto. */
+@media (min-width: 641px) and (max-width: 1024px) and (orientation: landscape) {
+    .slide img {
+        object-position: 15% 50%;
+    }
+}
+
+
 /* ---- MOBILE (até 640px) ---- */
 @media (max-width: 640px) {
 
@@ -661,6 +710,18 @@ a {
         transform: none;
         padding: 0 var(--espaco-lg);
         text-align: center;
+    }
+
+    /* Imagem retrato: ancora no topo para o motivo não ser cortado em telas mais baixas */
+    .slide img {
+        object-position: 50% 0;
+    }
+
+    /* Telas baixas (ex.: 375x667): sem a descrição o texto não cobre o motivo */
+    @media (max-height: 700px) {
+        .slide-desc {
+            display: none;
+        }
     }
 
     /* Overlay mais concentrado na base, onde o conteúdo fica no mobile */
