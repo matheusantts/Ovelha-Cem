@@ -55,6 +55,7 @@ body {
   color: var(--terracota-humildade);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
   height: 100dvh;
   overflow: hidden;
 }
@@ -76,7 +77,8 @@ img {
 .pagina-historia {
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  width: 100%;
+  height: 100vh;
   height: 100dvh;
   overflow: hidden;
 }
@@ -112,6 +114,8 @@ img {
 
 .lista-capitulos li {
   position: relative;
+  flex: 0 1 100px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -124,7 +128,8 @@ img {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100px;
+  width: 100%;
+  min-width: 0;
   padding: var(--sp-xs) var(--sp-sm);
   border-radius: 14px 14px 0 0;         /* arredondado só em cima */
   background-color: rgba(232, 220, 196, 0.35);
@@ -293,6 +298,8 @@ img {
 .texto-narrativo {
   flex: 1;                               /* empurra o rodapé para baixo */
   margin-bottom: var(--sp-lg);
+  max-width: 75ch;
+  overflow-wrap: break-word;
 }
 
 .texto-narrativo p {
@@ -476,8 +483,8 @@ img {
     gap: var(--sp-sm);
   }
 
-  .card-capitulo {
-    width: 80px;
+  .lista-capitulos li {
+    flex-basis: 80px;
   }
 
   /* Corpo passa para uma única coluna */
@@ -523,12 +530,25 @@ img {
   }
 
   /* Cards de capítulo mais estreitos no mobile */
+  .lista-capitulos li {
+    flex-basis: 80px;
+  }
+
+  /* padding menor: a palavra "Imagens" precisa caber no card em 320px */
   .card-capitulo {
-    width: clamp(60px, 20vw, 80px);
+    padding: var(--sp-xs) 4px;
   }
 
   .cap-numero {
-    font-size: 1.1rem;
+    font-size: clamp(0.85rem, 4.2vw, 1.1rem);
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    text-align: center;
+  }
+
+  .cap-label {
+    font-size: 0.6rem;
+    white-space: nowrap;
   }
 
   .coluna-narrativa {
@@ -581,8 +601,9 @@ body.lightbox-aberto {
 }
 
 .lightbox-imagem {
-  max-width: min(90vw, 900px);
+  max-width: min(90%, 900px);
   max-height: 85vh;
+  max-height: 85dvh;
   width: auto;
   border-radius: var(--raio-card);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
@@ -654,6 +675,7 @@ body.lightbox-aberto {
   .lightbox-imagem {
     max-width: 92vw;
     max-height: 78vh;
+    max-height: 78dvh;
   }
 
   .lightbox-anterior,
@@ -670,4 +692,53 @@ body.lightbox-aberto {
 
   .lightbox-anterior { left: var(--sp-xs); }
   .lightbox-proxima { right: var(--sp-xs); }
+}
+
+/* ── Telas largas: mais respiro e navbar maior ─────────────── */
+@media (min-width: 1600px) {
+  :root {
+    --altura-navbar: 104px;
+    --fs-titulo: clamp(2.8rem, 3vw, 3.6rem);
+    --fs-corpo: clamp(1.375rem, 1.3vw, 1.6rem);
+    --fs-versiculo: clamp(1.375rem, 1.2vw, 1.5rem);
+  }
+
+  .corpo {
+    grid-template-columns: 1fr 360px;
+  }
+
+  .card-capitulo {
+    width: 100%;
+  }
+
+  .lista-capitulos li {
+    flex-basis: 120px;
+  }
+}
+
+/* ── Paisagem com pouca altura (celular deitado) ───────────── */
+@media (max-height: 520px) and (orientation: landscape) {
+  :root {
+    --altura-navbar: 56px;
+    --sp-xl: 24px;
+    --sp-lg: 16px;
+  }
+
+  .navbar-capitulos {
+    padding: 0 var(--sp-md);
+  }
+
+  .card-capitulo {
+    flex-direction: row;
+    gap: 6px;
+    padding: 4px 8px;
+  }
+
+  .cap-label {
+    margin-top: 0;
+  }
+
+  .cap-indicador {
+    display: none;
+  }
 }

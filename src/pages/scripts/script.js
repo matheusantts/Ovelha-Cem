@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /* Fecha o menu ao redimensionar para desktop (evita menu aberto ao girar o celular) */
     window.addEventListener('resize', function () {
-        if (window.innerWidth > 640) {
+        if (window.innerWidth > 768) {
             navToggle.classList.remove('open');
             navLinks.classList.remove('open');
             navToggle.setAttribute('aria-expanded', false);

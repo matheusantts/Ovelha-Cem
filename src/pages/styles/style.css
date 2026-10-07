@@ -1,69 +1,30 @@
-/* ================================================================
-   OVELHA CEM — index.css
-   Organização:
-   1. Variáveis (paleta, tipografia, espaçamentos)
-   2. Reset e base
-   3. Header e navegação
-   4. Slider — estrutura
-   5. Slides — imagens e placeholders
-   6. Slides — conteúdo (textos e botões)
-   7. Thumbnails
-   8. Setas de navegação
-   9. Animações
-   10. Responsividade (tablet → mobile)
-================================================================ */
-
-
-/* ================================================================
-   1. VARIÁVEIS
-   Altere aqui para mudar toda a identidade visual de uma vez.
-================================================================ */
 :root {
-    /* --- Paleta Ovelha Cem --- */
     --dourado-divino: #D4AF37;
-    /* Realeza de Jesus e o Ouro da Igreja */
     --branco-cordeiro: #F8F9FA;
-    /* Pureza — branco levemente suave */
     --bege-la: #E8DCC4;
-    /* Lã da ovelha e acolhimento */
     --terracota-humildade: #A0522D;
-    /* Terra do caminho e o hábito religioso */
     --verde-pastagem: #556B2F;
-    /* Esperança e o aprisco */
     --vermelho-liturgico: #8B0000;
-    /* Sacrifício de Cristo */
 
-    /* --- Cores de suporte --- */
     --preto-noite: #0a0a0a;
-    /* Fundo escuro do slider */
     --overlay-escuro: rgba(0, 0, 0, 0.55);
-    /* Escurecimento das imagens */
     --branco-transparente: rgba(248, 249, 250, 0.12);
-    /* Fundo sutil em botões */
 
-    /* --- Tipografia --- */
     --font-titulo: 'Cinzel', Georgia, serif;
-    /* Serifa litúrgica para títulos */
     --font-corpo: 'Lato', Arial, sans-serif;
-    /* Sem serifa para textos e UI */
 
-    /* --- Espaçamentos base --- */
     --espaco-xs: 4px;
     --espaco-sm: 8px;
     --espaco-md: 16px;
     --espaco-lg: 32px;
     --espaco-xl: 64px;
 
-    /* --- Tamanhos do slider --- */
     --thumb-largura: 120px;
     --thumb-altura: 175px;
     --header-altura: 56px;
+    --footer-altura: 40px;
 }
 
-
-/* ================================================================
-   2. RESET E BASE
-================================================================ */
 *,
 *::before,
 *::after {
@@ -73,7 +34,6 @@
 }
 
 html {
-    /* Scroll suave ao navegar por âncoras */
     scroll-behavior: smooth;
 }
 
@@ -83,7 +43,6 @@ body {
     font-family: var(--font-corpo);
     font-size: 16px;
     line-height: 1.6;
-    /* Evita scroll horizontal acidental */
     overflow-x: hidden;
 }
 
@@ -110,19 +69,16 @@ a {
 
 
 /* ================================================================
-   3. HEADER E NAVEGAÇÃO
+   HEADER E NAVEGAÇÃO
 ================================================================ */
 .site-header {
     position: absolute;
-    /* Flutua sobre o slider */
     top: 0;
     left: 0;
     width: 100%;
     z-index: 100;
-    /* Acima de tudo */
     padding: 0 5%;
     padding-bottom: var(--espaco-lg);
-    /* Gradiente sutil para manter o menu legível sobre qualquer imagem */
     background: linear-gradient(to bottom, rgba(10, 10, 10, 0.6) 0%, rgba(10, 10, 10, 0) 100%);
 }
 
@@ -133,18 +89,15 @@ a {
     gap: var(--espaco-lg);
 }
 
-/* Logo / nome do site */
 .nav-logo {
     font-family: var(--font-titulo);
     font-size: 1.2rem;
     color: var(--dourado-divino);
     letter-spacing: 2px;
     margin-right: auto;
-    /* Empurra os links para a direita */
     white-space: nowrap;
 }
 
-/* Lista de links */
 .nav-links {
     display: flex;
     gap: var(--espaco-lg);
@@ -165,10 +118,8 @@ a {
     color: var(--dourado-divino);
 }
 
-/* Botão hamburguer — oculto no desktop, visível no mobile */
 .nav-toggle {
     display: none;
-    /* Escondido por padrão */
     flex-direction: column;
     justify-content: center;
     gap: 5px;
@@ -187,7 +138,6 @@ a {
     transition: transform 0.3s, opacity 0.3s;
 }
 
-/* Estado aberto do hamburguer (classe adicionada pelo JS) */
 .nav-toggle.open span:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
 }
@@ -202,35 +152,28 @@ a {
 
 
 /* ================================================================
-   4. SLIDER — ESTRUTURA
+   SLIDER
 ================================================================ */
 .slider {
     position: relative;
     width: 100%;
-    height: 100vh;
-    /* Ocupa toda a altura da tela */
+    height: calc(100vh - var(--footer-altura));
+    height: calc(100dvh - var(--footer-altura));
     overflow: hidden;
     background-color: var(--preto-noite);
 }
 
-/* Empilha todos os slides um sobre o outro */
 .slider-list {
     position: relative;
     width: 100%;
     height: 100%;
 }
 
-
-/* ================================================================
-   5. SLIDES — IMAGENS E PLACEHOLDERS
-================================================================ */
 .slide {
     position: absolute;
     inset: 0;
-    /* Equivale a: top:0; right:0; bottom:0; left:0 */
     opacity: 0;
     transition: opacity 0.7s ease;
-    /* Garante que slides inativos não capturem cliques */
     pointer-events: none;
 }
 
@@ -240,8 +183,6 @@ a {
     z-index: 1;
 }
 
-/* Escurece a imagem de fundo para garantir contraste do texto,
-   independente do brilho/cores da foto de cada slide */
 .slide::after {
     content: '';
     position: absolute;
@@ -253,44 +194,32 @@ a {
         linear-gradient(to top, rgba(10, 10, 10, 0.8) 0%, rgba(10, 10, 10, 0) 35%);
 }
 
-/* Fundo responsivo: <picture> preenche o slide e a <img> dentro dele
-   continua com object-fit: cover (versões mobile/tablet escolhidas no HTML) */
 .slide > picture {
     position: absolute;
     inset: 0;
     display: block;
 }
 
-/* Placeholder de cor (usado enquanto não há imagens reais) */
 .slide-img-placeholder {
     position: absolute;
     inset: 0;
 }
 
-/*
-    COMO USAR IMAGEM REAL:
-    Remova o <div class="slide-img-placeholder"> e adicione:
-    <img src="img/seu-slide.jpg" alt="Descrição do slide">
-*/
-
 
 /* ================================================================
-   6. SLIDES — CONTEÚDO (TEXTOS E BOTÕES)
+   CONTEÚDO DOS SLIDES
 ================================================================ */
 .slide-content {
     position: absolute;
-    /* Posição no desktop: começa após o header, alinhado à esquerda */
     top: 50%;
     left: 8%;
     transform: translateY(-50%);
     width: 50%;
-    /* Ocupa metade da tela para não colidir com as thumbs */
     max-width: 600px;
     color: var(--branco-cordeiro);
     z-index: 2;
 }
 
-/* Categoria / eyebrow acima do título */
 .slide-label {
     display: inline-block;
     font-size: 0.7rem;
@@ -301,7 +230,6 @@ a {
     border-left: 3px solid var(--dourado-divino);
     padding-left: var(--espaco-sm);
     margin-bottom: var(--espaco-md);
-    /* Animação: começa invisível, JS adiciona .active ao slide */
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0s, transform 0s;
@@ -309,8 +237,7 @@ a {
 
 .slide-title {
     font-family: var(--font-titulo);
-    font-size: clamp(2rem, 5vw, 4rem);
-    /* Responsivo: mínimo 2rem, ideal 5vw, máximo 4rem */
+    font-size: clamp(1.75rem, min(4.5vw, 8vh), 4.5rem);
     font-weight: 700;
     line-height: 1.15;
     margin-bottom: var(--espaco-md);
@@ -322,7 +249,7 @@ a {
 }
 
 .slide-desc {
-    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    font-size: clamp(0.85rem, min(1.5vw, 2.4vh), 1.1rem);
     font-weight: 300;
     line-height: 1.7;
     color: var(--bege-la);
@@ -333,18 +260,15 @@ a {
     transition: opacity 0s, transform 0s;
 }
 
-/* Container dos botões lado a lado */
 .slide-buttons {
     display: flex;
     gap: var(--espaco-sm);
     flex-wrap: wrap;
-    /* Em telas muito estreitas, botões vão para linha abaixo */
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0s, transform 0s;
 }
 
-/* --- Estilo base dos botões --- */
 .btn {
     padding: 11px 28px;
     font-size: 0.75rem;
@@ -356,7 +280,6 @@ a {
     white-space: nowrap;
 }
 
-/* Botão primário: fundo dourado */
 .btn-primary {
     background-color: var(--dourado-divino);
     color: var(--preto-noite);
@@ -364,11 +287,10 @@ a {
 }
 
 .btn-primary:hover {
-    background-color: var(--verde-pastagem);
+    background-color: var(--bege-la);
     color: var(--preto-noite);
 }
 
-/* Botão secundário: contorno dourado, fundo transparente */
 .btn-secondary {
     background-color: transparent;
     color: var(--dourado-divino);
@@ -382,7 +304,7 @@ a {
 
 
 /* ================================================================
-   7. THUMBNAILS (MINIATURAS)
+   THUMBNAILS
 ================================================================ */
 .slider-thumbs {
     position: absolute;
@@ -400,11 +322,9 @@ a {
     cursor: pointer;
     border-radius: 6px;
     overflow: hidden;
-    /* Borda dourada transparente — fica opaca na thumbnail ativa */
     border: 2px solid transparent;
     transition: border-color 0.3s, transform 0.3s;
     flex-shrink: 0;
-    /* Impede que as thumbs encolham em telas menores */
 }
 
 .thumb-item:hover {
@@ -412,20 +332,11 @@ a {
     border-color: rgba(212, 175, 55, 0.5);
 }
 
-/* Thumbnail ativa recebe borda dourada sólida e um leve brilho */
 .thumb-item.active {
     border-color: var(--dourado-divino);
     box-shadow: 0 4px 18px rgba(212, 175, 55, 0.35);
 }
 
-/*
-    IMAGEM DA THUMBNAIL — igual ao slide, suporta <picture> e <img>
-
-    O <picture> da thumbnail também precisa ser block e preencher
-    o container .thumb-item por completo.
-*/
-
-/* Container <picture> da thumbnail */
 .thumb-item picture {
     display: block;
     width: 100%;
@@ -434,10 +345,8 @@ a {
     inset: 0;
 }
 
-/* <img> dentro do <picture> da thumbnail */
 .thumb-item picture img,
 .thumb-item>img {
-    /* mantém compatibilidade com <img> direto */
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -452,20 +361,17 @@ a {
     filter: brightness(85%);
 }
 
-/* Placeholder de cor (remova quando tiver imagens reais) */
 .thumb-img-placeholder {
     width: 100%;
     height: 100%;
 }
 
-/* Textos sobre a thumbnail */
 .thumb-info {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     padding: var(--espaco-sm) var(--espaco-sm) 10px;
-    /* Gradiente sutil para o texto ficar legível */
     background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 100%);
 }
 
@@ -486,11 +392,11 @@ a {
 
 
 /* ================================================================
-   8. SETAS DE NAVEGAÇÃO
+   SETAS DE NAVEGAÇÃO
 ================================================================ */
 .slider-arrows {
     position: absolute;
-    bottom: var(--espaco-xl);
+    bottom: var(--espaco-lg);
     left: 8%;
     display: flex;
     gap: var(--espaco-sm);
@@ -525,9 +431,7 @@ a {
 
 
 /* ================================================================
-   9. ANIMAÇÕES DE ENTRADA DO CONTEÚDO
-   - Os elementos do slide ficam invisíveis (opacity: 0)
-   - Quando o slide recebe .active, a animação é disparada com delay
+   ANIMAÇÕES
 ================================================================ */
 @keyframes slideUp {
     to {
@@ -536,7 +440,6 @@ a {
     }
 }
 
-/* Aplica a animação nos filhos do slide ativo */
 .slide.active .slide-label {
     animation: slideUp 0.5s ease forwards;
     animation-delay: 0.2s;
@@ -557,10 +460,6 @@ a {
     animation-delay: 0.85s;
 }
 
-/*
-    PREFERÊNCIA DE ACESSIBILIDADE: respeita usuários que pedem menos movimento.
-    Desativa as animações se o sistema operacional tiver esta preferência ativa.
-*/
 @media (prefers-reduced-motion: reduce) {
 
     .slide-label,
@@ -575,35 +474,98 @@ a {
 }
 
 
+
+
 /* ================================================================
-   10. RESPONSIVIDADE
-   Breakpoints:
-   - Tablet: largura até 1024px
-   - Mobile: largura até 640px
+   RESPONSIVIDADE
+   Ordem: telas largas > notebook/tablet > menu > mobile > paisagem baixa.
+   Alturas usam vh/dvh para o conteudo nunca encostar no header,
+   nas miniaturas ou no rodape.
 ================================================================ */
 
-/* ---- TABLET (até 1024px) ---- */
-@media (max-width: 1024px) {
+/* ---- TELAS LARGAS (1600px+) ---- */
+@media (min-width: 1600px) {
+    :root {
+        --thumb-largura: 150px;
+        --thumb-altura: 220px;
+        --footer-altura: 48px;
+        --header-altura: 72px;
+    }
 
-    /* Conteúdo do slide ocupa mais espaço horizontal */
+    .slide-content {
+        left: 10%;
+        max-width: 760px;
+    }
+
+    .slide-label {
+        font-size: 0.8rem;
+    }
+
+    .btn {
+        padding: 14px 36px;
+        font-size: 0.85rem;
+    }
+
+    .nav-logo {
+        font-size: 1.45rem;
+    }
+
+    .nav-links a {
+        font-size: 0.95rem;
+    }
+
+    .thumb-info h3 {
+        font-size: 0.8rem;
+    }
+
+    .thumb-info p {
+        font-size: 0.72rem;
+    }
+
+    .arrow-btn {
+        width: 52px;
+        height: 52px;
+    }
+
+    .slider-arrows {
+        left: 10%;
+    }
+
+    .footer-conteudo {
+        max-width: none;
+        padding: 0 5%;
+        font-size: 0.85rem;
+    }
+}
+
+
+/* ---- NOTEBOOK / TABLET (ate 1024px) ---- */
+@media (max-width: 1024px) {
+    :root {
+        --thumb-largura: 95px;
+        --thumb-altura: 140px;
+    }
+
+    .nav,
+    .nav-links {
+        gap: var(--espaco-md);
+    }
+
     .slide-content {
         left: 6%;
         width: 60%;
         top: 45%;
     }
 
-    /* Thumbnails menores */
-    :root {
-        --thumb-largura: 95px;
-        --thumb-altura: 140px;
+    .slider-arrows {
+        left: 6%;
     }
 
-    /* Menos thumbnails ficam visíveis — as que sobram ficam com scroll horizontal */
     .slider-thumbs {
-        right: 2%;
+        right: 3%;
         gap: var(--espaco-sm);
+        max-width: 90vw;
         overflow-x: auto;
-        /* Barra de scroll invisível mas funcional */
         scrollbar-width: none;
     }
 
@@ -613,9 +575,7 @@ a {
 }
 
 
-/* ---- TABLET EM RETRATO (até 1024px) ----
-   A imagem retrato tem o motivo na metade de cima, então o texto desce
-   para a base (mesma lógica do mobile). */
+/* ---- TABLET EM RETRATO ---- */
 @media (max-width: 1024px) and (orientation: portrait) {
     .slide-content {
         left: 0;
@@ -625,7 +585,7 @@ a {
         top: auto;
         bottom: calc(var(--thumb-altura) + 110px);
         transform: none;
-        padding: 0 var(--espaco-lg);
+        padding: 0 clamp(var(--espaco-md), 6vw, var(--espaco-xl));
         text-align: center;
     }
 
@@ -643,10 +603,21 @@ a {
     .slide-buttons {
         justify-content: center;
     }
+
+    .slider-arrows {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: calc(var(--thumb-altura) + var(--espaco-lg) + 12px);
+    }
+
+    .slider-thumbs {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+    }
 }
 
-/* ---- TABLET EM PAISAGEM ----
-   Desloca o recorte da imagem para o motivo não ficar atrás do texto. */
+/* ---- TABLET EM PAISAGEM ---- */
 @media (min-width: 641px) and (max-width: 1024px) and (orientation: landscape) {
     .slide img {
         object-position: 15% 50%;
@@ -654,19 +625,15 @@ a {
 }
 
 
-/* ---- MOBILE (até 640px) ---- */
-@media (max-width: 640px) {
-
-    /* === HEADER MOBILE === */
-
-    /* Mostra o botão hamburguer */
+/* ---- MENU HAMBURGUER (ate 768px) ----
+   Entre 640 e 768px os tres links + logo nao cabem na mesma linha,
+   por isso o menu recolhido comeca ja em 768px. */
+@media (max-width: 768px) {
     .nav-toggle {
         display: flex;
         margin-left: auto;
-        /* Vai para a extremidade direita */
     }
 
-    /* Menu de links: oculto por padrão, aparece como dropdown */
     .nav-links {
         display: none;
         flex-direction: column;
@@ -680,7 +647,6 @@ a {
         border-top: 1px solid rgba(212, 175, 55, 0.2);
     }
 
-    /* Quando o JS adiciona .open, o menu aparece */
     .nav-links.open {
         display: flex;
     }
@@ -695,41 +661,45 @@ a {
     .nav-links li:last-child a {
         border-bottom: none;
     }
+}
 
 
-    /* === SLIDER MOBILE === */
+/* ---- MOBILE (ate 640px) ---- */
+@media (max-width: 640px) {
+    :root {
+        /* miniaturas acompanham a altura da tela (celulares baixos e altos) */
+        --thumb-altura: clamp(84px, 17dvh, 120px);
+        --thumb-largura: calc(var(--thumb-altura) * 0.68);
+    }
 
-    /* Conteúdo do slide: ocupa quase toda a largura, posicionado mais ao centro-baixo */
     .slide-content {
         left: 0;
         right: 0;
         width: 100%;
         top: auto;
         bottom: calc(var(--thumb-altura) + 90px);
-        /* Espaço para thumbs e setas */
         transform: none;
-        padding: 0 var(--espaco-lg);
+        padding: 0 clamp(var(--espaco-md), 6vw, var(--espaco-lg));
         text-align: center;
     }
 
-    /* Imagem retrato: ancora no topo para o motivo não ser cortado em telas mais baixas */
+    .slide-title {
+        font-size: clamp(1.5rem, 7.2vw, 2.2rem);
+    }
+
+    .slide-desc {
+        font-size: clamp(0.8rem, 3.6vw, 0.95rem);
+        margin-bottom: var(--espaco-md);
+    }
+
     .slide img {
         object-position: 50% 0;
     }
 
-    /* Telas baixas (ex.: 375x667): sem a descrição o texto não cobre o motivo */
-    @media (max-height: 700px) {
-        .slide-desc {
-            display: none;
-        }
-    }
-
-    /* Overlay mais concentrado na base, onde o conteúdo fica no mobile */
     .slide::after {
         background: linear-gradient(to top, rgba(10, 10, 10, 0.92) 0%, rgba(10, 10, 10, 0.55) 45%, rgba(10, 10, 10, 0.15) 70%, rgba(10, 10, 10, 0) 100%);
     }
 
-    /* No mobile o label fica centralizado */
     .slide-label {
         border-left: none;
         padding-left: 0;
@@ -737,46 +707,177 @@ a {
         border-bottom: 2px solid var(--dourado-divino);
     }
 
-    /* Botões centralizados */
     .slide-buttons {
         justify-content: center;
     }
 
-    /* === THUMBNAILS MOBILE ===
-       Ficam centralizadas na parte inferior, com scroll horizontal se necessário */
     .slider-thumbs {
         left: 50%;
         right: auto;
         bottom: var(--espaco-md);
         transform: translateX(-50%);
         gap: var(--espaco-sm);
-        max-width: 95vw;
+        max-width: calc(100% - var(--espaco-md) * 2);
         overflow-x: auto;
         scrollbar-width: none;
         padding-bottom: 2px;
-        /* Espaço para a borda inferior das thumbs ativas */
-    }
-
-    :root {
-        --thumb-largura: 75px;
-        --thumb-altura: 110px;
     }
 
     .thumb-info h3 {
         font-size: 0.58rem;
     }
 
-    /* === SETAS MOBILE ===
-       Ficam acima das thumbnails, centralizadas */
     .slider-arrows {
         left: 50%;
         transform: translateX(-50%);
-        bottom: calc(var(--thumb-altura) + var(--espaco-lg) + 8px);
+        bottom: calc(var(--thumb-altura) + var(--espaco-md) + 20px);
     }
 
     .arrow-btn {
         width: 38px;
         height: 38px;
         font-size: 1.4rem;
+    }
+}
+
+/* Celulares baixos em retrato: esconde a descricao para o titulo nao bater no menu */
+@media (max-width: 640px) and (max-height: 700px) {
+    .slide-desc {
+        display: none;
+    }
+}
+
+
+/* ---- PAISAGEM COM POUCA ALTURA (celulares deitados) ----
+   Volta ao layout lateral e compacta tudo para caber sem sobreposicao. */
+@media (max-height: 520px) and (orientation: landscape) {
+    :root {
+        --header-altura: 48px;
+        --footer-altura: 32px;
+        --thumb-altura: clamp(70px, 26dvh, 110px);
+        --thumb-largura: calc(var(--thumb-altura) * 0.68);
+    }
+
+    .site-header {
+        padding-bottom: var(--espaco-md);
+    }
+
+    .slide-content {
+        left: 6%;
+        right: auto;
+        width: 55%;
+        max-width: 560px;
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
+        padding: 0;
+        text-align: left;
+    }
+
+    .slide-title {
+        font-size: clamp(1.25rem, 4.2vw, 2.2rem);
+        margin-bottom: var(--espaco-sm);
+    }
+
+    .slide-desc {
+        display: none;
+    }
+
+    .slide-label {
+        border-left: 3px solid var(--dourado-divino);
+        border-bottom: none;
+        padding-left: var(--espaco-sm);
+        padding-bottom: 0;
+        margin-bottom: var(--espaco-sm);
+    }
+
+    .slide-buttons {
+        justify-content: flex-start;
+    }
+
+    .btn {
+        padding: 8px 20px;
+    }
+
+    .slide::after {
+        background:
+            linear-gradient(100deg, rgba(10, 10, 10, 0.82) 0%, rgba(10, 10, 10, 0.5) 40%, rgba(10, 10, 10, 0) 80%),
+            linear-gradient(to top, rgba(10, 10, 10, 0.8) 0%, rgba(10, 10, 10, 0) 35%);
+    }
+
+    .slider-thumbs {
+        left: auto;
+        right: 3%;
+        bottom: var(--espaco-md);
+        transform: none;
+        max-width: 50%;
+    }
+
+    .slider-arrows {
+        left: 6%;
+        right: auto;
+        transform: none;
+        bottom: var(--espaco-md);
+    }
+
+    .arrow-btn {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+
+/* ================================================================
+   RODAPE
+================================================================ */
+.site-footer {
+    height: var(--footer-altura);
+    background-color: var(--preto-noite);
+    border-top: 1px solid rgba(212, 175, 55, 0.35);
+    padding: 0 var(--espaco-md);
+    display: flex;
+    align-items: center;
+}
+
+.footer-conteudo {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--espaco-md);
+    font-size: 0.75rem;
+    line-height: 1;
+}
+
+.footer-links {
+    list-style: none;
+    display: flex;
+    gap: var(--espaco-md);
+}
+
+.footer-links a {
+    color: var(--branco-cordeiro);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible {
+    color: var(--dourado-divino);
+}
+
+.footer-copy {
+    color: rgba(248, 249, 250, 0.6);
+}
+
+@media (max-width: 600px) {
+    .footer-copy {
+        display: none;
+    }
+
+    .footer-conteudo {
+        justify-content: center;
     }
 }

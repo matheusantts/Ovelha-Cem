@@ -188,7 +188,7 @@ h1{
    Mobile: uma coluna (definido na seção 7). */
 .stage{
   display:grid;
-  grid-template-columns:minmax(280px, 460px) minmax(280px, 1fr);
+  grid-template-columns:minmax(280px, 520px) minmax(280px, 1fr);
   gap:var(--stage-gap);
   align-items:start;
 }
@@ -413,7 +413,7 @@ footer{
   .rosary-panel{
     /* limita a largura do terço para não ficar gigante em tablets,
        mantendo-o centralizado */
-    max-width:520px;
+    max-width:600px;
     margin:0 auto;
   }
 }
@@ -471,5 +471,40 @@ footer{
   .label,
   .nav-btn{
     transition:none;
+  }
+}
+/* --- Botão "home" fixo: reserva espaço no topo para não cobrir o título --- */
+@media (max-width: 860px){
+  .wrap{
+    padding-top:72px;
+  }
+}
+
+/* --- Telas largas: terço e cartão crescem junto com a tela --- */
+@media (min-width: 1600px){
+  :root{
+    --stage-gap:64px;
+  }
+  .wrap{
+    max-width:1480px;
+  }
+  .stage{
+    grid-template-columns:minmax(320px, 600px) minmax(320px, 1fr);
+  }
+  .prayer-text{
+    font-size:22px;
+  }
+  .prayer-title{
+    font-size:38px;
+  }
+}
+
+/* --- Paisagem com pouca altura (celular deitado) --- */
+@media (max-height: 520px) and (orientation: landscape){
+  .wrap{
+    padding-top:56px;
+  }
+  .rosary-panel{
+    max-width:420px;
   }
 }

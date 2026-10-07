@@ -166,7 +166,8 @@ function beadsAlongArc(p0, p2, ctrl, count){
 
 /* ----------------------------------------------------------------
    3. PONTOS DO TERÇO (posições)
-   O desenho usa um "viewBox" de 460 x 900 (definido no index.html).
+   O desenho usa um "viewBox" de 576 x 914 com origem em x=-58 (definido no guiaTerco.html),
+   o que dá margem para os rótulos laterais não serem cortados.
    Pense nestas coordenadas como uma grade fixa desse tamanho —
    o SVG depois estica/encolhe para caber na tela automaticamente
    (isso é feito pelo CSS, não aqui).

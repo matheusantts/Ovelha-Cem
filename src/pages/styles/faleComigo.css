@@ -33,7 +33,7 @@ body {
   /* 100dvh considera a barra de endereço móvel; 100vh como fallback. */
   height: 100vh;
   height: 100dvh;
-  width: 100vw;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -352,7 +352,7 @@ form {
 /* ===== Telas baixas / paisagem em celular =====
    Evita rolagem quando a altura da viewport é reduzida,
    comprimindo espaçamentos e ocultando o elemento decorativo. */
-@media (max-height: 560px) {
+@media (max-height: 640px) {
   .ovelha-decorativa {
     display: none;
   }
@@ -379,5 +379,24 @@ form {
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
+  }
+}
+/* ===== Telas estreitas: reserva faixa no topo para o botão home e a ovelha =====
+   Antes eles ficavam sobrepostos ao cartão (que ocupa 92% da largura). */
+@media (max-width: 600px) {
+  body {
+    padding-top: calc(clamp(0.75rem, 2vh, 2rem) + 44px + 0.75rem);
+  }
+}
+
+/* ===== Telas largas (1600px+) ===== */
+@media (min-width: 1600px) {
+  :root {
+    --fonte-base: 1.05rem;
+    --fonte-titulo: 3rem;
+  }
+
+  .cartao {
+    max-width: 600px;
   }
 }

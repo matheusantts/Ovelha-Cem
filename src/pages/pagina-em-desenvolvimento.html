@@ -90,6 +90,29 @@
             display: grid;
         }
 
+        .btn-voltar {
+            display: inline-block;
+            padding: clamp(9px, 2.5vw, 11px) clamp(20px, 6vw, 28px);
+            font-size: clamp(11px, 3vw, 13px);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--vermelho-liturgico);
+            border: 2px solid var(--dourado-divino);
+            border-radius: 5px;
+            background-color: transparent;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        .btn-voltar:hover,
+        .btn-voltar:focus-visible {
+            background-color: var(--vermelho-liturgico);
+            border-color: var(--vermelho-liturgico);
+            color: var(--branco-cordeiro);
+            outline: none;
+        }
+
         p {
             color: var(--verde-pastagem);
             font-size: clamp(13px, 3.5vw, 16px);
@@ -139,7 +162,7 @@
                     style="color: var(--dourado-divino); font-family: Georgia, 'Times New Roman', Times, serif;">Construção</span>
             </h1>
             <div class="linha"></div>
-            <a href="../../index.html">Voltar ao Inicio</a>
+            <a class="btn-voltar" href="../../index.html">Voltar ao Início</a>
             <p>Voltaremos em breve com algo ainda melhor. <br> Obrigado pela sua paciência.</p>
             <p class="footer">@ Matheus Santos 2026 - EM DESENVOLVIMENTO</p>
         </div>
