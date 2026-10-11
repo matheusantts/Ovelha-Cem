@@ -7,8 +7,8 @@
 //   node scripts/otimizar-imagem.mjs <caminho-da-imagem> [largura] [qualidade] [--png]
 //
 // Exemplos:
-//   node scripts/otimizar-imagem.mjs src/img/nova-foto.jpg 640
-//   node scripts/otimizar-imagem.mjs src/img/geral/novo-icone.png 256 --png
+//   node scripts/otimizar-imagem.mjs assets/images/nova-foto.jpg 640
+//   node scripts/otimizar-imagem.mjs assets/images/geral/novo-icone.png 256 --png
 
 import sharp from "sharp";
 import path from "node:path";
@@ -24,8 +24,8 @@ Uso:
   node scripts/otimizar-imagem.mjs <caminho-da-imagem> [largura] [qualidade] [--png]
 
 Exemplos:
-  node scripts/otimizar-imagem.mjs src/img/nova-foto.jpg 640
-  node scripts/otimizar-imagem.mjs src/img/geral/novo-icone.png 256 --png
+  node scripts/otimizar-imagem.mjs assets/images/nova-foto.jpg 640
+  node scripts/otimizar-imagem.mjs assets/images/geral/novo-icone.png 256 --png
 
 Guia rapido de largura (2x o tamanho real de exibicao na tela):
   Fundo de slide em tela cheia (hero)........... 1600-1900

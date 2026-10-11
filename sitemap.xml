@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://ovelhacem.com.br/</loc></url>
-  <url><loc>https://ovelhacem.com.br/src/pages/todasHistorias.html</loc></url>
-  <url><loc>https://ovelhacem.com.br/src/pages/guiaTerco.html</loc></url>
-  <url><loc>https://ovelhacem.com.br/src/pages/faleComigo.html</loc></url>
-  <url><loc>https://ovelhacem.com.br/src/pages/milagreLanciano.html</loc></url>
-  <url><loc>https://ovelhacem.com.br/src/pages/historias/milagreLanciano/historia1.html</loc></url>
-  <url><loc>https://ovelhacem.com.br/src/pages/historias/milagreLanciano/historia2.html</loc></url>
-  <url><loc>https://ovelhacem.com.br/src/pages/historias/milagreLanciano/historia3.html</loc></url>
-  <url><loc>https://ovelhacem.com.br/src/pages/historias/milagreLanciano/historia4.html</loc></url>
+  <url><loc>https://ovelhacem.com.br/pages/todas-historias/</loc></url>
+  <url><loc>https://ovelhacem.com.br/pages/curiosidades/</loc></url>
+  <url><loc>https://ovelhacem.com.br/pages/guia-terco/</loc></url>
+  <url><loc>https://ovelhacem.com.br/pages/fale-comigo/</loc></url>
+  <url><loc>https://ovelhacem.com.br/pages/historias/milagre-lanciano/</loc></url>
+  <url><loc>https://ovelhacem.com.br/pages/historias/milagre-lanciano/cap1.html</loc></url>
+  <url><loc>https://ovelhacem.com.br/pages/historias/milagre-lanciano/cap2.html</loc></url>
+  <url><loc>https://ovelhacem.com.br/pages/historias/milagre-lanciano/cap3.html</loc></url>
+  <url><loc>https://ovelhacem.com.br/pages/historias/milagre-lanciano/imagens.html</loc></url>
 </urlset>

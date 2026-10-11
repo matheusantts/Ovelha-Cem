@@ -1,0 +1,18 @@
+/* ================================================================
+   OVELHA CEM — RESET (src/css/reset.css)
+
+   Zera as margens e espaçamentos padrão do navegador e faz todos os
+   elementos usarem box-sizing: border-box.
+
+   Atenção: as páginas Fale Comigo e Guia do Terço NÃO carregam este
+   reset; elas têm um reset mais leve no próprio CSS. Zerar as margens
+   nativas de campos de formulário e botões (Safari e Firefox) mudaria
+   o layout dessas duas páginas.
+================================================================ */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}

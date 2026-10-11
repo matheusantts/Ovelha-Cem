@@ -1,0 +1,115 @@
+/* ================================================================
+   OVELHA CEM — EM CONSTRUÇÃO (pages/em-construcao/em-construcao.css)
+   Carregado depois de src/css/main.css (reset + paleta da marca).
+================================================================ */
+* {
+    font-family: sans-serif;
+}
+
+body {
+    background-color: var(--branco-cordeiro);
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px 16px;
+}
+
+main {
+    width: min(550px, 100%); 
+    min-height: 450px;
+    border-radius: 5px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    background-color: var(--branco-cordeiro);
+    border: 1px solid #e1d7c1;
+    box-shadow: 0px 0px 70px 150px rgba(232, 220, 196, 0.5);
+    padding: clamp(24px, 6vw, 48px) clamp(16px, 5vw, 40px);
+}
+
+img {
+    width: clamp(100px, 28vw, 150px);
+    border-radius: 50%;
+    box-shadow: 0px 0px 50px 20px rgba(232, 220, 196, 0.5);
+    border: 1px solid #e1d7c1;
+    animation: 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite animacao-img;
+}
+
+main div {
+    gap: clamp(16px, 4vw, 30px); 
+    display: grid;
+    place-items: center;
+}
+
+h1 {
+    font-size: clamp(26px, 8vw, 45px);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    line-height: 1.15;
+}
+
+.linha {
+    background-color: var(--dourado-divino);
+    width: clamp(80px, 30%, 165px);
+    height: 2px;
+    padding: 0px;
+
+    display: grid;
+}
+
+.btn-voltar {
+    display: inline-block;
+    padding: clamp(9px, 2.5vw, 11px) clamp(20px, 6vw, 28px);
+    font-size: clamp(11px, 3vw, 13px);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--vermelho-liturgico);
+    border: 2px solid var(--dourado-divino);
+    border-radius: 5px;
+    background-color: transparent;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.btn-voltar:hover,
+.btn-voltar:focus-visible {
+    background-color: var(--vermelho-liturgico);
+    border-color: var(--vermelho-liturgico);
+    color: var(--branco-cordeiro);
+    outline: none;
+}
+
+p {
+    color: var(--verde-pastagem);
+    font-size: clamp(13px, 3.5vw, 16px);
+    line-height: 1.6;
+}
+
+@media (max-width: 360px) {
+    p br {
+        display: none;
+    }
+}
+
+.footer {
+    font-size: clamp(10px, 2.5vw, 13px);
+    color: var(--vermelho-liturgico);
+}
+
+@keyframes animacao-img {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

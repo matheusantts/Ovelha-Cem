@@ -12,7 +12,7 @@ import sharp from 'sharp';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const pasta = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../src/img/paginaInicial/fundos');
+const pasta = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../assets/images/pagina-inicial/fundos');
 const nomes = ['milagre-lanciano', 'sao-bento', 'senhora-aparecida'];
 
 // Faixa central da imagem original (1672x941) que contém o motivo principal.

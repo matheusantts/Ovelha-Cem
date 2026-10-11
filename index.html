@@ -13,7 +13,7 @@
   <meta property="og:title" content="Ovelha Cem — Conteúdo Católico">
   <meta property="og:description" content="Histórias da fé católica: milagres eucarísticos, aparições marianas, vidas de santos e um guia interativo para rezar o Santo Terço.">
   <meta property="og:url" content="https://ovelhacem.com.br/">
-  <meta property="og:image" content="https://ovelhacem.com.br/src/img/geral/og-image.jpg">
+  <meta property="og:image" content="https://ovelhacem.com.br/assets/images/geral/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
@@ -24,15 +24,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="src/pages/styles/style.css">
-    <link rel="icon" href="src/img/geral/ovelha-cem-icon.png">
+    <link rel="stylesheet" href="src/css/main.css">
+    <link rel="stylesheet" href="src/css/pages/home.css">
+    <link rel="icon" href="assets/images/geral/ovelha-cem-icon.png">
 </head>
 
 <body>
 
     <header class="site-header">
         <nav class="nav">
-            <a href="#" class="nav-logo" target="_blank" rel="noopener noreferrer">Ovelha Cem</a>
+            <a href="#" class="nav-logo" rel="noopener noreferrer">Ovelha Cem</a>
 
             <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
                 <span></span>
@@ -41,9 +42,9 @@
             </button>
 
             <ul class="nav-links" id="navLinks">
-                <li><a href="src/pages/guiaTerco.html">Guia - Santo Terço</a></li>
-                <li><a href="src/pages/todasHistorias.html">Todas as histórias</a></li>
-                <li><a href="src/pages/faleComigo.html">Fale Comigo</a></li>
+                <li><a href="pages/guia-terco/index.html">Guia - Santo Terço</a></li>
+                <li><a href="pages/todas-historias/index.html">Todas as histórias</a></li>
+                <li><a href="pages/fale-comigo/index.html">Fale Comigo</a></li>
             </ul>
         </nav>
     </header>
@@ -54,13 +55,13 @@
             <div class="slide active">
 
                 <picture>
-                    <source media="(max-width: 640px)" srcset="src/img/paginaInicial/fundos/milagre-lanciano-mobile.webp">
-                    <source media="(max-width: 1024px) and (orientation: portrait)" srcset="src/img/paginaInicial/fundos/milagre-lanciano-tablet.webp">
-                    <img src="src/img/paginaInicial/fundos/milagre-lanciano.webp" alt="Ostensório dourado do Milagre de Lanciano com dois anjos">
+                    <source media="(max-width: 640px)" srcset="assets/images/pagina-inicial/fundos/milagre-lanciano-mobile.webp">
+                    <source media="(max-width: 1024px) and (orientation: portrait)" srcset="assets/images/pagina-inicial/fundos/milagre-lanciano-tablet.webp">
+                    <img src="assets/images/pagina-inicial/fundos/milagre-lanciano.webp" alt="Ostensório dourado do Milagre de Lanciano com dois anjos">
                 </picture>
 
                     <div class="slide-content">
-                        <a href="src/pages/pagina-em-desenvolvimento.html">
+                        <a href="pages/em-construcao/index.html">
                             <span class="slide-label">Milagres Eucarísticos</span>
                         </a>
                         <h2 class="slide-title">Milagre de Lanciano</h2>
@@ -70,7 +71,7 @@
                             visivelmente em carne e sangue.
                         </p>
                         <div class="slide-buttons">
-                            <a href="src/pages/milagreLanciano.html">
+                            <a href="pages/historias/milagre-lanciano/index.html">
                                 <button class="btn btn-primary">Acessar</button>
                             </a>
                         </div>
@@ -80,13 +81,13 @@
             <div class="slide">
 
                 <picture>
-                    <source media="(max-width: 640px)" srcset="src/img/paginaInicial/fundos/senhora-aparecida-mobile.webp">
-                    <source media="(max-width: 1024px) and (orientation: portrait)" srcset="src/img/paginaInicial/fundos/senhora-aparecida-tablet.webp">
-                    <img src="src/img/paginaInicial/fundos/senhora-aparecida.webp" alt="Nossa Senhora Aparecida" loading="lazy">
+                    <source media="(max-width: 640px)" srcset="assets/images/pagina-inicial/fundos/senhora-aparecida-mobile.webp">
+                    <source media="(max-width: 1024px) and (orientation: portrait)" srcset="assets/images/pagina-inicial/fundos/senhora-aparecida-tablet.webp">
+                    <img src="assets/images/pagina-inicial/fundos/senhora-aparecida.webp" alt="Nossa Senhora Aparecida" loading="lazy">
                 </picture>
                 
                 <div class="slide-content">
-                    <a href="src/pages/pagina-em-desenvolvimento.html">
+                    <a href="pages/em-construcao/index.html">
                         <span class="slide-label">Aparições Marianas</span>
                     </a>
                     <h2 class="slide-title">Nossa Senhora da Conceição Aparecida</h2>
@@ -95,7 +96,7 @@
                         o povo brasileiro desde que sua imagem foi encontrada nas águas do Rio Paraíba.
                     </p>
                     <div class="slide-buttons">
-                        <a href="src/pages/nossaSenhoraAparecida.html">
+                        <a href="pages/historias/nossa-senhora-aparecida/index.html">
                             <button class="btn btn-primary">Acessar</button>
                         </a>
                     </div>
@@ -105,13 +106,13 @@
             <div class="slide">
 
                 <picture>
-                    <source media="(max-width: 640px)" srcset="src/img/paginaInicial/fundos/sao-bento-mobile.webp">
-                    <source media="(max-width: 1024px) and (orientation: portrait)" srcset="src/img/paginaInicial/fundos/sao-bento-tablet.webp">
-                    <img src="src/img/paginaInicial/fundos/sao-bento.webp" alt="São Bento" loading="lazy">
+                    <source media="(max-width: 640px)" srcset="assets/images/pagina-inicial/fundos/sao-bento-mobile.webp">
+                    <source media="(max-width: 1024px) and (orientation: portrait)" srcset="assets/images/pagina-inicial/fundos/sao-bento-tablet.webp">
+                    <img src="assets/images/pagina-inicial/fundos/sao-bento.webp" alt="São Bento" loading="lazy">
                 </picture>
 
                 <div class="slide-content">
-                    <a href="src/pages/pagina-em-desenvolvimento.html">
+                    <a href="pages/em-construcao/index.html">
                         <span class="slide-label">Santos da Igreja</span>
                     </a>
                     <h2 class="slide-title">São Bento</h2>
@@ -121,19 +122,41 @@
                         famosa Medalha de Proteção.
                     </p>
                     <div class="slide-buttons">
-                        <a href="src/pages/saoBento.html">
+                        <a href="pages/historias/sao-bento/index.html">
                             <button class="btn btn-primary">Acessar</button>
                         </a>
                     </div>
                 </div>
             </div>
-            
+
+            <div class="slide">
+
+                <!-- Sem imagem por enquanto: troque o placeholder por um <picture> como nos slides acima -->
+                <div class="slide-img-placeholder" aria-hidden="true"></div>
+
+                <div class="slide-content">
+                    <a href="pages/curiosidades/index.html">
+                        <span class="slide-label">Curiosidades</span>
+                    </a>
+                    <h2 class="slide-title">Curiosidades da Fé Cristã</h2>
+                    <p class="slide-desc">
+                        Fatos surpreendentes sobre a Bíblia, a história da Igreja e a fé que
+                        atravessa os séculos — para aprender, compartilhar e se maravilhar.
+                    </p>
+                    <div class="slide-buttons">
+                        <a href="pages/em-construcao/index.html">
+                            <button class="btn btn-primary">Acessar</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
         </div>
        
         <div class="slider-thumbs" id="sliderThumbs">
 
             <div class="thumb-item active" data-index="0">
-                <img src="src/img/paginaInicial/cards/milagre-lanciano.webp" alt="Milagre de Lanciano">
+                <img src="assets/images/pagina-inicial/cards/milagre-lanciano.webp" alt="Milagre de Lanciano">
                 <div class="thumb-info">
                     <h3>Lanciano</h3>
                     <p>Ver matéria</p>
@@ -141,7 +164,7 @@
             </div>
 
             <div class="thumb-item" data-index="1">
-                <img src="src/img/paginaInicial/cards/senhora-aparecida.webp" alt="Nossa Senhora Aparecida">
+                <img src="assets/images/pagina-inicial/cards/senhora-aparecida.webp" alt="Nossa Senhora Aparecida">
                 <div class="thumb-info">
                     <h3>Aparecida</h3>
                     <p>Ver matéria</p>
@@ -149,9 +172,18 @@
             </div>
 
             <div class="thumb-item" data-index="2">
-                <img src="src/img/paginaInicial/cards/sao-bento.webp" alt="São Bento">
+                <img src="assets/images/pagina-inicial/cards/sao-bento.webp" alt="São Bento">
                 <div class="thumb-info">
                     <h3>São Bento</h3>
+                    <p>Ver matéria</p>
+                </div>
+            </div>
+
+            <div class="thumb-item" data-index="3">
+                <!-- Sem imagem por enquanto: troque o placeholder por um <img> como nos cards acima -->
+                <div class="thumb-img-placeholder" aria-hidden="true"></div>
+                <div class="thumb-info">
+                    <h3>Curiosi&shy;dades</h3>
                     <p>Ver matéria</p>
                 </div>
             </div>
@@ -167,22 +199,31 @@
 
     <footer class="site-footer">
         <div class="footer-conteudo">
+            <p class="footer-marca">
+                <img src="assets/images/geral/ovelha-cem-icon.png" alt="" width="22" height="22">
+                Ovelha Cem
+            </p>
+
             <ul class="footer-links">
                 <li>
-                    <a href="https://portifolio-matheus-gold.vercel.app/" target="_blank" rel="noopener noreferrer">Matheus Santos</a>
+                    <a href="https://instagram.com/ovelhacem100/" target="_blank" rel="noopener noreferrer" aria-label="Instagram do Ovelha Cem (@ovelhacem100)">
+                        <svg class="footer-icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8" />
+                            <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8" />
+                            <circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" />
+                        </svg>
+                        <span class="footer-instagram-texto">@ovelhacem100</span>
+                    </a>
                 </li>
                 <li>
-                    <a href="https://instagram.com/ovelhacem100/" target="_blank" rel="noopener noreferrer">Acesse o Instagram do Site</a>
+                    <a href="https://portifolio-matheus-gold.vercel.app/" target="_blank" rel="noopener noreferrer">&copy; <span id="footerAno">2026</span> Matheus Santos</a>
                 </li>
             </ul>
-            <p class="footer-copy">&copy; <span id="footerAno">2026</span> Ovelha Cem</p>
         </div>
     </footer>
 
-    <script>
-        /*document.getElementById('footerAno').textContent = new Date().getFullYear();*/
-    </script>
-    <script src="src/pages/scripts/script.js"></script>
+    <script src="src/js/modules/menu-mobile.js"></script>
+    <script src="src/js/pages/home.js"></script>
 
 </body>
 

@@ -1,0 +1,19 @@
+/* ================================================================
+   OVELHA CEM — VARIÁVEIS GLOBAIS (src/css/variables.css)
+
+   Paleta oficial da marca. É carregada por todas as páginas que
+   usam src/css/main.css e, diretamente, pela página Fale Comigo.
+
+   Variáveis próprias de cada página (fontes, espaçamentos, tons de
+   apoio como --preto-noite) continuam no CSS daquela página: cada
+   página tem a sua escala, e trazer esses valores para cá mudaria
+   o visual das outras.
+================================================================ */
+:root {
+    --dourado-divino: #D4AF37;       /* Realeza de Jesus e o Ouro da Igreja */
+    --branco-cordeiro: #F8F9FA;      /* Pureza e a Ovelha (um branco levemente suave) */
+    --bege-la: #E8DCC4;              /* A lã da ovelha e acolhimento */
+    --terracota-humildade: #A0522D;  /* Terra do caminho e o hábito religioso */
+    --verde-pastagem: #556B2F;       /* Esperança e o aprisco (Verde Oliva Escuro) */
+    --vermelho-liturgico: #8B0000;   /* Sacrifício de Cristo (Vermelho Sangue/Vinho) */
+}

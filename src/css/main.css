@@ -1,0 +1,15 @@
+/* ================================================================
+   OVELHA CEM — ESTILOS GLOBAIS (src/css/main.css)
+
+   Ponto de entrada dos estilos compartilhados. Cada página carrega
+   este arquivo PRIMEIRO e, logo depois, o CSS próprio dela:
+
+     <link rel="stylesheet" href="(...)/src/css/main.css">
+     <link rel="stylesheet" href="nome-da-pagina.css">
+
+   Exceções (identidade visual e reset próprios):
+   - pages/fale-comigo/ -> carrega só src/css/variables.css
+   - pages/guia-terco/  -> não usa os estilos globais
+================================================================ */
+@import url("variables.css");
+@import url("reset.css");

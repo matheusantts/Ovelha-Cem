@@ -1,0 +1,827 @@
+/* ================================================================
+   OVELHA CEM — curiosidades.css (página Curiosidades)
+   Carregado depois de src/css/main.css (reset + paleta da marca).
+   Seções:
+   1. Variáveis
+   2. Base
+   3. Header e navegação
+   4. Hero (trilha, título e busca)
+   5. Filtros por categoria
+   6. Destaque ("Você sabia?")
+   7. Grade de curiosidades (cards)
+   8. Botões
+   9. Chamada para enviar curiosidade
+   10. Rodapé
+   11. Responsividade (tablet e mobile)
+================================================================ */
+
+
+/* ================================================================
+   1. VARIÁVEIS
+================================================================ */
+:root {
+    /* Paleta Ovelha Cem: src/css/variables.css */
+
+    /* Derivadas */
+    --branco-puro:      #FFFFFF;
+    --creme-fundo:      #FAF7EF;                    /* bege-la bem diluído: fundo do hero e da lista */
+    --bege-claro:       #F5EFE0;                    /* versão mais clara do bege-la: caixa de chamada */
+    --vermelho-escuro:  #5C0000;                    /* vermelho-liturgico mais escuro: hover e rodapé */
+    --dourado-suave:    rgba(212, 175, 55, 0.16);   /* fundo das etiquetas */
+    --dourado-borda:    rgba(212, 175, 55, 0.45);
+    --texto-principal:  #3A2E22;
+    --texto-secundario: #6B5D4A;
+    --linha-suave:      rgba(58, 46, 34, 0.12);
+    --sombra-card:      0 12px 32px rgba(58, 46, 34, 0.10);
+
+    /* Tipografia */
+    --font-titulo: 'Cormorant Garamond', Georgia, serif;
+    --font-corpo:  'Lato', Arial, sans-serif;
+
+    /* Espaçamentos */
+    --espaco-xs:  4px;
+    --espaco-sm:  8px;
+    --espaco-md:  16px;
+    --espaco-lg:  32px;
+    --espaco-xl:  64px;
+
+    /* Layout */
+    --largura-max:   1200px;
+    --gutter:        var(--espaco-lg);
+    --header-altura: 72px;
+    --raio-card:     16px;
+    --raio-pilula:   100px;
+}
+
+
+/* ================================================================
+   2. BASE (o reset fica em src/css/reset.css)
+================================================================ */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--creme-fundo);
+    color: var(--texto-principal);
+    font-family: var(--font-corpo);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+ul,
+ol     { list-style: none; }
+a      { text-decoration: none; color: inherit; }
+img    { display: block; max-width: 100%; }
+button { font-family: var(--font-corpo); cursor: pointer; }
+
+/* Texto só para leitores de tela */
+.visualmente-oculto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+:focus-visible {
+    outline: 2px solid var(--dourado-divino);
+    outline-offset: 3px;
+}
+
+
+/* ================================================================
+   3. HEADER E NAVEGAÇÃO
+================================================================ */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--branco-puro);
+    border-bottom: 1px solid var(--linha-suave);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-lg);
+    max-width: calc(var(--largura-max) + 2 * var(--gutter));
+    height: var(--header-altura);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: auto;
+    font-family: var(--font-titulo);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--vermelho-liturgico);
+    white-space: nowrap;
+}
+
+/* Ovelhinha dentro de um círculo dourado */
+.nav-logo img {
+    width: 36px;
+    height: 36px;
+    padding: 2px;
+    border-radius: 50%;
+    background-color: var(--bege-claro);
+    border: 2px solid var(--dourado-divino);
+}
+
+.nav-links {
+    display: flex;
+    gap: var(--espaco-lg);
+}
+
+.nav-links a {
+    font-size: 0.875rem;
+    color: var(--texto-secundario);
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--vermelho-liturgico);
+}
+
+/* Botão hamburguer — oculto no desktop */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    padding: var(--espaco-sm);
+    margin-left: auto;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: var(--texto-principal);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+
+/* ================================================================
+   4. HERO (trilha, título e busca)
+================================================================ */
+.hero {
+    padding: var(--espaco-xl) var(--gutter) 72px;
+    text-align: center;
+}
+
+/* Trilha de navegação: Início / Curiosidades */
+.trilha ol {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--espaco-sm);
+    font-size: 0.8rem;
+    color: var(--texto-secundario);
+}
+
+.trilha li + li::before {
+    content: '/';
+    margin-right: var(--espaco-sm);
+    opacity: 0.6;
+}
+
+.trilha a:hover {
+    color: var(--vermelho-liturgico);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.hero-eyebrow {
+    display: block;
+    margin-top: var(--espaco-md);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--terracota-humildade);
+}
+
+.hero-titulo {
+    margin-top: var(--espaco-sm);
+    font-family: var(--font-titulo);
+    font-size: clamp(2.4rem, 5.5vw, 3.75rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--vermelho-liturgico);
+}
+
+.hero-subtitulo {
+    max-width: 620px;
+    margin: var(--espaco-md) auto 0;
+    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+    color: var(--texto-secundario);
+    line-height: 1.7;
+}
+
+/* Campo de busca */
+.busca {
+    position: relative;
+    max-width: 560px;
+    margin: var(--espaco-lg) auto 0;
+}
+
+.busca-icone {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    width: 18px;
+    height: 18px;
+    transform: translateY(-50%);
+    color: var(--texto-secundario);
+    pointer-events: none;
+}
+
+.busca-campo {
+    width: 100%;
+    height: 50px;
+    padding: 0 20px 0 48px;
+    font-family: var(--font-corpo);
+    font-size: 0.95rem;
+    color: var(--texto-principal);
+    background-color: var(--branco-puro);
+    border: 1px solid var(--linha-suave);
+    border-radius: var(--raio-pilula);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.busca-campo::placeholder {
+    color: var(--texto-secundario);
+    opacity: 0.8;
+}
+
+.busca-campo:focus {
+    outline: none;
+    border-color: var(--dourado-divino);
+    box-shadow: 0 0 0 4px var(--dourado-suave);
+}
+
+
+/* ================================================================
+   5. FILTROS POR CATEGORIA
+================================================================ */
+.filtros {
+    background-color: var(--branco-puro);
+    border-top: 1px solid var(--linha-suave);
+    border-bottom: 1px solid var(--linha-suave);
+}
+
+.filtros-conteudo {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-md);
+    max-width: calc(var(--largura-max) + 2 * var(--gutter));
+    margin: 0 auto;
+    padding: 20px var(--gutter);
+}
+
+.filtros-rotulo {
+    flex-shrink: 0;
+    font-size: 0.875rem;
+    color: var(--texto-secundario);
+}
+
+.filtros-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filtro {
+    padding: 8px 18px;
+    font-size: 0.825rem;
+    font-weight: 700;
+    color: var(--texto-principal);
+    background-color: var(--branco-puro);
+    border: 1px solid var(--linha-suave);
+    border-radius: var(--raio-pilula);
+    white-space: nowrap;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.filtro:hover {
+    border-color: var(--dourado-divino);
+}
+
+/* Filtro selecionado (o JavaScript troca o aria-pressed) */
+.filtro[aria-pressed="true"] {
+    background-color: var(--vermelho-liturgico);
+    border-color: var(--vermelho-liturgico);
+    color: var(--branco-cordeiro);
+}
+
+
+/* ================================================================
+   6. DESTAQUE ("VOCÊ SABIA?")
+================================================================ */
+.main {
+    max-width: calc(var(--largura-max) + 2 * var(--gutter));
+    margin: 0 auto;
+    padding: 56px var(--gutter) 80px;
+}
+
+.destaque {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;   /* imagem levemente menor que o texto */
+    min-height: 380px;
+    border-radius: var(--raio-card);
+    overflow: hidden;
+    box-shadow: var(--sombra-card);
+}
+
+/*
+    ESPAÇO PARA IMAGEM (destaque e cards)
+    Enquanto não houver <img>, aparece o fundo bege com uma estrela dourada.
+    Quando houver, a imagem cobre todo o espaço.
+*/
+.destaque-imagem,
+.card-imagem {
+    position: relative;
+    display: grid;
+    place-items: center;
+    background-color: var(--bege-la);
+}
+
+.destaque-imagem::after,
+.card-imagem::after {
+    content: '✦';
+    content: '✦' / '';                   /* decorativo: leitores de tela ignoram */
+    font-size: 1.75rem;
+    color: var(--dourado-divino);
+    opacity: 0.75;
+}
+
+.destaque-imagem img,
+.card-imagem img {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.destaque-conteudo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--espaco-md);
+    padding: var(--espaco-xl) 56px;
+    background-color: var(--vermelho-liturgico);
+}
+
+.destaque-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--dourado-divino);
+}
+
+.destaque-titulo {
+    font-family: var(--font-titulo);
+    font-size: clamp(1.75rem, 3vw, 2.35rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--branco-cordeiro);
+}
+
+.destaque-texto {
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--bege-la);
+}
+
+.destaque-link {
+    width: fit-content;
+    margin-top: var(--espaco-xs);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--dourado-divino);
+    transition: color 0.3s;
+}
+
+.destaque-link:hover {
+    color: var(--branco-cordeiro);
+}
+
+.destaque-link span,
+.card-link span {
+    display: inline-block;
+    transition: transform 0.3s;
+}
+
+.destaque-link:hover span,
+.card:hover .card-link span {
+    transform: translateX(4px);
+}
+
+
+/* ================================================================
+   7. GRADE DE CURIOSIDADES (CARDS)
+================================================================ */
+.secao-titulo {
+    margin: var(--espaco-xl) 0 var(--espaco-lg);
+    font-family: var(--font-titulo);
+    font-size: clamp(1.75rem, 3vw, 2.1rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--texto-principal);
+}
+
+.grade {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.card {
+    position: relative;                  /* base do link que cobre o card inteiro */
+    display: flex;
+    flex-direction: column;
+    background-color: var(--branco-puro);
+    border: 1px solid var(--linha-suave);
+    border-radius: var(--raio-card);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.card[hidden] {
+    display: none;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    border-color: var(--dourado-borda);
+    box-shadow: var(--sombra-card);
+}
+
+.card-imagem {
+    aspect-ratio: 2 / 1;
+}
+
+.card-corpo {
+    flex: 1;                             /* cards da mesma linha com a mesma altura */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 24px;
+}
+
+.tag {
+    width: fit-content;
+    padding: 3px 12px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: var(--terracota-humildade);
+    background-color: var(--dourado-suave);
+    border-radius: var(--raio-pilula);
+}
+
+.card-titulo {
+    font-family: var(--font-titulo);
+    font-size: 1.45rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--texto-principal);
+    transition: color 0.3s;
+}
+
+.card:hover .card-titulo {
+    color: var(--vermelho-liturgico);
+}
+
+.card-desc {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--texto-secundario);
+}
+
+.card-link {
+    margin-top: auto;                    /* fica sempre no pé do card */
+    padding-top: var(--espaco-sm);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--terracota-humildade);
+}
+
+/* O link "Ler mais" cobre o card inteiro: clicar em qualquer ponto abre a curiosidade */
+.card-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+}
+
+.sem-resultados {
+    padding: var(--espaco-xl) var(--espaco-md);
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--texto-secundario);
+}
+
+.mais {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+
+/* ================================================================
+   8. BOTÕES
+================================================================ */
+.botao {
+    display: inline-block;
+    padding: 12px 28px;
+    font-family: var(--font-corpo);
+    font-size: 0.875rem;
+    font-weight: 700;
+    border: 1px solid transparent;
+    border-radius: var(--raio-pilula);
+    white-space: nowrap;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.botao[hidden] {
+    display: none;
+}
+
+.botao-escuro {
+    background-color: var(--vermelho-liturgico);
+    color: var(--branco-cordeiro);
+}
+
+.botao-escuro:hover {
+    background-color: var(--vermelho-escuro);
+}
+
+.botao-contorno {
+    background-color: var(--branco-puro);
+    color: var(--texto-principal);
+    border-color: var(--linha-suave);
+}
+
+.botao-contorno:hover {
+    border-color: var(--dourado-divino);
+    color: var(--vermelho-liturgico);
+}
+
+
+/* ================================================================
+   9. CHAMADA PARA ENVIAR CURIOSIDADE
+================================================================ */
+.chamada {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--espaco-lg);
+    margin-top: var(--espaco-xl);
+    padding: 36px 40px;
+    background-color: var(--bege-claro);
+    border-radius: var(--raio-card);
+}
+
+.chamada-titulo {
+    font-family: var(--font-titulo);
+    font-size: clamp(1.5rem, 2.6vw, 1.85rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--texto-principal);
+}
+
+.chamada-texto {
+    margin-top: var(--espaco-xs);
+    font-size: 0.9rem;
+    color: var(--texto-secundario);
+}
+
+
+/* ================================================================
+   10. RODAPÉ
+================================================================ */
+.site-footer {
+    background-color: var(--vermelho-escuro);
+    border-top: 2px solid var(--dourado-borda);
+}
+
+.footer-conteudo {
+    max-width: calc(var(--largura-max) + 2 * var(--gutter));
+    margin: 0 auto;
+    padding: 40px var(--gutter);
+}
+
+.footer-marca {
+    font-family: var(--font-titulo);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--branco-cordeiro);
+}
+
+.footer-copy {
+    margin-top: var(--espaco-xs);
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--bege-la);
+    opacity: 0.8;
+}
+
+
+/* ================================================================
+   11. RESPONSIVIDADE
+   Breakpoints:
+   - Tablet grande: até 960px
+   - Tablet: até 768px (mesmo ponto do menu-mobile.js)
+   - Mobile: até 600px
+================================================================ */
+
+/* ---- TABLET GRANDE (até 960px) ---- */
+@media (max-width: 960px) {
+    .grade {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .destaque-conteudo {
+        padding: var(--espaco-lg);
+    }
+}
+
+
+/* ---- TABLET (até 768px) ---- */
+@media (max-width: 768px) {
+    :root {
+        --gutter: 20px;
+        --header-altura: 64px;
+    }
+
+    /* === MENU HAMBÚRGUER === */
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: var(--header-altura);
+        left: 0;
+        width: 100%;
+        padding: var(--espaco-sm) 0;
+        gap: 0;
+        background-color: var(--branco-puro);
+        border-bottom: 1px solid var(--linha-suave);
+        box-shadow: var(--sombra-card);
+        z-index: 50;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links li a {
+        display: block;
+        padding: var(--espaco-md) var(--gutter);
+        font-size: 0.95rem;
+        border-bottom: 1px solid var(--linha-suave);
+    }
+
+    .nav-links li:last-child a {
+        border-bottom: none;
+    }
+
+    /* Destaque empilhado: imagem em cima, texto embaixo */
+    .destaque {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+
+    .destaque-imagem {
+        aspect-ratio: 16 / 9;
+    }
+
+    /* Chamada em coluna */
+    .chamada {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: var(--espaco-lg) 28px;
+    }
+}
+
+
+/* ---- MOBILE (até 600px) ---- */
+@media (max-width: 600px) {
+    .nav-logo {
+        font-size: 1.25rem;
+    }
+
+    .hero {
+        padding: 40px var(--gutter) 48px;
+    }
+
+    /* Filtros em uma linha só, com rolagem lateral */
+    .filtros-conteudo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: var(--espaco-md) 0;
+    }
+
+    .filtros-rotulo {
+        padding: 0 var(--gutter);
+    }
+
+    .filtros-lista {
+        flex-wrap: nowrap;
+        width: 100%;
+        padding: 6px var(--gutter);      /* espaço para o contorno de foco */
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .filtros-lista::-webkit-scrollbar {
+        display: none;
+    }
+
+    .main {
+        padding-top: var(--espaco-lg);
+        padding-bottom: 56px;
+    }
+
+    .destaque-conteudo {
+        padding: 28px 24px;
+    }
+
+    .secao-titulo {
+        margin: 48px 0 var(--espaco-md);
+    }
+
+    .grade {
+        grid-template-columns: 1fr;
+        gap: var(--espaco-md);
+    }
+
+    .card-corpo {
+        padding: 20px;
+    }
+
+    .card-titulo {
+        font-size: 1.35rem;
+    }
+
+    .chamada {
+        margin-top: 48px;
+        padding: 28px 24px;
+    }
+
+    .chamada .botao {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+/* Acessibilidade: desativa animações para quem preferir */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .card,
+    .card-titulo,
+    .card-link span,
+    .destaque-link span,
+    .filtro,
+    .botao,
+    .nav-toggle span {
+        transition: none;
+    }
+
+    .card:hover {
+        transform: none;
+    }
+}
