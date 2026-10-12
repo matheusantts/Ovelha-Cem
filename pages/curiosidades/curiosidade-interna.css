@@ -175,6 +175,12 @@ img { display: block; max-width: 100%; }
     border-top: 2px solid rgba(212, 175, 55, 0.45);
 }
 
+.abas {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+}
+
 .aba {
     position: relative;
     display: flex;
@@ -186,7 +192,32 @@ img { display: block; max-width: 100%; }
     border: 1px solid rgba(212, 175, 55, 0.55);
     border-bottom: 0;
     border-radius: 14px 14px 0 0;
+    transition: background-color 0.2s;
 }
+
+/* Aba inativa (link para a outra aba) */
+a.aba {
+    background-color: rgba(232, 220, 196, 0.35);
+    border-color: transparent;
+}
+
+a.aba:hover {
+    background-color: rgba(232, 220, 196, 0.55);
+}
+
+a.aba .aba-simbolo { color: rgba(250, 247, 242, 0.75); }
+a.aba .aba-rotulo  { color: rgba(250, 247, 242, 0.8); }
+
+/* Aba ativa quando é link (página Imagens) */
+a.aba[aria-current="page"] {
+    background-color: var(--bege-claro);
+    border-color: rgba(212, 175, 55, 0.55);
+}
+
+a.aba[aria-current="page"] .aba-simbolo { color: var(--vermelho-liturgico); }
+a.aba[aria-current="page"] .aba-rotulo  { color: var(--terracota-humildade); }
+
+a.aba:not([aria-current="page"])::after { display: none; }
 
 .aba-simbolo {
     font-family: var(--font-titulo);
@@ -455,6 +486,151 @@ img { display: block; max-width: 100%; }
 }
 
 
+/* Galeria de imagens (aba "Imagens"), igual à das histórias */
+.galeria-capitulo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    align-items: start;
+    gap: 16px;
+    align-self: stretch;
+}
+
+.imagem-capitulo {
+    margin: 0;
+    overflow: hidden;
+    border-radius: var(--raio-card);
+    border: 1px solid var(--dourado-borda);
+    background-color: var(--bege-claro);
+}
+
+.imagem-capitulo img {
+    width: 100%;
+    aspect-ratio: 4 / 7;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.imagem-capitulo:hover img {
+    transform: scale(1.03);
+}
+
+.legenda-imagem {
+    position: relative;
+    padding: 10px 8px 12px;
+    font-family: var(--font-titulo);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.25;
+    text-align: center;
+    color: var(--terracota-humildade);
+    background-color: var(--bege-claro);
+    border-top: 1px solid var(--dourado-borda);
+}
+
+.legenda-imagem:empty { display: none; }
+
+/* Lightbox (criado por src/js/modules/lightbox.js) */
+body.lightbox-aberto { overflow: hidden; }
+
+.lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    background-color: rgba(20, 12, 8, 0.92);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease;
+    z-index: 1000;
+}
+
+.lightbox-overlay.ativo { opacity: 1; visibility: visible; }
+
+.lightbox-figura {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    max-width: min(90%, 900px);
+    margin: 0;
+}
+
+.lightbox-imagem {
+    max-width: 100%;
+    max-height: 85dvh;
+    width: auto;
+    border-radius: var(--raio-card);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    object-fit: contain;
+}
+
+.lightbox-overlay.tem-legenda .lightbox-imagem { max-height: calc(85dvh - 4rem); }
+
+.lightbox-legenda {
+    font-family: var(--font-titulo);
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.25;
+    text-align: center;
+    color: var(--bege-la);
+}
+
+.lightbox-legenda:empty { display: none; }
+
+.lightbox-fechar,
+.lightbox-anterior,
+.lightbox-proxima {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(248, 249, 250, 0.12);
+    color: var(--branco-cordeiro);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.lightbox-fechar:hover,
+.lightbox-anterior:hover,
+.lightbox-proxima:hover { background-color: rgba(248, 249, 250, 0.25); }
+
+.lightbox-fechar {
+    top: 24px;
+    right: 24px;
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+    line-height: 1;
+}
+
+.lightbox-anterior,
+.lightbox-proxima {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    font-size: 28px;
+}
+
+.lightbox-anterior { left: 24px; }
+.lightbox-proxima  { right: 24px; }
+
+.lightbox-contador {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--branco-cordeiro);
+    opacity: 0.75;
+}
+
+
 /* ================================================================
    6. RODAPÉ
 ================================================================ */
@@ -562,4 +738,28 @@ img { display: block; max-width: 100%; }
     .leitura {
         padding-top: 24px;
     }
+
+    .abas {
+        gap: 8px;
+    }
+
+    .galeria-capitulo {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 8px;
+    }
+
+    .legenda-imagem {
+        padding: 8px 6px 10px;
+        font-size: 0.95rem;
+    }
+
+    .lightbox-overlay.tem-legenda .lightbox-imagem { max-height: calc(78dvh - 4rem); }
+    .lightbox-legenda { font-size: 1.15rem; }
+
+    .lightbox-anterior,
+    .lightbox-proxima { width: 40px; height: 40px; font-size: 22px; }
+
+    .lightbox-fechar { top: 16px; right: 16px; }
+    .lightbox-anterior { left: 8px; }
+    .lightbox-proxima  { right: 8px; }
 }
