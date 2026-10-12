@@ -1,0 +1,565 @@
+/* ================================================================
+   OVELHA CEM — curiosidade.css (páginas internas das curiosidades)
+   Compartilhado por todas as curiosidades: pages/curiosidades/<nome>/index.html
+   Carregado depois de src/css/main.css (reset + paleta da marca).
+   Segue o layout dos capítulos das histórias (barra vermelha com aba,
+   coluna de leitura e coluna de versículos) e o cabeçalho/rodapé de
+   Curiosidades (curiosidades.css).
+   Seções:
+   1. Variáveis
+   2. Base
+   3. Header e navegação
+   4. Barra vermelha (aba "Curiosidade")
+   5. Corpo: leitura e versículos
+   6. Rodapé
+   7. Responsividade
+================================================================ */
+
+
+/* ================================================================
+   1. VARIÁVEIS
+================================================================ */
+:root {
+    /* Paleta Ovelha Cem: src/css/variables.css */
+
+    /* Derivadas */
+    --branco-puro:      #FFFFFF;
+    --creme-fundo:      #FAF7EF;
+    --bege-claro:       #F5EFE0;
+    --verde-hover:      #3f5022;
+    --vermelho-escuro:  #5C0000;
+    --dourado-borda:    rgba(212, 175, 55, 0.45);
+    --texto-principal:  #3A2E22;
+    --texto-secundario: #6B5D4A;
+    --linha-suave:      rgba(58, 46, 34, 0.12);
+    --sombra-card:      0 12px 32px rgba(58, 46, 34, 0.10);
+
+    /* Tipografia */
+    --font-titulo: 'Cormorant Garamond', Georgia, serif;
+    --font-corpo:  'Lora', Georgia, serif;
+    --font-ui:     'Lato', Arial, sans-serif;
+
+    /* Layout */
+    --largura-max:   1200px;
+    --gutter:        clamp(16px, 4vw, 64px);
+    --header-altura: 72px;
+    --raio-card:     14px;
+    --raio-pilula:   100px;
+}
+
+
+/* ================================================================
+   2. BASE (o reset fica em src/css/reset.css)
+================================================================ */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--branco-puro);
+    color: var(--texto-principal);
+    font-family: var(--font-ui);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+ul,
+ol  { list-style: none; }
+a   { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+
+:focus-visible {
+    outline: 2px solid var(--dourado-divino);
+    outline-offset: 3px;
+}
+
+
+/* ================================================================
+   3. HEADER E NAVEGAÇÃO
+================================================================ */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--branco-puro);
+    border-bottom: 1px solid var(--linha-suave);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    max-width: calc(var(--largura-max) + 2 * var(--gutter));
+    height: var(--header-altura);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: auto;
+    font-family: var(--font-titulo);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--vermelho-liturgico);
+    white-space: nowrap;
+}
+
+.nav-logo img {
+    width: 36px;
+    height: 36px;
+    padding: 2px;
+    border-radius: 50%;
+    background-color: var(--bege-claro);
+    border: 2px solid var(--dourado-divino);
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+}
+
+.nav-links a {
+    font-size: 0.875rem;
+    color: var(--texto-secundario);
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--vermelho-liturgico);
+}
+
+/* Botão hamburguer — oculto no desktop */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    padding: 8px;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: var(--texto-principal);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+
+/* ================================================================
+   4. BARRA VERMELHA (aba "Curiosidade", como a navbar dos capítulos)
+================================================================ */
+.barra {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 88px;
+    padding: 0 var(--gutter);
+    background-color: var(--vermelho-liturgico);
+    border-top: 2px solid rgba(212, 175, 55, 0.45);
+}
+
+.aba {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 10px 28px 12px;
+    background-color: var(--bege-claro);
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-bottom: 0;
+    border-radius: 14px 14px 0 0;
+}
+
+.aba-simbolo {
+    font-family: var(--font-titulo);
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--vermelho-liturgico);
+}
+
+.aba-rotulo {
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--terracota-humildade);
+}
+
+/* Ponto dourado indicador */
+.aba::after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--dourado-divino);
+}
+
+.trilha {
+    padding-bottom: 20px;
+    font-size: 0.8125rem;
+    text-align: right;
+    color: var(--branco-cordeiro);
+    opacity: 0.85;
+}
+
+.trilha a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+
+/* ================================================================
+   5. CORPO: LEITURA E VERSÍCULOS
+================================================================ */
+.corpo {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+}
+
+.leitura {
+    padding: 32px var(--gutter) 56px;
+}
+
+.leitura-conteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    max-width: 760px;
+}
+
+/* Botão "Voltar às curiosidades" */
+.btn-contorno {
+    display: inline-flex;
+    align-items: center;
+    height: 34px;
+    padding: 0 16px;
+    border: 1.5px solid rgba(160, 82, 45, 0.3);
+    border-radius: var(--raio-pilula);
+    font-size: 0.875rem;
+    color: var(--terracota-humildade);
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.btn-contorno:hover {
+    border-color: rgba(160, 82, 45, 0.6);
+    background-color: rgba(160, 82, 45, 0.06);
+}
+
+.divisor {
+    align-self: stretch;
+    height: 1px;
+    background-color: var(--bege-la);
+    opacity: 0.8;
+}
+
+.selo {
+    display: inline-flex;
+    padding: 4px 16px;
+    border-radius: var(--raio-pilula);
+    background-color: rgba(139, 0, 0, 0.07);
+    border: 1px solid rgba(139, 0, 0, 0.16);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--vermelho-liturgico);
+}
+
+.titulo-curiosidade {
+    font-family: var(--font-titulo);
+    font-size: clamp(2rem, 4.2vw, 2.9rem);
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--terracota-humildade);
+    text-wrap: balance;
+}
+
+.ornamento {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ornamento-linha {
+    display: block;
+    width: 70px;
+    height: 1px;
+    background-color: var(--dourado-divino);
+    opacity: 0.45;
+}
+
+.ornamento-estrela {
+    font-size: 11px;
+    line-height: 1;
+    color: var(--dourado-divino);
+    user-select: none;
+}
+
+/* Imagem da curiosidade (16:9). Sem <img>, mostra o espaço reservado. */
+.figura {
+    align-self: stretch;
+    margin: 0;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--raio-card);
+    background-color: var(--bege-la);
+}
+
+.figura img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.figura-vazia {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 16px;
+    text-align: center;
+    color: var(--terracota-humildade);
+}
+
+.figura-vazia strong { font-size: 0.95rem; opacity: 0.85; }
+.figura-vazia small  { font-size: 0.75rem; opacity: 0.65; }
+
+.legenda {
+    padding: 10px 16px;
+    font-size: 0.8125rem;
+    color: var(--texto-secundario);
+    background-color: var(--bege-claro);
+}
+
+/* Texto corrido e subtítulos */
+.texto {
+    font-family: var(--font-corpo);
+    font-size: clamp(1.0625rem, 1.35vw, 1.1875rem);
+    line-height: 1.75;
+    color: var(--texto-principal);
+}
+
+.leitura-conteudo h2 {
+    margin-top: 8px;
+    margin-bottom: -8px;
+    font-family: var(--font-titulo);
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--terracota-humildade);
+}
+
+.texto a {
+    color: var(--verde-pastagem);
+    text-decoration: underline;
+    text-decoration-color: rgba(85, 107, 47, 0.4);
+    text-underline-offset: 3px;
+}
+
+.texto a:hover {
+    color: var(--verde-hover);
+    text-decoration-color: currentColor;
+}
+
+.navegacao {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 24px;
+    padding-top: 16px;
+}
+
+.botao-proximo {
+    display: inline-block;
+    padding: 11px 24px;
+    border-radius: var(--raio-pilula);
+    background-color: var(--verde-pastagem);
+    color: var(--branco-puro);
+    font-size: 0.95rem;
+    font-weight: 700;
+    transition: background-color 0.2s;
+}
+
+.botao-proximo:hover { background-color: var(--verde-hover); }
+
+.link-voltar {
+    font-size: 0.95rem;
+    color: var(--terracota-humildade);
+    opacity: 0.85;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.link-voltar:hover { opacity: 1; }
+
+/* Coluna de versículos relacionados */
+.coluna-versiculo {
+    display: flex;
+    flex-direction: column;
+    align-content: start;
+    gap: 16px;
+    padding: 32px 24px;
+    background-color: var(--creme-fundo);
+    border-left: 1px solid var(--linha-suave);
+}
+
+.coluna-versiculo h3 {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--texto-secundario);
+}
+
+.card-versiculo {
+    padding: 16px;
+    background-color: var(--bege-claro);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: var(--raio-card);
+}
+
+.card-versiculo p {
+    margin-bottom: 8px;
+    font-family: var(--font-corpo);
+    font-size: 0.9375rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--texto-principal);
+}
+
+.card-versiculo cite {
+    font-size: 0.8125rem;
+    font-style: normal;
+    color: var(--terracota-humildade);
+}
+
+
+/* ================================================================
+   6. RODAPÉ
+================================================================ */
+.site-footer {
+    background-color: var(--vermelho-escuro);
+    border-top: 2px solid var(--dourado-borda);
+}
+
+.footer-conteudo {
+    max-width: calc(var(--largura-max) + 2 * var(--gutter));
+    margin: 0 auto;
+    padding: 32px var(--gutter);
+}
+
+.footer-marca {
+    font-family: var(--font-titulo);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--branco-cordeiro);
+}
+
+.footer-copy {
+    margin-top: 4px;
+    font-size: 0.8125rem;
+    color: var(--bege-la);
+    opacity: 0.8;
+}
+
+
+/* ================================================================
+   7. RESPONSIVIDADE
+   - Tablet: até 860px (versículos vão para baixo do texto)
+   - Menu hamburguer: até 768px (mesmo ponto do menu-mobile.js)
+   - Mobile: até 560px
+================================================================ */
+@media (max-width: 860px) {
+    .corpo {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .coluna-versiculo {
+        padding: 32px var(--gutter);
+        border-left: 0;
+        border-top: 1px solid var(--linha-suave);
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: var(--header-altura);
+        left: 0;
+        width: 100%;
+        padding: 8px 0;
+        gap: 0;
+        background-color: var(--branco-puro);
+        border-bottom: 1px solid var(--linha-suave);
+        box-shadow: var(--sombra-card);
+        z-index: 50;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links li a {
+        display: block;
+        padding: 16px var(--gutter);
+        font-size: 0.95rem;
+        border-bottom: 1px solid var(--linha-suave);
+    }
+
+    .nav-links li:last-child a {
+        border-bottom: none;
+    }
+}
+
+@media (max-width: 560px) {
+    :root {
+        --header-altura: 64px;
+    }
+
+    .nav-logo {
+        font-size: 1.25rem;
+    }
+
+    .trilha {
+        display: none;
+    }
+
+    .barra {
+        min-height: 72px;
+    }
+
+    .aba {
+        padding: 8px 20px 12px;
+    }
+
+    .leitura {
+        padding-top: 24px;
+    }
+}
