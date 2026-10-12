@@ -1,6 +1,6 @@
 // ===== Configuração =====
 // Email para onde as mensagens serão enviadas.
-const EMAIL_DESTINO = "matheusbw07@gmail.com";
+const EMAIL_DESTINO = "ovelhacem@gmail.com";
 
 const formulario = document.getElementById("formContato");
 const statusEnvio = document.getElementById("statusEnvio");
@@ -66,15 +66,41 @@ function definirStatus(texto, tipo) {
   if (tipo) statusEnvio.classList.add(tipo);
 }
 
-// Envia a mensagem abrindo o cliente de email do usuário (mailto),
-// já preenchido com o assunto e o corpo da mensagem.
-function enviarPorMailto(nome, email, mensagem) {
-  const assunto = encodeURIComponent(`Fale Comigo - mensagem de ${nome}`);
-  const corpo = encodeURIComponent(
-    `Nome: ${nome}\nEmail: ${email}\n\nMensagem:\n${mensagem}`
-  );
-
-  window.location.href = `mailto:${EMAIL_DESTINO}?subject=${assunto}&body=${corpo}`;
+// Envia a mensagem pelo FormSubmit (serviço gratuito que encaminha para o
+// EMAIL_DESTINO), sem depender de app de email no aparelho do visitante.
+// Se falhar (offline, bloqueio), abre o mailto como alternativa.
+async function enviarEmail(nome, email, mensagem) {
+  try {
+    const resposta = await fetch(
+      `https://formsubmit.co/ajax/${encodeURIComponent(EMAIL_DESTINO)}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: nome,
+          email: email,
+          message: mensagem,
+          _subject: `Fale Comigo - mensagem de ${nome}`,
+          _replyto: email,
+          _template: "table",
+          _captcha: "false",
+        }),
+      }
+    );
+    const dados = await resposta.json();
+    if (!resposta.ok || String(dados.success) !== "true") {
+      throw new Error(dados.message || "Falha no envio");
+    }
+    formulario.reset();
+    definirStatus("Mensagem enviada! Obrigado por falar conosco.", "sucesso");
+  } catch (erro) {
+    definirStatus("Não foi possível enviar agora. Abrindo seu aplicativo de email...", "falha");
+    const assunto = encodeURIComponent(`Fale Comigo - mensagem de ${nome}`);
+    const corpo = encodeURIComponent(
+      `Nome: ${nome}\nEmail: ${email}\n\nMensagem:\n${mensagem}`
+    );
+    window.location.href = `mailto:${EMAIL_DESTINO}?subject=${assunto}&body=${corpo}`;
+  }
 }
 
 formulario.addEventListener("submit", function (evento) {
@@ -89,8 +115,8 @@ formulario.addEventListener("submit", function (evento) {
   const email = campos.email.value.trim();
   const mensagem = campos.mensagem.value.trim();
 
-  definirStatus("Abrindo seu aplicativo de email...", "sucesso");
-  enviarPorMailto(nome, email, mensagem);
+  definirStatus("Enviando...", "sucesso");
+  enviarEmail(nome, email, mensagem);
 });
 
 // Remove a mensagem de erro assim que a pessoa começa a corrigir o campo.
