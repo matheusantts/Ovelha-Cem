@@ -276,8 +276,17 @@ footer{
 .cross-shape{
   cursor:pointer;
 }
-.cross-shape:hover rect{
+.cross-shape,
+.medallion-ring{
+  transition:filter .15s ease;
+}
+.cross-shape:hover,
+.medallion-ring:hover{
   filter:brightness(1.2);
+}
+.cross-shape.active,
+.medallion-ring.active{
+  filter:brightness(1.4) drop-shadow(0 0 10px var(--bead-glow));
 }
 
 .medallion-ring{

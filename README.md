@@ -35,7 +35,7 @@ pages/
     ├── sao-bento/              index.html
     └── modelo-nova-historia/   modelo para criar uma história nova
 assets/
-└── images/                     geral/, pagina-inicial/, todas-historias/, historias/<história>/
+└── images/                     geral/, imagens-logos-all/, todas-historias/, historias/<história>/
 src/
 ├── css/
 │   ├── main.css                ponto de entrada global (importa os dois abaixo)

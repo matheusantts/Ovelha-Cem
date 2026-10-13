@@ -52,18 +52,11 @@
     </header>
 
     <section class="hero">
-        <nav class="trilha" aria-label="Você está em">
-            <ol>
-                <li><a href="../../index.html">Início</a></li>
-                <li aria-current="page">Curiosidades</li>
-            </ol>
-        </nav>
 
         <span class="hero-eyebrow">Curiosidades</span>
         <h1 class="hero-titulo">Curiosidades da Fé Cristã</h1>
         <p class="hero-subtitulo">
-            Fatos surpreendentes sobre a Bíblia, a história da Igreja e a fé que atravessa
-            os séculos — para aprender, compartilhar e se maravilhar.
+            Curiosidades surpreendentes sobre a os Santos da Igreja, o Catecismo da Igreja Católica, inspirações de fé e muito mais — para aprender, compartilhar e se maravilhar.
         </p>
 
         <form class="busca" id="formBusca" role="search">
@@ -80,12 +73,15 @@
         <div class="filtros-conteudo">
             <span class="filtros-rotulo" id="filtrosRotulo">Explorar por:</span>
             <div class="filtros-lista" role="group" aria-labelledby="filtrosRotulo">
+
                 <button type="button" class="filtro" data-categoria="todas" aria-pressed="true">Todas</button>
-                <button type="button" class="filtro" data-categoria="biblia" aria-pressed="false">Bíblia</button>
-                <button type="button" class="filtro" data-categoria="historia-da-igreja" aria-pressed="false">História da Igreja</button>
-                <button type="button" class="filtro" data-categoria="arqueologia" aria-pressed="false">Arqueologia</button>
-                <button type="button" class="filtro" data-categoria="palavras-e-origens" aria-pressed="false">Palavras e Origens</button>
-                <button type="button" class="filtro" data-categoria="personagens" aria-pressed="false">Personagens</button>
+
+                <button type="button" class="filtro" data-categoria="nossa-senhora" aria-pressed="false">Nossa Senhora</button>
+
+                <button type="button" class="filtro" data-categoria="santos" aria-pressed="false">Santos</button>
+                
+                <button type="button" class="filtro" data-categoria="testemunhos" aria-pressed="false">Testemunhos</button>
+                
             </div>
         </div>
     </div>
@@ -123,134 +119,38 @@
                    <img src="../../assets/images/curiosidades/nome-da-imagem.webp" alt="" loading="lazy"> -->
             <ul class="grade" id="grade">
 
-                <!-- ADICIONE NOVOS CARDS AQUI (os mais recentes ficam no topo) -->
-
-                <li class="card" data-categoria="biblia">
+                <li class="card" data-categoria="nossa-senhora">
                     <div class="card-imagem"></div>
                     <div class="card-corpo">
-                        <span class="tag">Bíblia</span>
-                        <h3 class="card-titulo">Uma biblioteca escrita por cerca de 40 autores</h3>
+                        <span class="tag">Nossa Senhora</span>
+                        <h3 class="card-titulo">A cor escura da imagem de Nossa Senhora Aparecida</h3>
                         <p class="card-desc">
-                            A Bíblia católica reúne 73 livros, escritos ao longo de cerca de 1.500 anos
-                            por reis, profetas, pastores, pescadores e até um médico.
+                            Descubra por que a imagem de Nossa Senhora Aparecida tem a cor escura que conhecemos hoje. Conheça os acontecimentos históricos, os fatores que contribuíram para essa transformação.
+                        </p>
+                        <a class="card-link" href="nossa-senhora/a-cor-da-imagem/a-cor-da-imagem.html">Ler mais <span aria-hidden="true">&rarr;</span></a>
+                    </div>
+                </li>
+
+                <li class="card" data-categoria="nossa-senhora">
+                    <div class="card-imagem"></div>
+                    <div class="card-corpo">
+                        <span class="tag">Nossa Senhora</span>
+                        <h3 class="card-titulo">O atentado a Nossa Senhora Aparecida de 1978</h3>
+                        <p class="card-desc">
+                            Em 16 de maio de 1978, um jovem de apenas 19 anos tentou furtar a imagem de Nossa Senhora Aparecida. O episódio acabou causando graves danos à imagem e deu início a um delicado e complexo processo de restauração. Conheça os detalhes desse acontecimento.
                         </p>
                         <a class="card-link" href="../em-construcao/index.html">Ler mais <span aria-hidden="true">&rarr;</span></a>
                     </div>
                 </li>
 
-                <li class="card" data-categoria="biblia">
+                <li class="card" data-categoria="santos">
                     <div class="card-imagem"></div>
                     <div class="card-corpo">
-                        <span class="tag">Bíblia</span>
-                        <h3 class="card-titulo">O menor e o maior capítulo da Bíblia</h3>
-                        <p class="card-desc">
-                            O Salmo 117 (116) tem apenas dois versículos, enquanto o Salmo 119 (118)
-                            chega a 176 — um longo poema em louvor à Lei de Deus.
-                        </p>
-                        <a class="card-link" href="../em-construcao/index.html">Ler mais <span aria-hidden="true">&rarr;</span></a>
-                    </div>
-                </li>
-
-                <li class="card" data-categoria="palavras-e-origens">
-                    <div class="card-imagem"></div>
-                    <div class="card-corpo">
-                        <span class="tag">Palavras e Origens</span>
+                        <span class="tag">Santos</span>
                         <h3 class="card-titulo">De onde vem a palavra “Bíblia”?</h3>
                         <p class="card-desc">
                             Vem do grego <em>biblía</em>, plural de <em>biblíon</em>, que significa “livros”.
                             O termo lembra Biblos, cidade fenícia de onde vinha o papiro usado na escrita.
-                        </p>
-                        <a class="card-link" href="../em-construcao/index.html">Ler mais <span aria-hidden="true">&rarr;</span></a>
-                    </div>
-                </li>
-
-                <li class="card" data-categoria="arqueologia">
-                    <div class="card-imagem"></div>
-                    <div class="card-corpo">
-                        <span class="tag">Arqueologia</span>
-                        <h3 class="card-titulo">Os Manuscritos do Mar Morto</h3>
-                        <p class="card-desc">
-                            Descobertos a partir de 1947 em cavernas de Qumran, trazem cópias de livros
-                            do Antigo Testamento cerca de mil anos mais antigas que os manuscritos
-                            hebraicos conhecidos até então.
-                        </p>
-                        <a class="card-link" href="../em-construcao/index.html">Ler mais <span aria-hidden="true">&rarr;</span></a>
-                    </div>
-                </li>
-
-                <li class="card" data-categoria="historia-da-igreja">
-                    <div class="card-imagem"></div>
-                    <div class="card-corpo">
-                        <span class="tag">História da Igreja</span>
-                        <h3 class="card-titulo">A Bíblia de Gutenberg</h3>
-                        <p class="card-desc">
-                            Concluída por volta de 1455, em Mainz, na Alemanha, foi o primeiro grande
-                            livro impresso com tipos móveis na Europa. O texto escolhido foi a Vulgata latina.
-                        </p>
-                        <a class="card-link" href="../em-construcao/index.html">Ler mais <span aria-hidden="true">&rarr;</span></a>
-                    </div>
-                </li>
-
-                <li class="card" data-categoria="historia-da-igreja">
-                    <div class="card-imagem"></div>
-                    <div class="card-corpo">
-                        <span class="tag">História da Igreja</span>
-                        <h3 class="card-titulo">Almeida e o Novo Testamento em português</h3>
-                        <p class="card-desc">
-                            Publicado em Amsterdã, em 1681, o Novo Testamento traduzido do grego por
-                            João Ferreira de Almeida foi o primeiro impresso em língua portuguesa.
-                        </p>
-                        <a class="card-link" href="../em-construcao/index.html">Ler mais <span aria-hidden="true">&rarr;</span></a>
-                    </div>
-                </li>
-
-                <li class="card" data-categoria="personagens">
-                    <div class="card-imagem"></div>
-                    <div class="card-corpo">
-                        <span class="tag">Personagens</span>
-                        <h3 class="card-titulo">Matusalém, o homem mais velho da Bíblia</h3>
-                        <p class="card-desc">
-                            Segundo o Gênesis, Matusalém viveu 969 anos — a maior idade registrada nas
-                            Escrituras. Ele era avô de Noé (Gn 5,25-29).
-                        </p>
-                        <a class="card-link" href="../em-construcao/index.html">Ler mais <span aria-hidden="true">&rarr;</span></a>
-                    </div>
-                </li>
-
-                <li class="card" data-categoria="personagens">
-                    <div class="card-imagem"></div>
-                    <div class="card-corpo">
-                        <span class="tag">Personagens</span>
-                        <h3 class="card-titulo">São Jerônimo e a Vulgata</h3>
-                        <p class="card-desc">
-                            No fim do século IV, a pedido do Papa São Dâmaso, Jerônimo revisou e traduziu
-                            a Bíblia para o latim. A Vulgata se tornou o texto de referência da Igreja no Ocidente.
-                        </p>
-                        <a class="card-link" href="../em-construcao/index.html">Ler mais <span aria-hidden="true">&rarr;</span></a>
-                    </div>
-                </li>
-
-                <li class="card" data-categoria="arqueologia">
-                    <div class="card-imagem"></div>
-                    <div class="card-corpo">
-                        <span class="tag">Arqueologia</span>
-                        <h3 class="card-titulo">A pedra com o nome de Pôncio Pilatos</h3>
-                        <p class="card-desc">
-                            Encontrada em 1961 em Cesareia Marítima, em Israel, a inscrição cita
-                            “Pôncio Pilatos, prefeito da Judeia” — a autoridade que aparece no julgamento de Jesus.
-                        </p>
-                        <a class="card-link" href="../em-construcao/index.html">Ler mais <span aria-hidden="true">&rarr;</span></a>
-                    </div>
-                </li>
-
-                <li class="card" data-categoria="palavras-e-origens">
-                    <div class="card-imagem"></div>
-                    <div class="card-corpo">
-                        <span class="tag">Palavras e Origens</span>
-                        <h3 class="card-titulo">O que significa “Amém”?</h3>
-                        <p class="card-desc">
-                            É uma palavra hebraica ligada à ideia de firmeza e confiança. Dita no fim
-                            de uma oração, quer dizer “assim seja” ou “é verdade”.
                         </p>
                         <a class="card-link" href="../em-construcao/index.html">Ler mais <span aria-hidden="true">&rarr;</span></a>
                     </div>

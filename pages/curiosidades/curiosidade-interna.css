@@ -56,6 +56,10 @@ html {
 }
 
 body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
     background-color: var(--branco-puro);
     color: var(--texto-principal);
     font-family: var(--font-ui);
@@ -262,6 +266,7 @@ a.aba:not([aria-current="page"])::after { display: none; }
    5. CORPO: LEITURA E VERSÍCULOS
 ================================================================ */
 .corpo {
+    flex: 1 0 auto;
     display: grid;
     grid-template-columns: minmax(0, 1fr) 280px;
 }
