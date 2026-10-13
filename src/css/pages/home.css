@@ -24,6 +24,21 @@
     --header-altura: 56px;
     --footer-altura: 40px;
 
+    /* ---- Layout do slider: nada se sobrepõe ----
+       O cabeçalho e os controles (setas e miniaturas) ficam fixos nas bordas.
+       Cada slide é uma grade com padding que RESERVA o espaço deles, então o
+       texto e a imagem em destaque só usam a área livre entre os dois.
+       Se mudar o tamanho do cabeçalho ou dos controles, mude os tokens abaixo
+       (e não valores soltos em cada regra). */
+    --n-thumbs: 3;                      /* quantidade de miniaturas */
+    --thumbs-total: calc(var(--n-thumbs) * var(--thumb-largura) + (var(--n-thumbs) - 1) * var(--thumbs-gap));
+    --borda-controles: var(--espaco-lg); /* distância dos controles até a borda de baixo */
+    --seta-tamanho: 44px;
+    --slide-lado: 8%;                   /* margem esquerda do texto */
+    --dica-altura: 56px;                /* espaço da etiqueta clicável sob a imagem */
+    --slide-topo: calc(var(--header-altura) + var(--espaco-md));
+    --slide-base: calc(var(--thumb-altura) + var(--borda-controles) + var(--espaco-md));
+
     /* Altura visível da tela. O src/js/pages/home.js sobrescreve com window.innerHeight,
        necessário em navegadores embutidos (Instagram, Facebook...), onde
        100vh/100dvh ignoram as barras do app e empurram o rodapé para fora. */
@@ -177,6 +192,15 @@ a {
     opacity: 0;
     transition: opacity 0.7s ease;
     pointer-events: none;
+
+    /* texto à esquerda; imagem à direita, na mesma coluna das miniaturas
+       (assim ela fica centralizada em relação a elas) */
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--thumbs-total);
+    grid-template-rows: minmax(0, 1fr);
+    align-items: center;
+    column-gap: var(--espaco-lg);
+    padding: var(--slide-topo) var(--thumbs-direita) var(--slide-base) var(--slide-lado);
 }
 
 .slide.active {
@@ -196,12 +220,6 @@ a {
         linear-gradient(to top, rgba(10, 10, 10, 0.8) 0%, rgba(10, 10, 10, 0) 35%);
 }
 
-.slide > picture {
-    position: absolute;
-    inset: 0;
-    display: block;
-}
-
 /* Fundo animado dos slides, atrás da imagem em destaque.
    Só CSS, sem JavaScript e sem imagens: o céu estrelado e o degradê dourado escuro são estáticos
    e apenas dois elementos se movem, usando só transform e opacity (rodam na GPU,
@@ -209,8 +227,8 @@ a {
    prefere menos movimento.
    --foco-x/y marcam o centro da imagem em destaque (raios e brilho nascem dali). */
 .slide-img-placeholder {
-    --foco-x: calc(100% - var(--thumbs-direita) - (4 * var(--thumb-largura) + 3 * var(--thumbs-gap)) / 2);
-    --foco-y: 39%;
+    --foco-x: calc(100% - var(--thumbs-direita) - var(--thumbs-total) / 2);
+    --foco-y: calc(var(--slide-topo) + (100% - var(--slide-topo) - var(--slide-base)) / 2);
     position: absolute;
     inset: 0;
     overflow: hidden;
@@ -324,12 +342,6 @@ a {
     animation-play-state: paused;
 }
 
-@media (max-width: 1024px) and (orientation: landscape) {
-    .slide-img-placeholder {
-        --foco-y: 36%;
-    }
-}
-
 @keyframes fundo-raios {
     to { transform: rotate(360deg); }
 }
@@ -358,38 +370,46 @@ a {
     }
 }
 
-/* Imagem em destaque do slide de Curiosidades (proporção 4:5, post do Instagram).
-   Fica à direita do texto, acima das miniaturas e centralizada em relação a elas; nos layouts em retrato sobe para o topo. */
+/* Imagem em destaque (proporção 4:5, post do Instagram).
+   Ocupa a coluna da direita do slide, inteira dentro da área livre: a altura da
+   imagem é calculada a partir do tamanho da própria coluna (unidades cqh/cqw),
+   descontando o espaço da etiqueta clicável que fica logo abaixo dela. */
 .slide-destaque {
-    position: absolute;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: stretch;
+    min-width: 0;
+    min-height: 0;
+    container-type: size;
     z-index: 2;
-    right: calc(var(--thumbs-direita) + (4 * var(--thumb-largura) + 3 * var(--thumbs-gap)) / 2);
-    top: 13%;
-    height: 52%;
-    aspect-ratio: 4 / 5;
-    transform: translateX(50%);
 }
 
 .slide-destaque a {
-    position: relative;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--espaco-md);
     width: 100%;
     height: 100%;
+}
+
+.slide-destaque img {
+    flex: none;
+    width: auto;
+    max-width: 100%;
+    height: 40vh;                                   /* alternativa para navegadores sem unidades cq */
+    height: min(calc(100cqh - var(--dica-altura) - var(--espaco-md)), calc(100cqw * 1.25));
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
     border: 1.5px solid rgba(232, 220, 196, 0.45);
     border-radius: 6px;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.slide-destaque img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 5px;
-}
-
-.slide-destaque a:hover,
-.slide-destaque a:focus-visible {
+.slide-destaque a:hover img,
+.slide-destaque a:focus-visible img {
     border-color: var(--dourado-divino);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 24px rgba(212, 175, 55, 0.45);
 }
@@ -399,17 +419,18 @@ a {
     outline-offset: 3px;
 }
 
-/* Aviso de que a imagem é um link: fica logo abaixo dela, sempre visível (também no toque) */
+/* Aviso de que a imagem é um link: fica logo abaixo dela (no fluxo, sem posição
+   absoluta), sempre visível, inclusive no toque */
 .destaque-dica {
-    position: absolute;
-    top: calc(100% + 12px);
-    left: 50%;
-    transform: translateX(-50%);
+    flex: none;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5em;
+    max-width: 100%;
     padding: 0.45em 1.1em;
-    white-space: nowrap;
+    text-align: center;
+    line-height: 1.3;
     font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.16em;
@@ -436,51 +457,15 @@ a {
     transform: translateX(4px);
 }
 
-@media (max-width: 1024px) and (orientation: landscape) {
-    .slide-destaque {
-        top: 10%;
-        height: 52%;
-    }
-}
-
-@media (max-width: 1024px) and (orientation: portrait) {
-    .slide-destaque {
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-        top: 8%;
-        height: 40%;
-    }
-}
-
-@media (max-width: 640px) {
-    .slide-destaque {
-        top: 5%;
-        height: 44%;
-    }
-
-    /* A imagem em destaque já traz o texto: esconder a descrição libera espaço para ampliá-la */
-    .slide-desc {
-        display: none;
-    }
-}
-
-@media (max-height: 520px) and (orientation: landscape) {
-    .slide-destaque {
-        display: none;
-    }
-}
-
 
 /* ================================================================
    CONTEÚDO DOS SLIDES
 ================================================================ */
 .slide-content {
-    position: absolute;
-    top: 50%;
-    left: 8%;
-    transform: translateY(-50%);
-    width: 50%;
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    min-width: 0;
     max-width: 600px;
     color: var(--branco-cordeiro);
     z-index: 2;
@@ -574,7 +559,7 @@ a {
 ================================================================ */
 .slider-thumbs {
     position: absolute;
-    bottom: var(--espaco-lg);
+    bottom: var(--borda-controles);
     right: var(--thumbs-direita);
     display: flex;
     gap: var(--thumbs-gap);
@@ -690,16 +675,16 @@ a {
 ================================================================ */
 .slider-arrows {
     position: absolute;
-    bottom: var(--espaco-lg);
-    left: 8%;
+    bottom: var(--borda-controles);
+    left: var(--slide-lado);
     display: flex;
     gap: var(--espaco-sm);
     z-index: 10;
 }
 
 .arrow-btn {
-    width: 44px;
-    height: 44px;
+    width: var(--seta-tamanho);
+    height: var(--seta-tamanho);
     border-radius: 50%;
     border: 2px solid rgba(212, 175, 55, 0.5);
     background-color: rgba(212, 175, 55, 0.1);
@@ -784,10 +769,11 @@ a {
         --thumb-altura: 220px;
         --footer-altura: 48px;
         --header-altura: 72px;
+        --slide-lado: 10%;
+        --seta-tamanho: 52px;
     }
 
     .slide-content {
-        left: 10%;
         max-width: 760px;
     }
 
@@ -815,16 +801,6 @@ a {
     .thumb-info p {
         font-size: 0.72rem;
     }
-
-    .arrow-btn {
-        width: 52px;
-        height: 52px;
-    }
-
-    .slider-arrows {
-        left: 10%;
-    }
-
 }
 
 
@@ -840,6 +816,7 @@ a {
         --thumb-altura: 140px;
         --thumbs-direita: 3%;
         --thumbs-gap: var(--espaco-sm);
+        --slide-lado: 6%;
     }
 
     .nav,
@@ -847,18 +824,7 @@ a {
         gap: var(--espaco-md);
     }
 
-    .slide-content {
-        left: 6%;
-        width: 60%;
-        top: 45%;
-    }
-
-    .slider-arrows {
-        left: 6%;
-    }
-
     .slider-thumbs {
-        gap: var(--espaco-sm);
         max-width: 90vw;
         overflow-x: auto;
         scrollbar-width: none;
@@ -870,28 +836,43 @@ a {
 }
 
 
-/* ---- TABLET EM RETRATO ---- */
-@media (max-width: 1024px) and (orientation: portrait) {
-    .slide-content {
-        left: 0;
-        right: 0;
-        width: 100%;
-        max-width: none;
-        top: auto;
-        bottom: calc(var(--thumb-altura) + 110px);
-        transform: none;
-        padding: 0 clamp(var(--espaco-md), 6vw, var(--espaco-xl));
+/* ---- LAYOUT EMPILHADO (tablet em pé e celulares) ----
+   Imagem em cima, texto embaixo e, por último, setas e miniaturas
+   (uma pilha só, sem nada lado a lado). O --slide-base reserva a altura
+   das setas + miniaturas, para o conteúdo nunca passar por baixo delas. */
+@media (max-width: 1024px) and (orientation: portrait), (max-width: 640px) {
+    :root {
+        --slide-base: calc(var(--thumb-altura) + var(--borda-controles) + var(--espaco-md) + var(--seta-tamanho) + var(--espaco-md));
+    }
+
+    .slide {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: minmax(0, 1fr) auto;
+        row-gap: var(--espaco-md);
+        padding-left: clamp(var(--espaco-md), 6vw, var(--espaco-xl));
+        padding-right: clamp(var(--espaco-md), 6vw, var(--espaco-xl));
         text-align: center;
+    }
+
+    .slide-destaque {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .slide-content {
+        grid-column: 1;
+        grid-row: 2;
+        max-width: none;
     }
 
     .slide::after {
         background: linear-gradient(to top, rgba(10, 10, 10, 0.92) 0%, rgba(10, 10, 10, 0.55) 45%, rgba(10, 10, 10, 0.15) 70%, rgba(10, 10, 10, 0) 100%);
     }
 
-    /* Texto embaixo e centralizado: o foco do fundo sobe junto com a imagem */
+    /* o brilho do fundo acompanha a imagem, que agora fica no alto e centralizada */
     .slide-img-placeholder {
         --foco-x: 50%;
-        --foco-y: 29%;
+        --foco-y: calc(var(--slide-topo) + (100% - var(--slide-topo) - var(--slide-base) - 110px) / 2);
     }
 
     .slide-label {
@@ -901,31 +882,16 @@ a {
         border-bottom: 2px solid var(--dourado-divino);
     }
 
-    .slide-buttons {
-        justify-content: center;
-    }
-
     .slider-arrows {
         left: 50%;
-        right: auto;
         transform: translateX(-50%);
-        transform: translateX(-50%);
-        bottom: calc(var(--thumb-altura) + var(--espaco-lg) + 12px);
+        bottom: calc(var(--borda-controles) + var(--thumb-altura) + var(--espaco-md));
     }
 
     .slider-thumbs {
         left: 50%;
         right: auto;
         transform: translateX(-50%);
-        right: auto;
-        transform: translateX(-50%);
-    }
-}
-
-/* ---- TABLET EM PAISAGEM ---- */
-@media (min-width: 641px) and (max-width: 1024px) and (orientation: landscape) {
-    .slide img {
-        object-position: 15% 50%;
     }
 }
 
@@ -985,58 +951,20 @@ a {
         /* miniaturas acompanham a altura da tela (celulares baixos e altos) */
         --thumb-altura: clamp(84px, calc(var(--app-height) * 0.17), 120px);
         --thumb-largura: calc(var(--thumb-altura) * 0.68);
-    }
-
-    .slide-content {
-        left: 0;
-        right: 0;
-        width: 100%;
-        top: auto;
-        bottom: calc(var(--thumb-altura) + 90px);
-        transform: none;
-        padding: 0 clamp(var(--espaco-md), 6vw, var(--espaco-lg));
-        text-align: center;
-    }
-
-    /* Texto embaixo e centralizado: o foco do fundo sobe junto com a imagem */
-    .slide-img-placeholder {
-        --foco-x: 50%;
-        --foco-y: 26%;
+        --borda-controles: var(--espaco-md);
+        --seta-tamanho: 38px;
     }
 
     .slide-title {
         font-size: clamp(1.5rem, 7.2vw, 2.2rem);
     }
 
+    /* A imagem em destaque já traz o texto: sem a descrição sobra mais espaço para ela */
     .slide-desc {
-        font-size: clamp(0.8rem, 3.6vw, 0.95rem);
-        margin-bottom: var(--espaco-md);
-    }
-
-    .slide img {
-        object-position: 50% 0;
-    }
-
-    .slide::after {
-        background: linear-gradient(to top, rgba(10, 10, 10, 0.92) 0%, rgba(10, 10, 10, 0.55) 45%, rgba(10, 10, 10, 0.15) 70%, rgba(10, 10, 10, 0) 100%);
-    }
-
-    .slide-label {
-        border-left: none;
-        padding-left: 0;
-        padding-bottom: 4px;
-        border-bottom: 2px solid var(--dourado-divino);
-    }
-
-    .slide-buttons {
-        justify-content: center;
+        display: none;
     }
 
     .slider-thumbs {
-        left: 50%;
-        right: auto;
-        bottom: var(--espaco-md);
-        transform: translateX(-50%);
         gap: var(--espaco-sm);
         max-width: calc(100% - var(--espaco-md) * 2);
         overflow-x: auto;
@@ -1048,51 +976,47 @@ a {
         font-size: 0.58rem;
     }
 
-    .slider-arrows {
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: calc(var(--thumb-altura) + var(--espaco-md) + 20px);
-    }
-
     .arrow-btn {
-        width: 38px;
-        height: 38px;
         font-size: 1.4rem;
-    }
-}
-
-/* Celulares baixos em retrato: esconde a descricao para o titulo nao bater no menu */
-@media (max-width: 640px) and (max-height: 700px) {
-    .slide-desc {
-        display: none;
     }
 }
 
 
 /* ---- PAISAGEM COM POUCA ALTURA (celulares deitados) ----
-   Volta ao layout lateral e compacta tudo para caber sem sobreposicao. */
+   Não há espaço para a imagem em destaque: some, e o texto ocupa a
+   coluna da esquerda. Setas e miniaturas ficam nos cantos de baixo. */
 @media (max-height: 520px) and (orientation: landscape) {
     :root {
         --header-altura: 48px;
         --footer-altura: 32px;
         --thumb-altura: clamp(70px, calc(var(--app-height) * 0.26), 110px);
         --thumb-largura: calc(var(--thumb-altura) * 0.68);
+        --borda-controles: var(--espaco-md);
+        --seta-tamanho: 36px;
+        --slide-lado: 6%;
+        --slide-base: calc(var(--thumb-altura) + var(--borda-controles) + var(--espaco-md));
     }
 
     .site-header {
         padding-bottom: var(--espaco-md);
     }
 
-    .slide-content {
-        left: 6%;
-        right: auto;
-        width: 55%;
-        max-width: 560px;
-        top: 50%;
-        bottom: auto;
-        transform: translateY(-50%);
-        padding: 0;
+    .slide {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: minmax(0, 1fr);
+        padding-left: var(--slide-lado);
+        padding-right: var(--thumbs-direita);
         text-align: left;
+    }
+
+    .slide-destaque {
+        display: none;
+    }
+
+    .slide-content {
+        grid-column: 1;
+        grid-row: 1;
+        max-width: 560px;
     }
 
     .slide-title {
@@ -1112,37 +1036,28 @@ a {
         margin-bottom: var(--espaco-sm);
     }
 
-    .slide-buttons {
-        justify-content: flex-start;
-    }
-
-    .btn {
-        padding: 8px 20px;
-    }
-
     .slide::after {
         background:
             linear-gradient(100deg, rgba(10, 10, 10, 0.82) 0%, rgba(10, 10, 10, 0.5) 40%, rgba(10, 10, 10, 0) 80%),
             linear-gradient(to top, rgba(10, 10, 10, 0.8) 0%, rgba(10, 10, 10, 0) 35%);
     }
 
+    .slide-img-placeholder {
+        --foco-x: calc(100% - var(--thumbs-direita) - var(--thumbs-total) / 2);
+        --foco-y: 50%;
+    }
+
     .slider-thumbs {
         left: auto;
-        bottom: var(--espaco-md);
+        right: var(--thumbs-direita);
         transform: none;
         max-width: 50%;
     }
 
     .slider-arrows {
-        left: 6%;
-        right: auto;
+        left: var(--slide-lado);
         transform: none;
-        bottom: var(--espaco-md);
-    }
-
-    .arrow-btn {
-        width: 36px;
-        height: 36px;
+        bottom: var(--borda-controles);
     }
 }
 
