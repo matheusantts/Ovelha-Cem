@@ -370,6 +370,16 @@ a {
     }
 }
 
+/* Celular: os raios (camada enorme com máscara girando) e as nuvens do fundo são as
+   animações mais caras para a GPU/CPU. Ficam estáticos; o brilho e as estrelas continuam. */
+@media (max-width: 768px) {
+    .slide-img-placeholder::before,
+    .fundo-nuvens {
+        animation: none;
+        will-change: auto;
+    }
+}
+
 /* Imagem em destaque (proporção 4:5, post do Instagram).
    Ocupa a coluna da direita do slide, inteira dentro da área livre: a altura da
    imagem é calculada a partir do tamanho da própria coluna (unidades cqh/cqw),
