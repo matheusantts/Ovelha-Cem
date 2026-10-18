@@ -1233,17 +1233,13 @@ a {
         height: 20px;
     }
 
-    /* No celular fica só o ícone do Instagram (o link mantém o aria-label) */
-    .footer-instagram-texto {
+    /* No celular o Instagram sai do rodapé (ele continua no menu); fica só o © */
+    .footer-links .footer-instagram {
         display: none;
     }
 
-    .footer-icone {
-        margin-right: 0;
-    }
-
     .footer-links li + li::before {
-        margin: 0 10px;
+        display: none;
     }
 
     .footer-links a {
