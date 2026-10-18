@@ -21,13 +21,20 @@
     <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="https://ovelhacem.com.br/">
 
+    <link rel="preload" as="image" href="assets/images/imagens-logos-all/destaques/historias-540.webp"
+        imagesrcset="assets/images/imagens-logos-all/destaques/historias-360.webp 360w, assets/images/imagens-logos-all/destaques/historias-540.webp 540w, assets/images/imagens-logos-all/destaques/historias-1080.webp 1080w" imagesizes="(max-width: 640px) 80vw, 40vw" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Fontes carregam sem bloquear a renderização (media="print" + onload) -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap"
-        rel="stylesheet">
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap"
+            rel="stylesheet">
+    </noscript>
 
-    <link rel="stylesheet" href="src/css/main.css">
-    <link rel="stylesheet" href="src/css/pages/home.css">
+    <link rel="stylesheet" href="src/css/main.min.css?v=aeff964f">
+    <link rel="stylesheet" href="src/css/pages/home.min.css?v=b2d43571">
     <link rel="icon" href="assets/images/geral/ovelha-cem-icon.png">
 </head>
 
@@ -81,8 +88,10 @@
 
                 <figure class="slide-destaque">
                     <a href="pages/todas-historias/index.html">
-                        <img src="assets/images/imagens-logos-all/todas-historias/historias.svg"
-                            alt="Ostensório dourado do Milagre de Lanciano com dois anjos" width="1080" height="1350">
+                        <img src="assets/images/imagens-logos-all/destaques/historias-540.webp"
+                            srcset="assets/images/imagens-logos-all/destaques/historias-360.webp 360w, assets/images/imagens-logos-all/destaques/historias-540.webp 540w, assets/images/imagens-logos-all/destaques/historias-1080.webp 1080w" sizes="(max-width: 640px) 80vw, 40vw"
+                            alt="Ostensório dourado do Milagre de Lanciano com dois anjos" width="1080" height="1350"
+                            fetchpriority="high" decoding="async">
                         <span class="destaque-dica" aria-hidden="true">Veja Todas as Histórias<span>&rarr;</span></span>
                     </a>
                 </figure>
@@ -106,9 +115,10 @@
                 <!-- Imagem em destaque de cada slide: proporção 4:5 (post do Instagram), 1080 × 1350.
                      Para trocar, substitua o arquivo em assets/images/imagens-logos-all/destaques/. -->
                 <figure class="slide-destaque">
-                    <a href="pages/curiosidades/index.html">
-                        <img src="assets/images/imagens-logos-all/destaques/curiosidades.webp"
-                            alt="Curiosidades da Fé Cristã" width="1080" height="1350" loading="lazy">
+                    <a href="pages/em-construcao/index.html">
+                        <img src="assets/images/imagens-logos-all/destaques/curiosidades-540.webp"
+                            srcset="assets/images/imagens-logos-all/destaques/curiosidades-360.webp 360w, assets/images/imagens-logos-all/destaques/curiosidades-540.webp 540w, assets/images/imagens-logos-all/destaques/curiosidades-1080.webp 1080w" sizes="(max-width: 640px) 80vw, 40vw"
+                            alt="Curiosidades da Fé Cristã" width="1080" height="1350" loading="lazy" decoding="async">
                         <span class="destaque-dica" aria-hidden="true">Ver as curiosidades <span>&rarr;</span></span>
                     </a>
                 </figure>
@@ -132,7 +142,9 @@
 
                 <figure class="slide-destaque">
                     <a href="pages/guia-terco/index.html">
-                        <img src="assets/images/imagens-logos-all/todas-historias/santo-terco.svg" alt="Santo Terço" width="1080" height="1350" loading="lazy">
+                        <img src="assets/images/imagens-logos-all/destaques/santo-terco-540.webp"
+                            srcset="assets/images/imagens-logos-all/destaques/santo-terco-360.webp 360w, assets/images/imagens-logos-all/destaques/santo-terco-540.webp 540w, assets/images/imagens-logos-all/destaques/santo-terco-1080.webp 1080w" sizes="(max-width: 640px) 80vw, 40vw"
+                            alt="Santo Terço" width="1080" height="1350" loading="lazy" decoding="async">
                         <span class="destaque-dica" aria-hidden="true">Rezar o Santo Terço<span>&rarr;</span></span>
                     </a>
                 </figure>
@@ -151,21 +163,21 @@
         <div class="slider-thumbs" id="sliderThumbs">
 
             <div class="thumb-item active" data-index="0">
-                <img src="assets/images/imagens-logos-all/todas-historias/historias.svg" alt="Historias">
+                <img src="assets/images/imagens-logos-all/destaques/historias-360.webp" alt="Historias" width="360" height="450" loading="lazy" decoding="async">
                 <div class="thumb-info">
                     <h3>Histórias</h3>
                 </div>
             </div>
 
             <div class="thumb-item" data-index="1">
-                <img src="assets/images/imagens-logos-all/cards/curiosidades.webp" alt="Curiosidades da Fé Cristã">
+                <img src="assets/images/imagens-logos-all/cards/curiosidades.webp" alt="Curiosidades da Fé Cristã" loading="lazy" decoding="async">
                 <div class="thumb-info">
                     <h3>Curiosidades</h3>
                 </div>
             </div>
 
             <div class="thumb-item" data-index="2">
-                <img src="assets/images/imagens-logos-all/todas-historias/santo-terco.svg" alt="Santo Terço">
+                <img src="assets/images/imagens-logos-all/destaques/santo-terco-360.webp" alt="Santo Terço" width="360" height="450" loading="lazy" decoding="async">
                 <div class="thumb-info">
                     <h3>Santo Terço</h3>
                 </div>
@@ -206,8 +218,8 @@
         </div>
     </footer>
 
-    <script src="src/js/modules/menu-mobile.js"></script>
-    <script src="src/js/pages/home.js"></script>
+    <script src="src/js/modules/menu-mobile.min.js?v=3373e3e9" defer></script>
+    <script src="src/js/pages/home.min.js?v=e8552216" defer></script>
 
 </body>
 
