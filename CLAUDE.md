@@ -37,6 +37,7 @@ Site estático (HTML/CSS/JS puro) em https://ovelhacem.com.br, hospedado na Host
 ## 6. SEO e acessibilidade (a pontuação inclui isso)
 - Cada página: `<title>`, `meta description`, `canonical`, `lang="pt-br"`, um único `<h1>`, hierarquia de títulos correta.
 - Página nova entra no `sitemap.xml`.
+- Página nova leva a Google tag (gtag.js, `G-ZK1401QWMP`) no fim do `<head>`, igual ao `index.html` (`async`, é a única exceção aceita à regra do `defer`/dependência externa). Redirecionamentos de `src/pages/` não levam.
 - Contraste de cor adequado, links e botões com nome acessível (`aria-label` em botões só com ícone).
 
 ## 7. Checklist ao terminar qualquer mudança
